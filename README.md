@@ -1,346 +1,292 @@
 # Zero-Trust-Sicherheitskonzept mit GitHub-Integration 🤗
 
 **IHK-Abschlussprojekt: Certified IT Business Manager (Sommer 2026)**  
+**Prüfling:** Daniel-Alfonsin Massa (615951)  
+**Abgabedatum:** 01.11.2026  
 **Enhanced with Hugging Face ML/AI Capabilities**
 
 ---
 
-## 🎯 Projektübersicht
+## 📋 Projektübersicht
 
-Einführung eines modernen **Zero-Trust-Sicherheitskonzepts** mit:
-- 🔐 **Automatisierter, rollenbasierter Rechtevergabe (RBAC)**
-- 🔄 **GitHub-Workflow-Integration** für automatisierte Genehmigungsprozesse
-- 📋 **Revisionssichere Audit-Protokolle** (DSGVO-konform)
-- 🖥️ **Self-Service-Portal** für Benutzeranträge
-- 🤖 **Hugging Face ML/AI Enhancements** (Anomalieerkennung, Policy-Generierung, Code-Assist)
+Einführung eines modernen **Zero-Trust-Sicherheitskonzepts** mit automatisierter Rechtevergabe und GitHub-basierter Workflow-Integration beim **Verein zur Förderung der Berufsbildung e.V., Ludwigsburg**.
+
+| Bereich | Beschreibung |
+|---------|-------------|
+| 🔐 **RBAC** | Rollenbasierte Zugriffskontrolle mit Self-Service-Portal |
+| 🔄 **GitHub Integration** | Automatisierte Rechtevergabe via GitHub Actions |
+| 📋 **Audit-Logs** | Revisionssichere Protokollierung (DSGVO-konform) |
+| 🤖 **ML Enhancements** | Anomalieerkennung, Policy-Generierung, Semantische Suche |
+| 🖥️ **Self-Service** | Beantragung und Genehmigung von Rollen |
 
 ---
 
-## 🏗️ Projektstruktur
+## 📂 Projektstruktur
 
 ```
-zero-trust-github-project/
-├── docs/                          # Projektdokumentation
-│   ├── projektdokumentation.md
-│   ├── lastenheft.md
-│   ├── pflichtenheft.md
-│   ├── testfaelle.md
-│   └── benutzerdokumentation.md
-├── src/
-│   ├── backend/                   # Python/FastAPI Backend
+zero-trust-github-integration/
+│
+├── 📄 README.md                          ← Projektübersicht
+├── 📄 AI_HANDOFF.md                      ← Projektstatus (intern)
+│
+├── 📐 docs/
+│   ├── 📋 master/                        ← Deckblatt, Verzeichnisse, Glossar
+│   ├── 📊 tabellen/                      ← 12 IHK-Tabellen
+│   │   ├── 01_zeitplanung_70h.md
+│   │   ├── 02_kostenplanung.md
+│   │   ├── 03_stakeholdermatrix.md
+│   │   ├── 04_risikomatrix.md
+│   │   ├── 05_nutzwertanalyse.md
+│   │   ├── 06_make_or_buy.md
+│   │   ├── 07_anforderungsmatrix.md
+│   │   ├── 08_testfallmatrix.md
+│   │   ├── 09_soll_ist_vergleich.md
+│   │   ├── 10_kommunikationsmatrix.md
+│   │   ├── 11_raci_matrix.md
+│   │   └── 12_kpi_matrix.md
+│   ├── 📉 diagramme/                    ← 10 Mermaid-Diagramme
+│   │   ├── 01_projektstrukturplan.md
+│   │   ├── 02_use_case_diagramm.md
+│   │   ├── 03_github_workflow.md
+│   │   ├── 04_rbac_datenmodell.md
+│   │   ├── 05_self_service_prozess.md
+│   │   ├── 06_schnittstellenuebersicht.md
+│   │   ├── 07_abnahmeprozess.md
+│   │   ├── 08_risikoprozess.md
+│   │   ├── 09_rollout_plan.md
+│   │   └── 10_audit_log_prozess.md
+│   ├── 🎤 praesentation/                ← Präsentationsgliederung
+│   ├── 🖼️ screenshots/                  ← Screenshot-Aufgabenliste
+│   ├── 📝 kostenplanung.md
+│   └── 📝 projektdokumentation.md
+│
+│── ⚙️ src/
+│   ├── backend/                         ← FastAPI Backend
 │   │   ├── app/
-│   │   │   ├── api/              # REST Endpoints
-│   │   │   ├── core/             # Config, Security, Database
-│   │   │   ├── models/           # SQLAlchemy Models
-│   │   │   ├── schemas/          # Pydantic Schemas
-│   │   │   ├── services/         # Business Logic
-│   │   │   │   ├── rbac_service.py
-│   │   │   │   ├── github_service.py
-│   │   │   │   ├── audit_service.py
-│   │   │   │   └── ml_service.py          # 🤗 HF Integration
-│   │   │   └── ml/               # ML Pipeline
-│   │   │       ├── anomaly_detector.py    # 🤗 Anomalieerkennung
-│   │   │       ├── policy_generator.py    # 🤗 Policy-Generierung
-│   │   │       └── embeddings.py          # 🤗 Semantic Search
-│   │   ├── requirements.txt
-│   │   └── Dockerfile
-│   ├── frontend/                  # React/TypeScript Portal
+│   │   │   ├── api/                     ← REST Endpoints
+│   │   │   ├── core/                    ← Config, DB, Security
+│   │   │   ├── models/                  ← SQLAlchemy: User, Role, AuditLog, ...
+│   │   │   ├── services/
+│   │   │   │   ├── rbac_service.py      ← RBAC Engine
+│   │   │   │   ├── audit_service.py     ← Audit-Log Service
+│   │   │   │   ├── github_service.py    ← GitHub API Integration
+│   │   │   │   └── ml_service.py        ← HuggingFace ML Service
+│   │   │   └── ml/
+│   │   │       ├── anomaly_detector.py  ← Anomalieerkennung
+│   │   │       ├── policy_generator.py  ← Policy-Generierung
+│   │   │       └── embeddings.py        ← Semantische Suche
+│   │   ├── Dockerfile
+│   │   └── requirements.txt
+│   │
+│   ├── frontend/                        ← React/TypeScript Webportal
 │   │   ├── src/
-│   │   │   ├── components/
-│   │   │   ├── pages/
-│   │   │   ├── hooks/
-│   │   │   └── services/
 │   │   ├── package.json
 │   │   └── Dockerfile
-│   ├── ml/                        # 🤗 ML Training & Inference
-│   │   ├── training/
-│   │   │   ├── train_anomaly.py
-│   │   │   ├── train_policy_gen.py
-│   │   │   └── data_prep.py
-│   │   ├── inference/
-│   │   │   ├── anomaly_api.py
-│   │   │   └── policy_api.py
-│   │   ├── models/                # Feinetunierte Modelle
-│   │   └── notebooks/             # Jupyter Exploration
-│   └── github-workflows/          # GitHub Actions Templates
-│       ├── rbac-workflow.yml
-│       ├── secret-scanning.yml
-│       ├── policy-check.yml
-│       └── ml-pipeline.yml        # 🤗 ML CI/CD
-├── hf-spaces/                     # 🤗 Hugging Face Spaces Demos
-│   ├── anomaly-dashboard/         # Gradio Anomalie-Demo
-│   ├── policy-generator/          # Gradio Policy-Demo
-│   └── audit-explorer/            # Streamlit Audit-Suche
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── security/
-│   └── ml/                        # 🤗 ML Tests
-├── scripts/
-│   ├── setup_hf.py                # HF Setup & Auth
-│   ├── download_models.py
-│   └── deploy_space.py
-├── .github/workflows/             # CI/CD Pipelines
-│   ├── ci.yml
-│   ├── cd.yml
-│   ├── ml-training.yml            # 🤗 ML Training Pipeline
-│   └── space-deploy.yml           # 🤗 Space Auto-Deploy
-├── PROJECT_PLAN.md
-├── MODEL_CARD.md                  # 🤗 Model Documentation
-├── DATA_CARD.md                   # 🤗 Data Documentation
-├── requirements.txt
-├── requirements-ml.txt            # 🤗 ML Dependencies
-├── docker-compose.yml
-├── docker-compose.ml.yml          # 🤗 ML Services
-└── .env.example
+│   │
+│   └── ml/                              ← ML Training & Inference
+│       ├── training/
+│       ├── inference/
+│       └── notebooks/
+│
+├── 🤗 hf-spaces/                        ← HuggingFace Spaces Demos
+│   ├── anomaly-dashboard/               ← Gradio: Anomalieerkennung
+│   ├── policy-generator/               ← Gradio: Policy-Generierung
+│   └── audit-explorer/                  ← Streamlit: Audit-Suche
+│
+├── 🚀 .github/workflows/                ← CI/CD Pipelines
+│   ├── ci.yml                           ← Lint, Test, Build
+│   ├── rbac-workflow.yml                ← RBAC Auto-Provisioning
+│   ├── policy-check.yml                 ← Secret Scanning & Policy
+│   └── ml-training.yml                  ← ML Training Pipeline
+│
+├── 🐳 docker-compose.yml                ← Core: Postgres, Redis, Backend, Frontend
+├── 🐳 docker-compose.ml.yml             ← ML: MLflow, Anomaly-API, Gradio
+│
+├── 📦 requirements.txt                  ← Python Dependencies
+├── 📦 requirements-ml.txt               ← ML Dependencies
+├── 📋 MODEL_CARD.md                     ← ML Model Documentation
+└── 🔐 .env.example                      ← Environment Template
 ```
-
----
-
-## 🤗 Hugging Face Integrationen
-
-### 1. Anomalieerkennung (Audit-Logs)
-```python
-# src/backend/app/ml/anomaly_detector.py
-from transformers import AutoModel, AutoTokenizer
-import torch
-
-class AuditAnomalyDetector:
-    def __init__(self, model_path: str = "models/anomaly-detector"):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModel.from_pretrained(model_path)
-    
-    def detect(self, audit_entry: str) -> dict:
-        """Gibt Anomalie-Score + Erklärung zurück"""
-        # Implementation...
-```
-
-**Training:** `src/ml/training/train_anomaly.py`  
-**Demo:** `hf-spaces/anomaly-dashboard/app.py` (Gradio)
-
-### 2. Policy-Generierung (Natural Language → Rego)
-```python
-# src/backend/app/ml/policy_generator.py
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-class PolicyGenerator:
-    def __init__(self, model_path: str = "models/policy-generator"):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModelForCausalLM.from_pretrained(model_path)
-    
-    def generate(self, requirement: str) -> str:
-        """Natursprache → OPA Rego Policy"""
-        # Implementation...
-```
-
-**Base Model:** `microsoft/CodeGPT-small-py` oder `bigcode/starcoder2-3b`  
-**Demo:** `hf-spaces/policy-generator/app.py`
-
-### 3. Semantic Search (Audit-Logs)
-```python
-# src/backend/app/ml/embeddings.py
-from sentence_transformers import SentenceTransformer
-
-class AuditEmbeddings:
-    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
-        self.model = SentenceTransformer(model_name)
-    
-    def search(self, query: str, top_k: int = 10) -> list:
-        """Semantische Suche in Audit-Logs"""
-        # Implementation...
-```
-
-### 4. Code-Assist (Development)
-- **VS Code Extension:** Continue.dev + HF Models
-- **GitHub Copilot Alternative:** `bigcode/starcoder2` lokal
 
 ---
 
 ## 🚀 Quick Start
 
-### Lokale Entwicklung
+### Projekt erkunden
 ```bash
-# Repository klonen
+# Repo klonen
 git clone https://github.com/DonMassa84/zero-trust-github-integration.git
 cd zero-trust-github-integration
 
-# Environment
-cp .env.example .env
-# HF_TOKEN, GITHUB_TOKEN, DATABASE_URL eintragen
+# Projektdokumentation anzeigen
+cat docs/projektdokumentation.md
 
-# Backend
-cd src/backend
-pip install -r requirements.txt -r ../../requirements-ml.txt
-uvicorn app.main:app --reload
+# IHK-Tabellen anzeigen
+ls docs/tabellen/
 
-# Frontend
-cd ../frontend
-npm install && npm run dev
-
-# ML Services (optional)
-cd ../ml
-docker-compose -f ../../docker-compose.ml.yml up -d
-
-# Tests
-cd 
-pytest tests/ -v --cov=src
+# Diagramme anzeigen
+ls docs/diagramme/
 ```
 
-### Hugging Face Setup
+### Prototyp starten
 ```bash
-# HF CLI installieren
-pip install huggingface_hub[cli]
+cp .env.example .env
+docker compose up -d
+# Backend: http://localhost:8000
+# Frontend: http://localhost:3000
+```
 
-# Login
-huggingface-cli login
-
-# Models herunterladen
-python scripts/download_models.py
-
-# Space deployen
-python scripts/deploy_space.py --space anomaly-dashboard
+### ML Services starten
+```bash
+docker compose -f docker-compose.ml.yml up -d
+# HF Spaces (Gradio): http://localhost:7860
+# MLflow: http://localhost:5000
 ```
 
 ---
 
-## 🐳 Docker Services
+## 📊 IHK-Tabellen (12)
 
-```yaml
-# docker-compose.yml (Core)
-services:
-  postgres:
-    image: pgvector/pgvector:pg16
-    environment:
-      POSTGRES_DB: zero_trust
-      POSTGRES_USER: zt_user
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports: ["5432:5432"]
+| # | Tabelle | Inhalt |
+|---|---|------|
+| 1 | [Zeitplanung 70h](docs/tabellen/01_zeitplanung_70h.md) | Projektdurchführung in 8 Phasen |
+| 2 | [Kostenplanung](docs/tabellen/02_kostenplanung.md) | Kosten + Amortisation |
+| 3 | [Stakeholdermatrix](docs/tabellen/03_stakeholdermatrix.md) | Einfluss/Interesse der Beteiligten |
+| 4 | [Risikomatrix](docs/tabellen/04_risikomatrix.md) | 7 Risiken bewertet |
+| 5 | [Nutzwertanalyse](docs/tabellen/05_nutzwertanalyse.md) | Manuell vs IAM vs GitHub |
+| 6 | [Make-or-Buy](docs/tabellen/06_make_or_buy.md) | Entscheidungsmatrix |
+| 7 | [Anforderungsmatrix](docs/tabellen/07_anforderungsmatrix.md) | Muss/Kann-Anforderungen |
+| 8 | [Testfallmatrix](docs/tabellen/08_testfallmatrix.md) | 12 Testfälle |
+| 9 | [Soll-Ist-Vergleich](docs/tabellen/09_soll_ist_vergleich.md) | Zielerreichung |
+| 10 | [Kommunikationsmatrix](docs/tabellen/10_kommunikationsmatrix.md) | Reporting-Struktur |
+| 11 | [RACI-Matrix](docs/tabellen/11_raci_matrix.md) | Verantwortlichkeiten |
+| 12 | [KPI-Matrix](docs/tabellen/12_kpi_matrix.md) | Projekt-Kennzahlen |
 
-  redis:
-    image: redis:7-alpine
-    ports: ["6379:6379"]
+---
 
-  backend:
-    build: ./src/backend
-    ports: ["8000:8000"]
-    depends_on: [postgres, redis]
-    environment:
-      - DATABASE_URL=postgresql://zt_user:${DB_PASSWORD}@postgres/zero_trust
-      - REDIS_URL=redis://redis:6379
-      - HF_TOKEN=${HF_TOKEN}
+## 📉 Diagramme (10 Mermaid)
 
-  frontend:
-    build: ./src/frontend
-    ports: ["3000:3000"]
-    depends_on: [backend]
+| # | Diagramm | Beschreibung |
+|---|---|------|
+| 1 | [Projektstrukturplan](docs/diagramme/01_projektstrukturplan.md) | PSP: 6 Hauptphasen |
+| 2 | [Use-Case-Diagramm](docs/diagramme/02_use_case_diagramm.md) | Rollenbeantragung, Genehmigung, Audit |
+| 3 | [GitHub Workflow](docs/diagramme/03_github_workflow.md) | Actions: Antrag → Policy-Check → Provisioning |
+| 4 | [RBAC Datenmodell](docs/diagramme/04_rbac_datenmodell.md) | ERD: User, Role, Permission, AuditLog |
+| 5 | [Self-Service Prozess](docs/diagramme/05_self_service_prozess.md) | Sequence: Nutzer → Portal → Admin → Audit |
+| 6 | [Schnittstellen](docs/diagramme/06_schnittstellenuebersicht.md) | Architektur-Überblick |
+| 7 | [Abnahmeprozess](docs/diagramme/07_abnahmeprozess.md) | Test → Review → Freigabe |
+| 8 | [Risikoprozess](docs/diagramme/08_risikoprozess.md) | Erkennung → Bewertung → Maßnahme |
+| 9 | [Rollout-Plan](docs/diagramme/09_rollout_plan.md) | Pilot → Phase 1 → Vollausbau |
+| 10 | [Audit-Log Prozess](docs/diagramme/10_audit_log_prozess.md) | Event → Speicherung → Auswertung |
+
+---
+
+## 🤗 Hugging Face Integration
+
+### 1. Anomalieerkennung (Audit-Logs)
+```python
+from transformers import pipeline
+
+classifier = pipeline("text-classification", model="DonMassa84/zero-trust-anomaly-detector")
+result = classifier("ROLE_ESCALATION on super-admin-role")
+# {'label': 'ANOMALY', 'score': 0.89}
 ```
 
-```yaml
-# docker-compose.ml.yml (ML Services)
-services:
-  mlflow:
-    image: ghcr.io/mlflow/mlflow:v2.11
-    ports: ["5000:5000"]
-    volumes:
-      - mlflow_data:/mlflow
+### 2. Policy-Generierung (NLP → Rego)
+```python
+from transformers import pipeline
 
-  anomaly-api:
-    build: ./src/ml/inference
-    command: python anomaly_api.py
-    ports: ["8001:8000"]
-    environment:
-      - MODEL_PATH=/models/anomaly-detector
-      - HF_TOKEN=${HF_TOKEN}
-    volumes:
-      - ./src/ml/models:/models
+generator = pipeline("text-generation", model="DonMassa84/zero-trust-policy-generator")
+policy = generator("Read-only access for developers on production")
+# package zero_trust.policies.readonly
+# default allow = false
+```
 
-  policy-api:
-    build: ./src/ml/inference
-    command: python policy_api.py
-    ports: ["8002:8000"]
-    environment:
-      - MODEL_PATH=/models/policy-generator
-    volumes:
-      - ./src/ml/models:/models
+### 3. HF Spaces
+- [Anomaly Dashboard](hf-spaces/anomaly-dashboard/) - Gradio UI für Live-Analyse
+- [Policy Generator](hf-spaces/policy-generator/) - OPA Rego Generator
+- [Audit Explorer](hf-spaces/audit-explorer/) - Semantische Suche
 
-  gradio-demo:
-    build: ./hf-spaces/anomaly-dashboard
-    ports: ["7860:7860"]
-    depends_on: [anomaly-api]
+---
+
+## 📐 Architektur
+
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Frontend   │────▶│   Backend    │────▶│  PostgreSQL   │
+│   (React)    │     │  (FastAPI)   │     │  (RBAC, Audit)│
+└──────────────┘     └──────┬───────┘     └──────────────┘
+                            │
+                    ┌───────┼──────────┐
+                    │       │          │
+              ┌─────┴┐  ┌──┴──┐  ┌────┴────┐
+              │GitHub│  │ OPA │  │Prometheus│
+              │Actions│  │Policy│  │  Grafana │
+              └──────┘  └─────┘  └─────────┘
+                            │
+                    ┌───────┴───────┐
+                    │   🤗 HF ML   │
+                    │  (Anomaly,    │
+                    │   Policy,     │
+                    │   Embeddings) │
+                    └───────────────┘
 ```
 
 ---
 
-## 📊 Projektmetriken
+## 📈 Projektkennzahlen
 
-| Metrik | Ziel | Ist | Status |
+| Metrik | Soll | Ist | Status |
 |--------|------|-----|--------|
 | Gesamtaufwand | 70h | 70h | ✅ |
 | Amortisation | 12 Monate | ~11 Monate | ✅ |
 | Fehlerrate Rechtevergabe | <2% | 1.2% | ✅ |
 | Bearbeitungszeit/Anfrage | <4h | 3.5h | ✅ |
 | User Satisfaction | >4/5 | 4.3/5 | ✅ |
-| Testabdeckung (Security) | 100% | 100% | ✅ |
-| **ML Model Accuracy** | >90% | 92% | ✅ |
-| **Anomalie Detection F1** | >0.85 | 0.89 | ✅ |
+| DSGVO-Konformität | 100% | 100% | ✅ |
 
 ---
 
-## 🤗 Model Cards & Data Cards
+## 📋 Status (Stand: 08.07.2026)
 
-- [MODEL_CARD.md](MODEL_CARD.md) - Dokumentation aller ML-Modelle
-- [DATA_CARD.md](DATA_CARD.md) - Trainingsdaten, Bias, Privacy
+| Bereich | Status | Details |
+|---------|--------|---------|
+| **Projektstruktur** | ✅ | 33 Dateien, 14 Bereiche |
+| **Tabellen** | ✅ | 12/12 IHK-Tabellen |
+| **Diagramme** | ✅ | 10/10 Mermaid-Diagramme |
+| **Backend Code** | ✅ | FastAPI, RBAC, GitHub, ML |
+| **CI/CD** | ✅ | GitHub Actions, Docker |
+| **HF Spaces** | ✅ | Anomaly Dashboard, Policy Generator |
+| **Screenshots** | 🔴 | 0/9 erstellt |
+| **Prüferfragen** | 🔴 | Nicht erstellt |
+| **Präsentation** | 🟡 | Gliederung vorhanden |
+| **DOCX/PDF Export** | 🔴 | Noch nicht exportiert |
 
----
-
-## 📚 Dokumentation
-
-- [📋 Vollständige Projektdokumentation](docs/projektdokumentation.md)
-- [📝 Lastenheft](docs/lastenheft.md)
-- [🔧 Pflichtenheft](docs/pflichtenheft.md)
-- [🧪 Testfälle & Abnahme](docs/testfaelle.md)
-- [👤 Benutzerdokumentation](docs/benutzerdokumentation.md)
-- [📅 Projektplan & Gantt](PROJECT_PLAN.md)
-- [🤗 ML Architecture](docs/ml_architecture.md)
-
----
-
-## 🔬 Lessons Learned (ML-Spezifisch)
-
-✅ **Erfolgsfaktoren:**
-- **Data Quality > Model Size:** Kuratierte Audit-Logs > große Modelle
-- **Privacy-First:** Lokale Inference, keine Logs an HF Hub
-- **Incremental Training:** Wöchentliche Retrainings mit neuen Daten
-
-⚠️ **Herausforderungen:**
-- Class Imbalance (Anomalien selten) → Focal Loss, Oversampling
-- Concept Drift → Monitoring + Auto-Retrain Pipeline
-- Erklärbarkeit → SHAP/LIME Integration für Prüfer
+**Gesamt: 🟡 Gelb – Noch nicht einreichungsreif**
 
 ---
 
-## 🔮 Ausblick (ML Roadmap)
+## 📅 Nächste Schritte
 
-| Quartal | Meilenstein |
-|---------|-------------|
-| Q3 2026 | Production Anomalie-Detection (Shadow Mode) |
-| Q4 2026 | Policy-Generator Beta (Internal) |
-| Q1 2027 | Semantic Audit Search (All Logs) |
-| Q2 2027 | KI-gestützte Risiko-Bewertung |
-| Q3 2027 | Federated Learning (Multi-Tenant) |
+### Diese Woche
+1. 🔴 Screenshots erstellen (9 Stück aus Prototyp)
+2. 🔴 DOCX/PDF exportieren
+3. 🔴 Prüferfragen-Katalog (50+)
+
+### Vor Einreichung (01.11.2026)
+4. 🟡 Präsentation ausbauen (Folien + Sprechtext)
+5. 🟡 Quellenverzeichnis finalisieren
+6. 🟡 Rechtschreibprüfung & Formatierung
 
 ---
 
 ## 📄 Lizenz & Kontakt
 
-**Prüfungsbewerber:** Daniel-Alfonsin Massa  
-**Ausbildungsbetrieb:** Verein zur Förderung der Berufsbildung e.V., Ludwigsburg  
-**Abgabedatum:** 30.06.2026  
-**HF Organization:** `DonMassa84` (optional)
+**Prüfling:** Daniel-Alfonsin Massa (615951) · dmassa00@gmail.com  
+**Betrieb:** Verein zur Förderung der Berufsbildung e.V., Kurfürstenstraße 6, 71636 Ludwigsburg  
+**Prüfung:** Certified IT Business Manager (IHK) · Sommer 2026  
+**Abgabe:** 01.11.2026
 
 ---
 
-*Projektdokumentation zur IHK-Abschlussprüfung Certified IT Business Manager*  
-*Enhanced with 🤗 Hugging Face*
+*Projektarbeit zur IHK-Abschlussprüfung · Enhanced with 🤗 Hugging Face*

@@ -1,9 +1,14 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 from app.core.config import settings
 from app.core.database import init_db, close_db
+from app.api.v1.health import router as health_router
+from app.api.v1.auth import router as auth_router
+from app.api.v1.rbac import router as rbac_router
+from app.api.v1.audit import router as audit_router
+from app.api.v1.github_integration import router as github_router
+from app.api.v1.ml import router as ml_router
 import structlog
 import time
 
@@ -54,20 +59,9 @@ async def log_requests(request: Request, call_next):
     return response
 
 
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "version": settings.APP_VERSION,
-        "environment": settings.ENVIRONMENT,
-    }
-
-
-@app.post("/api/v1/auth/login")
-async def login():
-    raise HTTPException(status_code=501, detail="Not implemented - use Azure AD / OIDC")
-
-
-@app.get("/api/v1/me")
-async def get_current_user():
-    raise HTTPException(status_code=501, detail="Not implemented - authentication required")
+app.include_router(health_router, prefix="/api/v1")
+app.include_router(auth_router, prefix="/api/v1")
+app.include_router(rbac_router, prefix="/api/v1")
+app.include_router(audit_router, prefix="/api/v1")
+app.include_router(github_router, prefix="/api/v1")
+app.include_router(ml_router, prefix="/api/v1")

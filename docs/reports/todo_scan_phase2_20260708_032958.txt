@@ -1,0 +1,28 @@
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/01_deckblatt_text.md:33:TODO_ABGABEDATUM_PRUEFEN  
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/01_deckblatt_text.md:39:TODO_REALDATEN_EINSETZEN
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/01_deckblatt_text.md:42:TODO_REALDATEN_EINSETZEN
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/01_deckblatt_text.md:49:Stuttgart, den TODO_ABGABEDATUM_PRUEFEN
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/03_abbildungsverzeichnis.md:20:> **Hinweis:** Alle Abbildungen sind als Mermaid-Diagramme im Ordner `04_diagramme_mermaid/` verfügbar und müssen vor Abgabe in das finale Dokument eingebunden werden. Screenshots der Anwendung (Abb. 8, 10, 12 in der ursprünglichen Vorlage) sind als `TODO_SCREENSHOT_EINFUEGEN` markiert.
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/07_eidesstattliche_erklaerung.md:22:Stuttgart, den **TODO_ABGABEDATUM_PRUEFEN**
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/06_literaturverzeichnis.md:32:> **TODO_REALDATEN_EINSETZEN:** Konkrete Seitenzahlen, Zugriffsdaten und Zitate für alle Quellen ergänzen.
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/08_todo_liste_realdaten.md:6:- [ ] **TODO_ABGABEDATUM_PRUEFEN** — Offizielles Abgabedatum bei der IHK erfragen und überall eintragen (Deckblatt, Eidesstattliche Erklärung, Kapitel 1.6, 8.7)
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/08_todo_liste_realdaten.md:74:- [ ] **A8** Screenshots Anwendung (TODO_SCREENSHOT_EINFUEGEN → echte Bilder)
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/08_todo_liste_realdaten.md:90:- [ ] Keine TODO_REALDATEN_EINSETZEN mehr offen
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/00_master/08_todo_liste_realdaten.md:91:- [ ] Keine TODO_SCREENSHOT_EINFUEGEN mehr offen
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:5:| RBAC-Modell | definiert | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:6:| Self-Service-Antrag | strukturiert | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:7:| GitHub-Workflow | automatisiert | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:8:| Audit-Logging | protokolliert | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:9:| Testfaelle | 12 dokumentiert | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/09_soll_ist_vergleich.md:10:| Dokumentation | vollstaendig | TODO_REALDATEN_EINSETZEN | offen |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/02_kostenplanung.md:6:| Fachbereichsabstimmung | 4 h | 50 EUR | 200 EUR | TODO_REALDATEN_EINSETZEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/03_tabellen/02_kostenplanung.md:7:| Datenschutzpruefung | 2 h | 70 EUR | 140 EUR | TODO_REALDATEN_EINSETZEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:5:| GitHub Repo Uebersicht | Projektumgebung | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:6:| GitHub Actions Workflow | Automatisierung | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:7:| YAML Workflow-Datei | techn. Umsetzung | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:8:| Testlauf Actions | Testnachweis | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:9:| Secret-Scanning | Security-Test | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:10:| Rollen-/Teamstruktur | RBAC-Nachweis | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:11:| Audit-Log-Auszug | Revisionssicherheit | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:12:| Self-Service-Formular | Benutzerprozess | TODO_SCREENSHOT_EINFUEGEN |
+/home/schattenmacher/openclaw-workspace/ihk_zero_trust_projektarbeit_final/10_screenshots/01_screenshot_liste.md:13:| Terminal-Testausgabe | techn. Nachweis | TODO_SCREENSHOT_EINFUEGEN |

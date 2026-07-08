@@ -1,0 +1,7 @@
+{
+  "title": "Zero-Trust RBAC Overview",
+  "panels": [
+    {"title": "API Requests", "type": "graph", "targets": [{"expr": "rate(http_requests_total[5m])"}]},
+    {"title": "Audit Logs", "type": "graph", "targets": [{"expr": "rate(audit_log_entries_total[5m])"}]}
+  ]
+}
