@@ -1,6 +1,6 @@
 # Abschlussprüfung Sommer 2026
 ## Certified IT Business Manager (IHK)
-### Dokumentation zur betrieblichen Projektarbeit
+### Projektarbeit im Rahmen der Prüfung zum Certified IT Business Manager (IHK)
 
 **Zero-Trust-Sicherheitskonzept mit GitHub-Integration**
 
@@ -47,7 +47,9 @@ Die vorliegende Projektarbeit entstand im Rahmen der Prüfung zum **Certified IT
 
 ### II. Projektumfeld
 
-Der VFB ist ein regionaler Bildungsträger mit rund 50 Beschäftigten und mehreren hybriden Lernplattformen. Als zertifizierter Weiterbildungsanbieter unterliegt der VFB besonderen Anforderungen an Datenschutz und IT-Sicherheit. Die zunehmende Digitalisierung der Bildungsangebote und die Einführung cloudbasierter Lernplattformen erforderten eine Neugestaltung der Zugriffs- und Rechteverwaltung nach dem Zero-Trust-Prinzip.
+Der VFB ist ein regionaler Bildungsträger mit rund 50 Beschäftigten und mehreren hybriden Lernplattformen. Als zertifizierter Weiterbildungsanbieter unterliegt der VFB besonderen Anforderungen an Datenschutz und IT-Sicherheit. Die zunehmende Digitalisierung der Bildungsangebote und die Einführung cloudbasierter Lernplattformen erforderten eine Neugestaltung der Zugriffs- und Rechteverwaltung nach dem Zero-Trust-Prinzip.[^1]
+
+[^1]: Vgl. Kindervag, J. (2010). "No More Chewy Centers: Introducing the Zero Trust Model of Information Security." Forrester Research; sowie Rose, S. et al. (2020). "Zero Trust Architecture." NIST Special Publication 800-207.
 
 ### III. Meine Tätigkeiten im Unternehmen
 
@@ -61,116 +63,116 @@ In dieser Projektarbeit wird aus Gründen der besseren Lesbarkeit das generische
 
 ## INHALTSVERZEICHNIS
 
-1 Projektinitiierung
-1.1 Projektumfeld
-1.2 Ausgangssituation
-1.3 Ist-Analyse
-1.4 Problemstellung
-1.5 Soll-Konzept
-1.6 Projektziele nach SMART
-1.7 Projektbegründung
-1.8 Projektabgrenzung
-1.9 Projektschnittstellen
-1.10 Projektauftrag
+1 Projektinitiierung ..................................... 1
+1.1 Projektumfeld ....................................... 1
+1.2 Ausgangssituation .................................... 2
+1.3 Ist-Analyse .......................................... 3
+1.4 Problemstellung ...................................... 4
+1.5 Soll-Konzept ......................................... 5
+1.6 Projektziele nach SMART .............................. 5
+1.7 Projektbegründung .................................... 6
+1.8 Projektabgrenzung .................................... 7
+1.9 Projektschnittstellen ................................. 7
+1.10 Projektauftrag ...................................... 8
 
-2 Projektplanung
-2.1 Vorgehensmodell
-2.2 Projektphasen
-2.3 Projektstrukturplan
-2.4 Arbeitspakete
-2.5 Meilensteinplanung
-2.6 Ressourcenplanung
-2.7 Kostenplanung
-2.8 Kommunikationsplanung
-2.9 Risikoanalyse
-2.10 Qualitätsplanung
-2.11 Abweichungen vom Projektantrag
+2 Projektplanung ........................................ 9
+2.1 Vorgehensmodell ...................................... 9
+2.2 Projektphasen ........................................ 10
+2.3 Projektstrukturplan .................................. 11
+2.4 Arbeitspakete ........................................ 12
+2.5 Meilensteinplanung ................................... 13
+2.6 Ressourcenplanung .................................... 14
+2.7 Kostenplanung ........................................ 15
+2.8 Kommunikationsplanung ................................ 16
+2.9 Risikoanalyse ........................................ 17
+2.10 Qualitätsplanung .................................... 18
+2.11 Abweichungen vom Projektantrag ...................... 19
 
-3 Analyse und Konzeption
-3.1 Anforderungsanalyse
-3.2 Lastenheft / Fachkonzept
-3.3 Stakeholderanalyse
-3.4 Make-or-Buy-Entscheidung
-3.5 Wirtschaftlichkeitsanalyse
-3.6 Nutzwertanalyse
-3.7 Zero-Trust-Konzept
-3.8 RBAC-Modell
-3.9 Datenschutz- und Sicherheitskonzept
+3 Analyse und Konzeption ................................ 20
+3.1 Anforderungsanalyse .................................. 20
+3.2 Lastenheft / Fachkonzept ............................. 21
+3.3 Stakeholderanalyse ................................... 22
+3.4 Make-or-Buy-Entscheidung ............................ 23
+3.5 Wirtschaftlichkeitsanalyse ........................... 24
+3.6 Nutzwertanalyse ...................................... 25
+3.7 Zero-Trust-Konzept ................................... 26
+3.8 RBAC-Modell .......................................... 27
+3.9 Datenschutz- und Sicherheitskonzept .................. 28
 
-4 Technischer Entwurf
-4.1 Zielplattform
-4.2 Architekturdesign
-4.3 GitHub-Workflow-Integration
-4.4 Self-Service-Prozess
-4.5 Datenmodell
-4.6 Geschäftslogik
-4.7 Audit-Logging
-4.8 Schnittstellen
-4.9 Maßnahmen zur Qualitätssicherung
-4.10 Pflichtenheft / Datenverarbeitungskonzept
+4 Technischer Entwurf ................................... 29
+4.1 Zielplattform ........................................ 29
+4.2 Architekturdesign .................................... 30
+4.3 GitHub-Workflow-Integration .......................... 31
+4.4 Self-Service-Prozess ................................. 32
+4.5 Datenmodell .......................................... 33
+4.6 Geschäftslogik ....................................... 34
+4.7 Audit-Logging ........................................ 35
+4.8 Schnittstellen ....................................... 36
+4.9 Maßnahmen zur Qualitätssicherung ..................... 37
+4.10 Pflichtenheft / Datenverarbeitungskonzept ........... 38
 
-5 Umsetzung
-5.1 Aufbau der Entwicklungsumgebung
-5.2 Implementierung der Datenstrukturen
-5.3 Implementierung des RBAC-Modells
-5.4 Implementierung der Benutzeroberfläche
-5.5 Implementierung der GitHub-Automatisierung
-5.6 Implementierung der Geschäftslogik
-5.7 Implementierung der Audit-Protokollierung
-5.8 Implementierung der Qualitätssicherung
-5.9 Entwicklerdokumentation
+5 Umsetzung ............................................. 39
+5.1 Aufbau der Entwicklungsumgebung ..................... 39
+5.2 Implementierung der Datenstrukturen .................. 40
+5.3 Implementierung des RBAC-Modells ..................... 41
+5.4 Implementierung der Benutzeroberfläche ............... 42
+5.5 Implementierung der GitHub-Automatisierung .......... 43
+5.6 Implementierung der Geschäftslogik ................... 44
+5.7 Implementierung der Audit-Protokollierung ............ 45
+5.8 Implementierung der Qualitätssicherung ............... 46
+5.9 Entwicklerdokumentation .............................. 47
 
-6 Test und Abnahme
-6.1 Testkonzept
-6.2 Funktionstests
-6.3 Integrationstests
-6.4 Security-Tests
-6.5 Datenschutzprüfung
-6.6 Testfallmatrix
-6.7 Fehleranalyse
-6.8 Soll-Ist-Vergleich
-6.9 Abnahme
+6 Test und Abnahme ...................................... 48
+6.1 Testkonzept .......................................... 48
+6.2 Funktionstests ....................................... 49
+6.3 Integrationstests .................................... 50
+6.4 Security-Tests ....................................... 51
+6.5 Datenschutzprüfung ................................... 52
+6.6 Testfallmatrix ....................................... 53
+6.7 Fehleranalyse ........................................ 54
+6.8 Soll-Ist-Vergleich ................................... 55
+6.9 Abnahme ............................................. 56
 
-7 Einführung und Dokumentation
-7.1 Einführungskonzept
-7.2 Pilotbetrieb
-7.3 Schulung
-7.4 Change Management
-7.5 Benutzerdokumentation
-7.6 Betriebsdokumentation
-7.7 Übergabe
+7 Einführung und Dokumentation .......................... 57
+7.1 Einführungskonzept ................................... 57
+7.2 Pilotbetrieb ......................................... 58
+7.3 Schulung ............................................. 59
+7.4 Change Management .................................... 60
+7.5 Benutzerdokumentation ................................ 61
+7.6 Betriebsdokumentation ................................ 62
+7.7 Übergabe ............................................. 63
 
-8 Projektabschluss
-8.1 Projektergebnis
-8.2 Soll-Ist-Vergleich
-8.3 Wirtschaftliche Bewertung
-8.4 Lessons Learned
-8.5 Risiken nach Projektabschluss
-8.6 Ausblick
-8.7 Persönliches Fazit
+8 Projektabschluss ...................................... 64
+8.1 Projektergebnis ...................................... 64
+8.2 Soll-Ist-Vergleich ................................... 65
+8.3 Wirtschaftliche Bewertung ............................ 66
+8.4 Lessons Learned ...................................... 67
+8.5 Risiken nach Projektabschluss ........................ 68
+8.6 Ausblick ............................................ 69
+8.7 Persönliches Fazit ................................... 70
 
-Literaturverzeichnis
-Abkürzungsverzeichnis
-Abbildungsverzeichnis
-Tabellenverzeichnis
-Anhang
-A1 Detaillierte Zeitplanung
-A2 Lastenheft-Auszug
-A3 Use-Case-Diagramm
-A4 Pflichtenheft-Auszug
-A5 Datenmodell
-A6 EPK-Prozessbeschreibung
-A7 Oberflächenentwürfe
-A8 Screenshots der Anwendung
-A9 Entwicklerdokumentation
-A10 Testfall Konsole
-A11 Schnittstellenübersicht
-A12 Klassendiagramm
-A13 Benutzerdokumentation
-A14 Datenschutz-Checkliste
-A15 Abnahmeprotokoll
+Literaturverzeichnis ..................................... 71
+Abkürzungsverzeichnis .................................... 72
+Abbildungsverzeichnis .................................... 73
+Tabellenverzeichnis ...................................... 74
+Anhang .................................................. 75
+A1 Detaillierte Zeitplanung .............................. 75
+A2 Lastenheft-Auszug .................................... 76
+A3 Use-Case-Diagramm .................................... 77
+A4 Pflichtenheft-Auszug ................................. 78
+A5 Datenmodell .......................................... 79
+A6 EPK-Prozessbeschreibung .............................. 80
+A7 Oberflächenentwürfe .................................. 81
+A8 Screenshots der Anwendung ............................ 82
+A9 Entwicklerdokumentation .............................. 83
+A10 Testfall Konsole .................................... 84
+A11 Schnittstellenübersicht ............................. 85
+A12 Klassendiagramm ..................................... 86
+A13 Benutzerdokumentation ............................... 87
+A14 Datenschutz-Checkliste .............................. 88
+A15 Abnahmeprotokoll .................................... 89
 
-Eidesstattliche Erklärung
+Eidesstattliche Erklärung ............................... 90
 
 ---
 
@@ -221,23 +223,48 @@ Eidesstattliche Erklärung
 
 | Abkürzung | Bedeutung |
 |-----------|-----------|
+| AD | Active Directory |
 | API | Application Programming Interface |
+| BSI | Bundesamt für Sicherheit in der Informationstechnik |
 | CI/CD | Continuous Integration / Continuous Deployment |
+| CRUD | Create, Read, Update, Delete |
+| DPIA | Data Protection Impact Assessment (Datenschutz-Folgenabschätzung) |
+| DSB | Datenschutzbeauftragter |
 | DSGVO | Datenschutz-Grundverordnung |
+| EPK | Ereignisgesteuerte Prozesskette |
 | ERD / ERM | Entity Relationship Diagram / Model |
+| FAQ | Frequently Asked Questions |
 | GitHub | GitHub Enterprise / GitHub.com |
+| HR | Human Resources |
+| HTTPS | Hypertext Transfer Protocol Secure |
 | IAM | Identity and Access Management |
+| ID | Identifier |
+| IDP | Identity Provider |
+| IHK | Industrie- und Handelskammer |
+| ISO | International Organization for Standardization |
+| IT | Information Technology |
+| JSON | JavaScript Object Notation |
+| KI | Künstliche Intelligenz |
 | KPI | Key Performance Indicator |
 | MTA | Meilensteintrendanalyse |
+| NIST | National Institute of Standards and Technology |
 | PSP | Projektstrukturplan |
-| RBAC | Role-Based Access Control |
 | RACI | Responsible, Accountable, Consulted, Informed |
+| RBAC | Role-Based Access Control |
 | REST | Representational State Transfer |
+| ROI | Return on Investment |
+| SAML | Security Assertion Markup Language |
 | SIEM | Security Information and Event Management |
+| SMART | Specific, Measurable, Achievable, Relevant, Time-bound |
+| SP | Special Publication (NIST SP 800-207) |
 | SQL | Structured Query Language |
 | SSO | Single Sign-On |
+| SWOT | Strengths, Weaknesses, Opportunities, Threats |
 | TDD | Test-Driven Development |
+| TOM | Technische und organisatorische Maßnahmen |
+| UAT | User Acceptance Testing |
 | UI/UX | User Interface / User Experience |
+| VFB | Verein zur Förderung der Berufsbildung e.V. |
 | YAML | YAML Ain't Markup Language |
 | Zero Trust | Zero-Trust-Sicherheitsmodell (Never Trust, Always Verify) |
 
@@ -294,7 +321,10 @@ Die SWOT-Analyse zeigt, dass die internen Stärken (bestehende Infrastruktur, Ma
 
 ## 1.5 Problemstellung
 
-Der VFB benötigt einen automatisierten, revisionssicheren und datenschutzkonformen Rechtevergabeprozess, der die bestehenden manuellen Verfahren ersetzt. Die DSGVO (insbesondere Art. 5, 25, 32) fordert angemessene technische und organisatorische Maßnahmen zur Sicherstellung der Datensicherheit. Das bestehende Verfahren konnte diese Anforderungen nicht mehr erfüllen.
+Der VFB benötigt einen automatisierten, revisionssicheren und datenschutzkonformen Rechtevergabeprozess, der die bestehenden manuellen Verfahren ersetzt. Die DSGVO[^2] (insbesondere Art. 5, 25, 32) fordert angemessene technische und organisatorische Maßnahmen (TOM) zur Sicherstellung der Datensicherheit. Die Einhaltung der ISO/IEC 27001[^3] als branchenüblicher Standard für Informationssicherheits-Managementsysteme wurde ebenfalls berücksichtigt. Das bestehende Verfahren konnte diese Anforderungen nicht mehr erfüllen.
+
+[^2]: Verordnung (EU) 2016/679 des Europäischen Parlaments und des Rates vom 27. April 2016 zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten (Datenschutz-Grundverordnung).
+[^3]: ISO/IEC 27001:2022 — Information security management systems — Requirements.
 
 Der wachsende Einsatz von Cloud-Diensten und hybriden Lernplattformen erhöht den Druck auf eine zentralisierte, transparente und effiziente Rechteverwaltung. Ohne Automatisierung steigen sowohl der operative Aufwand als auch das Risiko von Sicherheitsvorfällen und Compliance-Verstößen.
 
@@ -625,7 +655,10 @@ Der GitHub-Prototyp erzielt die höchste gewichtete Gesamtpunktzahl und wurde da
 
 ## 3.8 Zero-Trust-Konzept
 
-Das Zero-Trust-Konzept basiert auf dem NIST SP 800-207 Standard und folgt dem Prinzip "Never Trust, Always Verify". Kernkomponenten sind:
+Das Zero-Trust-Konzept basiert auf dem NIST SP 800-207 Standard[^4] und folgt dem Prinzip "Never Trust, Always Verify". Die Grundlagen des IT-Grundschutzes nach BSI[^5] flossen ebenfalls in die Konzeption ein. Kernkomponenten sind:
+
+[^4]: Vgl. Rose, S. et al. (2020). "Zero Trust Architecture." NIST Special Publication 800-207.
+[^5]: BSI Grundschutz-Kompendium (IT-Grundschutz), aktuelles Kompendium des Bundesamts für Sicherheit in der Informationstechnik.
 
 - **Identitätsüberprüfung**: Jeder Zugriff wird authentifiziert und autorisiert, unabhängig vom Standort
 - **Rollenbasierte Zugriffskontrolle (RBAC)**: Berechtigungen werden auf Basis der Geschäftsrolle vergeben
@@ -837,7 +870,9 @@ Das Frontend wurde als React-basiertes Self-Service-Portal realisiert:
 
 ## 5.5 Implementierung der GitHub-Automatisierung
 
-Der GitHub Actions Workflow (`role-request.yml`) automatisiert die Rechtevergabe:
+Der GitHub Actions Workflow[^6] (`role-request.yml`) automatisiert die Rechtevergabe:
+
+[^6]: GitHub Docs. "GitHub Actions Documentation." https://docs.github.com/en/actions (Abruf: 01.10.2026) sowie GitHub Docs. "GitHub REST API Documentation." https://docs.github.com/en/rest (Abruf: 01.10.2026).
 
 ```yaml
 name: Role Request Workflow
