@@ -22,7 +22,7 @@ Kurfürstenstraße 6
 71636 Ludwigsburg
 
 **Betreuer im Betrieb:**
-Herr Thomas Zoller, IT-Administration
+Carsten Vordermeier
 
 **IHK-Betreuer:**
 Frau Dr. Sabine Wagner, IHK Stuttgart
@@ -63,117 +63,119 @@ In dieser Projektarbeit wird aus Gründen der besseren Lesbarkeit das generische
 
 ## INHALTSVERZEICHNIS
 
-1 Projektinitiierung ..................................... 1
-1.1 Projektumfeld ....................................... 1
-1.2 Ausgangssituation .................................... 2
-1.3 Ist-Analyse .......................................... 3
-1.4 Problemstellung ...................................... 4
-1.5 Soll-Konzept ......................................... 5
-1.6 Projektziele nach SMART .............................. 5
-1.7 Projektbegründung .................................... 6
-1.8 Projektabgrenzung .................................... 7
-1.9 Projektschnittstellen ................................. 7
-1.10 Projektauftrag ...................................... 8
+Vorwort ..................................................... I
+Einleitung .................................................. II
+Projektumfeld ............................................... III
+Meine Tätigkeiten ........................................... IV
+Allgemeine Informationen .................................... V
+SPERRVERMERK ................................................ VI
+ABBILDUNGSVERZEICHNIS ....................................... VII
+TABELLENVERZEICHNIS ......................................... VIII
+ABKÜRZUNGSVERZEICHNIS ....................................... IX
+1 Projektinitiierung ........................................ 1
+1.1 Projektumfeld ........................................... 2
+1.2 Ausgangssituation ....................................... 3
+1.3 Ist-Analyse ............................................. 4
+1.4 Problemstellung ......................................... 5
+1.5 Soll-Konzept ............................................ 6
+1.6 Projektziele nach SMART ................................. 7
+1.7 Projektbegründung ....................................... 8
+1.8 Projektabgrenzung ....................................... 9
+1.9 Projektschnittstellen ................................... 10
+1.10 Projektauftrag ......................................... 11
+2 Projektplanung ............................................ 12
+2.1 Vorgehensmodell ......................................... 13
+2.2 Projektphasen ........................................... 14
+2.3 Projektstrukturplan ..................................... 15
+2.4 Arbeitspakete ........................................... 16
+2.5 Meilensteinplanung ...................................... 17
+2.6 Ressourcenplanung ....................................... 18
+2.7 Kostenplanung ........................................... 19
+2.8 Kommunikationsplanung ................................... 20
+2.9 Risikoanalyse ........................................... 21
+2.10 Qualitätsplanung ....................................... 22
+2.11 Abweichungen vom Projektantrag ......................... 23
+3 Analyse und Konzeption .................................... 24
+3.1 Anforderungsanalyse ..................................... 25
+3.2 Lastenheft / Fachkonzept ................................ 26
+3.3 Stakeholderanalyse ...................................... 27
+3.4 Make-or-Buy-Entscheidung ................................ 28
+3.5 Wirtschaftlichkeitsanalyse .............................. 29
+3.6 Nutzwertanalyse ......................................... 30
+3.7 Zero-Trust-Konzept ...................................... 31
+3.8 RBAC-Modell ............................................. 32
+3.9 Datenschutz- und Sicherheitskonzept ..................... 33
+4 Technischer Entwurf ....................................... 34
+4.1 Zielplattform ........................................... 35
+4.2 Architekturdesign ....................................... 36
+4.3 GitHub-Workflow-Integration ............................. 37
+4.4 Self-Service-Prozess .................................... 38
+4.5 Datenmodell ............................................. 39
+4.6 Geschäftslogik .......................................... 40
+4.7 Audit-Logging ........................................... 41
+4.8 Schnittstellen .......................................... 42
+4.9 Maßnahmen zur Qualitätssicherung ........................ 43
+4.10 Pflichtenheft / Datenverarbeitungskonzept .............. 44
+5 Umsetzung ................................................. 45
+5.1 Aufbau der Entwicklungsumgebung ......................... 46
+5.2 Implementierung der Datenstrukturen ..................... 47
+5.3 Implementierung des RBAC-Modells ........................ 48
+5.4 Implementierung der Benutzeroberfläche .................. 49
+5.5 Implementierung der GitHub-Automatisierung .............. 50
+5.6 Implementierung der Geschäftslogik ...................... 51
+5.7 Implementierung der Audit-Protokollierung ............... 52
+5.8 Implementierung der Qualitätssicherung .................. 53
+5.9 Entwicklerdokumentation ................................. 54
+6 Test und Abnahme .......................................... 55
+6.1 Testkonzept ............................................. 56
+6.2 Funktionstests .......................................... 57
+6.3 Integrationstests ....................................... 58
+6.4 Security-Tests .......................................... 59
+6.5 Datenschutzprüfung ...................................... 60
+6.6 Testfallmatrix .......................................... 61
+6.7 Fehleranalyse ........................................... 62
+6.8 Soll-Ist-Vergleich ...................................... 63
+6.9 Abnahme ................................................. 64
+7 Einführung und Dokumentation .............................. 65
+7.1 Einführungskonzept ...................................... 66
+7.2 Pilotbetrieb ............................................ 67
+7.3 Schulung ................................................ 68
+7.4 Change Management ....................................... 69
+7.5 Benutzerdokumentation ................................... 70
+7.6 Betriebsdokumentation ................................... 71
+7.7 Übergabe ................................................ 72
+8 Projektabschluss .......................................... 73
+8.1 Projektergebnis ......................................... 74
+8.2 Soll-Ist-Vergleich ...................................... 75
+8.3 Wirtschaftliche Bewertung ............................... 76
+8.4 Lessons Learned ......................................... 77
+8.5 Risiken nach Projektabschluss ........................... 78
+8.6 Ausblick ................................................ 79
+8.7 Persönliches Fazit ...................................... 80
+Literaturverzeichnis ........................................ i
+Abkürzungsverzeichnis ....................................... ii
+Abbildungsverzeichnis ....................................... iii
+Tabellenverzeichnis ......................................... iv
+Anhang ...................................................... v
+A1 Detaillierte Zeitplanung ................................. vi
+A2 Lastenheft-Auszug ........................................ vii
+A3 Use-Case-Diagramm ........................................ viii
+A4 Pflichtenheft-Auszug ..................................... ix
+A5 Datenmodell .............................................. x
+A6 EPK-Prozessbeschreibung .................................. xi
+A7 Oberflächenentwürfe ...................................... xii
+A8 Screenshots der Anwendung ................................ xiii
+A9 Entwicklerdokumentation .................................. xiv
+A10 Testfall Konsole ........................................ xv
+A11 Schnittstellenübersicht ................................. xvi
+A12 Klassendiagramm ......................................... xvii
+A13 Benutzerdokumentation ................................... xviii
+A14 Datenschutz-Checkliste .................................. xix
+A15 Abnahmeprotokoll ........................................ xx
+Eidesstattliche Erklärung ................................... xxi
 
-2 Projektplanung ........................................ 9
-2.1 Vorgehensmodell ...................................... 9
-2.2 Projektphasen ........................................ 10
-2.3 Projektstrukturplan .................................. 11
-2.4 Arbeitspakete ........................................ 12
-2.5 Meilensteinplanung ................................... 13
-2.6 Ressourcenplanung .................................... 14
-2.7 Kostenplanung ........................................ 15
-2.8 Kommunikationsplanung ................................ 16
-2.9 Risikoanalyse ........................................ 17
-2.10 Qualitätsplanung .................................... 18
-2.11 Abweichungen vom Projektantrag ...................... 19
-
-3 Analyse und Konzeption ................................ 20
-3.1 Anforderungsanalyse .................................. 20
-3.2 Lastenheft / Fachkonzept ............................. 21
-3.3 Stakeholderanalyse ................................... 22
-3.4 Make-or-Buy-Entscheidung ............................ 23
-3.5 Wirtschaftlichkeitsanalyse ........................... 24
-3.6 Nutzwertanalyse ...................................... 25
-3.7 Zero-Trust-Konzept ................................... 26
-3.8 RBAC-Modell .......................................... 27
-3.9 Datenschutz- und Sicherheitskonzept .................. 28
-
-4 Technischer Entwurf ................................... 29
-4.1 Zielplattform ........................................ 29
-4.2 Architekturdesign .................................... 30
-4.3 GitHub-Workflow-Integration .......................... 31
-4.4 Self-Service-Prozess ................................. 32
-4.5 Datenmodell .......................................... 33
-4.6 Geschäftslogik ....................................... 34
-4.7 Audit-Logging ........................................ 35
-4.8 Schnittstellen ....................................... 36
-4.9 Maßnahmen zur Qualitätssicherung ..................... 37
-4.10 Pflichtenheft / Datenverarbeitungskonzept ........... 38
-
-5 Umsetzung ............................................. 39
-5.1 Aufbau der Entwicklungsumgebung ..................... 39
-5.2 Implementierung der Datenstrukturen .................. 40
-5.3 Implementierung des RBAC-Modells ..................... 41
-5.4 Implementierung der Benutzeroberfläche ............... 42
-5.5 Implementierung der GitHub-Automatisierung .......... 43
-5.6 Implementierung der Geschäftslogik ................... 44
-5.7 Implementierung der Audit-Protokollierung ............ 45
-5.8 Implementierung der Qualitätssicherung ............... 46
-5.9 Entwicklerdokumentation .............................. 47
-
-6 Test und Abnahme ...................................... 48
-6.1 Testkonzept .......................................... 48
-6.2 Funktionstests ....................................... 49
-6.3 Integrationstests .................................... 50
-6.4 Security-Tests ....................................... 51
-6.5 Datenschutzprüfung ................................... 52
-6.6 Testfallmatrix ....................................... 53
-6.7 Fehleranalyse ........................................ 54
-6.8 Soll-Ist-Vergleich ................................... 55
-6.9 Abnahme ............................................. 56
-
-7 Einführung und Dokumentation .......................... 57
-7.1 Einführungskonzept ................................... 57
-7.2 Pilotbetrieb ......................................... 58
-7.3 Schulung ............................................. 59
-7.4 Change Management .................................... 60
-7.5 Benutzerdokumentation ................................ 61
-7.6 Betriebsdokumentation ................................ 62
-7.7 Übergabe ............................................. 63
-
-8 Projektabschluss ...................................... 64
-8.1 Projektergebnis ...................................... 64
-8.2 Soll-Ist-Vergleich ................................... 65
-8.3 Wirtschaftliche Bewertung ............................ 66
-8.4 Lessons Learned ...................................... 67
-8.5 Risiken nach Projektabschluss ........................ 68
-8.6 Ausblick ............................................ 69
-8.7 Persönliches Fazit ................................... 70
-
-Literaturverzeichnis ..................................... 71
-Abkürzungsverzeichnis .................................... 72
-Abbildungsverzeichnis .................................... 73
-Tabellenverzeichnis ...................................... 74
-Anhang .................................................. 75
-A1 Detaillierte Zeitplanung .............................. 75
-A2 Lastenheft-Auszug .................................... 76
-A3 Use-Case-Diagramm .................................... 77
-A4 Pflichtenheft-Auszug ................................. 78
-A5 Datenmodell .......................................... 79
-A6 EPK-Prozessbeschreibung .............................. 80
-A7 Oberflächenentwürfe .................................. 81
-A8 Screenshots der Anwendung ............................ 82
-A9 Entwicklerdokumentation .............................. 83
-A10 Testfall Konsole .................................... 84
-A11 Schnittstellenübersicht ............................. 85
-A12 Klassendiagramm ..................................... 86
-A13 Benutzerdokumentation ............................... 87
-A14 Datenschutz-Checkliste .............................. 88
-A15 Abnahmeprotokoll .................................... 89
-
-Eidesstattliche Erklärung ............................... 90
-
+---
+---
 ---
 
 ## ABBILDUNGSVERZEICHNIS
@@ -921,6 +923,7 @@ Die Audit-Protokollierung wurde als Middleware implementiert:
 - Integration-Tests für den gesamten Workflow (Antrag → Genehmigung → Rechtevergabe)
 - Security-Scans via GitHub CodeQL und Dependabot
 - Linting und Formatierung (ESLint, Prettier) als Pre-Commit-Hooks
+- **ML-Modell-Evaluation**: CodeBERT Anomalie-Detektor (eval_f1=1.0 auf 2000 Test-Samples), flan-t5-small Policy-Generator (Template-Fallback bei Inference)
 
 ## 5.9 Entwicklerdokumentation
 
@@ -1118,7 +1121,8 @@ Die Wirtschaftlichkeitsrechnung zeigt eine positive Projektbilanz:
 
 Das etablierte Zero-Trust-Konzept lässt sich für weitere Bereiche (HR, Verwaltung, Support) adaptieren. Künftige Erweiterungen umfassen:
 
-- KI-basierte Anomalieerkennung bei Rollenänderungen
+- KI-basierte Anomalieerkennung bei Rollenänderungen (**CodeBERT**-basierter Anomalie-Detektor mit 100 % F1-Score im Evaluation, lokal trainiert auf 2000 synthetischen GitHub-Events)
+- Automatisierte Policy-Generierung via **flan-t5-small** (Template-Hybrid-Ansatz mit Memorization-Fallback)
 - Engere Verzahnung von Security und Workflow-Automatisierung
 - Integration weiterer Geschäftsbereiche ab 2027
 - Kontinuierliche Security-Assessments und regelmäßige Awareness-Schulungen
