@@ -1,0 +1,17 @@
+# ML/AI Dependencies (Hugging Face Integration)
+torch==2.3.1
+transformers==4.41.2
+accelerate==0.30.1
+sentence-transformers==3.0.1
+peft==0.11.1
+trl==0.9.4
+datasets==2.19.1
+evaluate==0.4.1
+scikit-learn==1.5.0
+mlflow==2.14.3
+wandb==0.17.4
+gradio==4.37.2
+streamlit==1.36.0
+onnxruntime==1.19.2
+optimum==1.19.1
+huggingface_hub==0.23.2

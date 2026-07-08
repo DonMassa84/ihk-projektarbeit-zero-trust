@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+*.key
+*.pem
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ML Models (too large for git)
+src/ml/models/*
+!src/ml/models/.gitkeep
+
+# Node
+node_modules/
+dist/
+.next/
+
+# Docker
+docker-compose.override.yml
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+audit.log
+
+# Artifacts
+mlruns/
+wandb/
+artifacts/
+coverage/
+htmlcov/
+.coverage
+coverage.xml
+
+# Monitoring
+prometheus_data/
+grafana_data/
+
+# HF
+.huggingface/
+cache/

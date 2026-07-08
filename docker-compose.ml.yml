@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.14
+    ports:
+      - "5000:5000"
+    environment:
+      MLFLOW_TRACKING_URI: sqlite:///mlflow/mlflow.db
+    volumes:
+      - mlflow_data:/mlflow
+    command: mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlflow/mlflow.db --default-artifact-root /mlflow/artifacts
+
+  anomaly-api:
+    build:
+      context: ./src/ml/inference
+      dockerfile: Dockerfile.anomaly
+    ports:
+      - "8001:8000"
+    environment:
+      MODEL_PATH: /models/anomaly-detector
+      HF_TOKEN: ${HF_TOKEN:-}
+    volumes:
+      - ./src/ml/models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  policy-api:
+    build:
+      context: ./src/ml/inference
+      dockerfile: Dockerfile.policy
+    ports:
+      - "8002:8000"
+    environment:
+      MODEL_PATH: /models/policy-generator
+      HF_TOKEN: ${HF_TOKEN:-}
+      DEVICE: cpu
+    volumes:
+      - ./src/ml/models:/models
+
+  gradio-demo:
+    build:
+      context: ./hf-spaces/anomaly-dashboard
+    ports:
+      - "7860:7860"
+    depends_on:
+      - anomaly-api
+      - policy-api
+    environment:
+      ANOMALY_API_URL: http://anomaly-api:8000
+      POLICY_API_URL: http://policy-api:8000
+
+volumes:
+  mlflow_data:

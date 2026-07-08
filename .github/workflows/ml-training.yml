@@ -1,0 +1,83 @@
+name: ML Training Pipeline
+
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+    inputs:
+      model:
+        description: 'Model to train (anomaly/policy/both)'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - anomaly
+          - policy
+          - both
+
+jobs:
+  train-anomaly:
+    if: inputs.model == 'anomaly' || inputs.model == 'both'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements-ml.txt
+
+      - name: Train Anomaly Detection Model
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+        run: |
+          python src/ml/training/train_anomaly.py \
+            --epochs 5 \
+            --batch-size 16 \
+            --learning-rate 2e-5 \
+            --push-to-hub \
+            --hub-model-id DonMassa84/zero-trust-anomaly-detector
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: anomaly-model
+          path: models/anomaly-detector/
+
+  train-policy:
+    if: inputs.model == 'policy' || inputs.model == 'both'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements-ml.txt
+
+      - name: Train Policy Generator
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python src/ml/training/train_policy_gen.py \
+            --base-model bigcode/starcoder2-3b \
+            --push-to-hub \
+            --hub-model-id DonMassa84/zero-trust-policy-generator
+
+  deploy-spaces:
+    needs: [train-anomaly, train-policy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy HF Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install huggingface_hub
+          for space in hf-spaces/*/; do
+            space_name=$(basename "$space")
+            huggingface-cli upload DonMassa84/$space_name "$space" --repo-type=space --commit-message="Auto-deploy from CI"
+          done
