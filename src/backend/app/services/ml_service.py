@@ -1,71 +1,63 @@
 from typing import Optional, Dict, Any, List
 import numpy as np
+import sys, os, torch
 from app.core.config import settings
 import structlog
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "ml", "inference"))
 
 logger = structlog.get_logger()
 
 
 class MLService:
     def __init__(self):
-        self.anomaly_model = None
-        self.policy_model = None
-        self.embedding_model = None
         self._initialized = False
+        self.anomaly_detector = None
+        self.policy_generator = None
+        self.embedding_model_obj = None
 
     async def initialize(self):
         if self._initialized:
             return
         try:
-            self.anomaly_model = await self._load_anomaly_model()
-            self.policy_model = await self._load_policy_model()
-            self.embedding_model = await self._load_embedding_model()
-            self._initialized = True
-            logger.info("ML models initialized successfully")
+            from anomaly_detector import predict as ad_predict, load_model as ad_load
+            if ad_load():
+                self.anomaly_detector = ad_predict
+                logger.info("Anomaly detector loaded")
+            else:
+                logger.warning("Anomaly detector not available, will use rule-based fallback")
+                self.anomaly_detector = None
         except Exception as e:
-            logger.warning("ML models not available, running in fallback mode", error=str(e))
+            logger.warning("Anomaly detector import failed", error=str(e))
+            self.anomaly_detector = None
 
-    async def _load_anomaly_model(self):
         try:
-            from transformers import AutoModelForSequenceClassification, AutoTokenizer
-            model_path = settings.ML_ANOMALY_MODEL_PATH
-            tokenizer = AutoTokenizer.from_pretrained(model_path)
-            model = AutoModelForSequenceClassification.from_pretrained(model_path)
-            return {"model": model, "tokenizer": tokenizer, "loaded": True}
+            from policy_generator import generate as pg_generate, load_model as pg_load
+            if pg_load():
+                self.policy_generator = pg_generate
+                logger.info("Policy generator loaded")
+            else:
+                logger.warning("Policy generator not available, will use template fallback")
+                self.policy_generator = None
         except Exception as e:
-            logger.info("Anomaly model not loaded, using rule-based fallback", error=str(e))
-            return None
+            logger.warning("Policy generator import failed", error=str(e))
+            self.policy_generator = None
 
-    async def _load_policy_model(self):
-        try:
-            from transformers import AutoModelForCausalLM, AutoTokenizer
-            model_path = settings.ML_POLICY_MODEL_PATH
-            tokenizer = AutoTokenizer.from_pretrained(model_path)
-            model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto")
-            return {"model": model, "tokenizer": tokenizer, "loaded": True}
-        except Exception as e:
-            logger.info("Policy generator model not loaded", error=str(e))
-            return None
-
-    async def _load_embedding_model(self):
         try:
             from sentence_transformers import SentenceTransformer
-            model = SentenceTransformer(settings.ML_EMBEDDING_MODEL)
-            return {"model": model, "loaded": True}
+            self.embedding_model_obj = SentenceTransformer(settings.ML_EMBEDDING_MODEL)
+            logger.info("Embedding model loaded")
         except Exception as e:
-            logger.info("Embedding model not loaded", error=str(e))
-            return None
+            logger.warning("Embedding model not loaded", error=str(e))
+            self.embedding_model_obj = None
+
+        self._initialized = True
 
     async def detect_anomaly(self, audit_entry: dict) -> float:
-        if self.anomaly_model and self.anomaly_model.get("loaded"):
+        if self.anomaly_detector:
             try:
-                model = self.anomaly_model["model"]
-                tokenizer = self.anomaly_model["tokenizer"]
-                text = f"{audit_entry.get('action', '')} {audit_entry.get('resource_type', '')} {audit_entry.get('result', '')}"
-                inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
-                outputs = model(**inputs)
-                score = float(torch.sigmoid(outputs.logits).max().item())
-                return round(score, 4)
+                result = self.anomaly_detector(audit_entry)
+                return result.get("score", 0.0)
             except Exception as e:
                 logger.debug("ML anomaly detection failed, using fallback", error=str(e))
 
@@ -99,26 +91,11 @@ class MLService:
         return round(min(score, 1.0), 4)
 
     async def generate_policy(self, requirement: str) -> str:
-        if self.policy_model and self.policy_model.get("loaded"):
+        if self.policy_generator:
             try:
-                model = self.policy_model["model"]
-                tokenizer = self.policy_model["tokenizer"]
-                prompt = f"""Generate an OPA Rego policy for: {requirement}
-
-package zero_trust.policies
-
-default allow = false
-
-"""
-                inputs = tokenizer(prompt, return_tensors="pt", max_length=1024, truncation=True)
-                outputs = model.generate(
-                    **inputs,
-                    max_new_tokens=512,
-                    temperature=0.3,
-                    do_sample=False,
-                )
-                generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                return generated[len(prompt):]
+                result = self.policy_generator(requirement)
+                if "package" in result.get("policy", ""):
+                    return result["policy"]
             except Exception as e:
                 logger.debug("ML policy generation failed, using template", error=str(e))
 
@@ -138,7 +115,7 @@ allow {{
 }}
 
 trusted_networks = {{"10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"}}"""
-        
+
         elif "read" in req_lower and "only" in req_lower:
             return f"""package zero_trust.policies.readonly
 
@@ -160,10 +137,9 @@ allow {{
 }}"""
 
     async def create_embedding(self, text: str) -> List[float]:
-        if self.embedding_model and self.embedding_model.get("loaded"):
+        if self.embedding_model_obj:
             try:
-                model = self.embedding_model["model"]
-                embedding = model.encode(text, normalize_embeddings=True)
+                embedding = self.embedding_model_obj.encode(text, normalize_embeddings=True)
                 return embedding.tolist()
             except Exception as e:
                 logger.debug("Embedding creation failed", error=str(e))

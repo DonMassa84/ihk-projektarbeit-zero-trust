@@ -1,12 +1,14 @@
 import gradio as gr
-import random
-import json
+import json, sys, os
 from datetime import datetime, timedelta
 
-TITLE = "Zero-Trust Audit Anomaly Detector 🤖"
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src", "ml", "inference"))
+from anomaly_detector import predict, batch_predict
+
+TITLE = "Zero-Trust Audit Anomaly Detector"
 DESCRIPTION = """
 IHK-Projekt: Zero-Trust-Sicherheitskonzept mit GitHub-Integration  
-**ML-basierte Anomalieerkennung** für Audit-Logs
+**ML-basierte Anomalieerkennung** (CodeBERT) für Audit-Logs
 """
 
 SAMPLE_EVENTS = [
@@ -25,112 +27,100 @@ def analyze_event(event_json: str) -> str:
     except json.JSONDecodeError:
         return "Invalid JSON input"
 
-    score = 0.0
-    reasons = []
+    result = predict(event)
+    score = result["score"]
+    model_name = result["model"]
 
-    flagged_actions = {"MASS_ROLE_REVOKE": 0.9, "ADMIN_IMPERSONATE": 0.85, "UNAUTHORIZED_ACCESS": 0.75, "PRIVILEGE_ESCALATION": 0.7}
-    sensitive_resources = {"admin-role": 0.3, "super-admin": 0.5, "all-roles": 0.4, "admin-panel": 0.3}
-    suspicious_users = {"attacker": 0.8, "unknown": 0.6, "suspicious_user": 0.5}
+    if score >= 0.7:
+        severity = "CRITICAL"
+        icon = "🔴"
+    elif score >= 0.4:
+        severity = "SUSPICIOUS"
+        icon = "🟡"
+    else:
+        severity = "NORMAL"
+        icon = "🟢"
 
-    action = event.get("action", "")
-    resource = event.get("resource", "")
-    user = event.get("user", "")
-    result = event.get("result", "success")
+    reasons_str = ""
+    if "reasons" in result:
+        reasons_str = ", ".join(result["reasons"])
 
-    if action in flagged_actions:
-        score += flagged_actions[action]
-        reasons.append(f"High-risk action: {action}")
-
-    if resource in sensitive_resources:
-        score += sensitive_resources[resource]
-        reasons.append(f"Sensitive resource: {resource}")
-
-    if user in suspicious_users:
-        score += suspicious_users[user]
-        reasons.append(f"Suspicious user: {user}")
-
-    if result == "failure":
-        score += 0.15
-        reasons.append("Failed operation (potential brute-force)")
-
-    score = min(score, 1.0)
-
-    verdict = "🔴 CRITICAL" if score >= 0.7 else "🟡 SUSPICIOUS" if score >= 0.4 else "🟢 NORMAL"
-
-    output = f"""## Analysis Result: {verdict}
+    output = f"""## Analysis Result: {icon} {severity}
 
 ### Anomaly Score: **{score:.2%}**
-
-**Risk Factors:** {', '.join(reasons) if reasons else 'None detected'}
-
-**Recommendation:**
-- **CRITICAL (≥70%):** Immediate review required. Alert security team.
-- **SUSPICIOUS (40-69%):** Flag for manual review during next audit cycle.
-- **NORMAL (<40%):** No action required.
+**Model:** {model_name}
+**Risk Factors:** {reasons_str if reasons_str else 'None detected'}
 
 ### Event Details
 | Field | Value |
 |-------|-------|
-| Action | `{action}` |
-| User | `{user}` |
-| Resource | `{resource}` |
-| Result | `{result}` |
+| Action | `{event['action']}` |
+| User | `{event['user']}` |
+| Resource | `{event['resource']}` |
+| Result | `{event['result']}` |
 """
     return output
 
 
 def analyze_batch() -> str:
+    results = batch_predict(SAMPLE_EVENTS)
     lines = []
-    for event in SAMPLE_EVENTS:
-        json_str = json.dumps(event)
-        result = analyze_event(json_str)
-        score_line = result.split("**")[1] if "**" in result else "N/A"
-        lines.append(f"| {event['action']} | {event['user']} | {score_line} |")
-    
-    header = "## Batch Analysis - 6 Sample Events\n\n| Action | User | Score |\n|--------|------|-------|\n"
+    for event, result in zip(SAMPLE_EVENTS, results):
+        score = result["score"]
+        icon = "🔴" if score >= 0.5 else "🟢"
+        lines.append(f"| {event['action']} | {event['user']} | {icon} {score:.0%} |")
+
+    header = "## Batch Analysis - 6 Sample Events\n\n| Action | User | Anomaly Score |\n|--------|------|---------------|\n"
     return header + "\n".join(lines)
 
 
 def generate_report() -> str:
-    anomaly_count = random.randint(2, 5)
-    total_count = random.randint(20, 50)
-    
-    score = random.random()
-    if score > 0.9:
-        status = "🔴 Critical"
-    elif score > 0.7:
-        status = "🟡 Warning"
+    scores = [predict(e)["score"] for e in SAMPLE_EVENTS]
+    anomaly_count = sum(1 for s in scores if s > 0.5)
+    total_count = len(SAMPLE_EVENTS)
+    avg_score = sum(scores) / len(scores)
+
+    if avg_score > 0.7:
+        status = "CRITICAL"
+        icon = "🔴"
+    elif avg_score > 0.4:
+        status = "WARNING"
+        icon = "🟡"
     else:
-        status = "🟢 Healthy"
+        status = "HEALTHY"
+        icon = "🟢"
+
+    now = datetime.now()
+    lines = ""
+    for i, (event, score) in enumerate(zip(SAMPLE_EVENTS, scores)):
+        timestamp = (now - timedelta(hours=i * 2)).strftime("%Y-%m-%d %H:%M")
+        icon = "🔴" if score >= 0.5 else "🟢"
+        lines += f"| {timestamp} | {event['action']} | {event['user']} | {icon} {score:.0%} |\n"
 
     return f"""## Zero-Trust Security Report
-**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}
+**Generated:** {now.strftime('%Y-%m-%d %H:%M UTC')}
 
-### Overall Security Status: {status}
+### Overall Security Status: {icon} {status}
 
 ### Key Metrics
 | Metric | Value |
 |--------|-------|
-| Total Events (24h) | {total_count} |
+| Analyzed Events | {total_count} |
 | Anomalies Detected | {anomaly_count} |
-| False Positive Rate | {random.uniform(1, 5):.1f}% |
-| Detection Accuracy | {random.uniform(90, 99):.1f}% |
-| Top Anomaly Type | Suspicious Role Escalation |
+| Avg. Anomaly Score | {avg_score:.1%} |
+| Detection Model | CodeBERT (fine-tuned) |
 
-### Recent Alerts
-| Time | Event | User | Score |
-|------|-------|------|-------|
-| {datetime.now() - timedelta(minutes=15)} | MASS_ROLE_REVOKE | attacker | 0.92 |
-| {datetime.now() - timedelta(hours=2)} | ADMIN_IMPERSONATE | unknown | 0.85 |
-| {datetime.now() - timedelta(hours=5)} | UNAUTHORIZED_ACCESS | suspicious | 0.78 |
-"""
+### Event Analysis
+| Time | Action | User | Score |
+|------|--------|------|-------|
+{lines}"""
 
 
 with gr.Blocks(title=TITLE, theme=gr.themes.Soft()) as demo:
     gr.Markdown(f"# {TITLE}\n{DESCRIPTION}")
 
     with gr.Tabs():
-        with gr.Tab("🔍 Single Event Analysis"):
+        with gr.Tab("Single Event Analysis"):
             with gr.Row():
                 with gr.Column(scale=2):
                     event_input = gr.JSON(
@@ -142,7 +132,7 @@ with gr.Blocks(title=TITLE, theme=gr.themes.Soft()) as demo:
                         label="Load Example",
                         value=json.dumps(SAMPLE_EVENTS[0]),
                     )
-                    analyze_btn = gr.Button("Analyze Event 🚀", variant="primary", size="lg")
+                    analyze_btn = gr.Button("Analyze Event", variant="primary", size="lg")
                 with gr.Column(scale=3):
                     output = gr.Markdown(label="Analysis Result")
 
@@ -153,12 +143,12 @@ with gr.Blocks(title=TITLE, theme=gr.themes.Soft()) as demo:
             )
             analyze_btn.click(analyze_event, inputs=[event_input], outputs=[output])
 
-        with gr.Tab("📊 Batch Analysis"):
+        with gr.Tab("Batch Analysis"):
             batch_btn = gr.Button("Run Batch Analysis", variant="primary")
             batch_output = gr.Markdown()
             batch_btn.click(analyze_batch, outputs=[batch_output])
 
-        with gr.Tab("📈 Security Report"):
+        with gr.Tab("Security Report"):
             report_btn = gr.Button("Generate Report", variant="primary")
             report_output = gr.Markdown()
             report_btn.click(generate_report, outputs=[report_output])

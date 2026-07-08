@@ -1,8 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import List, Optional
+from app.services.ml_service import MLService
+from app.core.config import settings
 
 router = APIRouter(prefix="/ml", tags=["Machine Learning"])
+ml_service = MLService()
 
 class AnomalyRequest(BaseModel):
     event_type: str
@@ -39,30 +42,36 @@ class SearchResponse(BaseModel):
 
 @router.post("/anomaly", response_model=AnomalyResponse)
 async def detect_anomaly(body: AnomalyRequest):
-    score = 0.15
-    is_anomaly = score > 0.7
+    audit_entry = {
+        "action": body.event_type,
+        "user": str(body.user_id),
+        "resource": body.resource,
+        "result": "success",
+    }
+    score = await ml_service.detect_anomaly(audit_entry)
+    is_anomaly = score > 0.5
     return AnomalyResponse(
         is_anomaly=is_anomaly,
         score=score,
-        reason=None if not is_anomaly else "Unusual access pattern detected",
+        reason="Unusual access pattern detected" if is_anomaly else None,
     )
 
 @router.post("/policy", response_model=PolicyResponse)
 async def generate_policy(body: PolicyRequest):
-    return PolicyResponse(
-        policy=f"policy_allow_{body.context[:20].replace(' ', '_')}",
-        source="template",
-    )
+    result = await ml_service.generate_policy(body.context)
+    if "package" in result:
+        source = "ml-model"
+    else:
+        source = "template"
+    return PolicyResponse(policy=result, source=source)
 
 @router.post("/embed", response_model=EmbedResponse)
 async def create_embedding(body: EmbedRequest):
-    mock_embedding = [0.1] * 384
-    return EmbedResponse(embedding=mock_embedding, dimension=384)
+    embedding = await ml_service.create_embedding(body.text)
+    return EmbedResponse(embedding=embedding, dimension=len(embedding))
 
 @router.post("/search", response_model=SearchResponse)
 async def semantic_search(body: SearchRequest):
-    results = [
-        {"text": t, "score": 0.95 - i * 0.1}
-        for i, t in enumerate(body.corpus[:body.top_k])
-    ]
+    documents = [{"text": t} for t in body.corpus]
+    results = await ml_service.semantic_search(body.query, documents, top_k=body.top_k)
     return SearchResponse(results=results)

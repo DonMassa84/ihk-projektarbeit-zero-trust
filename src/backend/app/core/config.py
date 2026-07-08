@@ -38,8 +38,8 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
     
     # ML Services
-    ML_ANOMALY_MODEL_PATH: str = "models/anomaly-detector"
-    ML_POLICY_MODEL_PATH: str = "models/policy-generator"
+    ML_ANOMALY_MODEL_PATH: str = os.path.expanduser("~/.cache/zt-models/anomaly-detector")
+    ML_POLICY_MODEL_PATH: str = os.path.expanduser("~/.cache/zt-models/policy-generator")
     ML_EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
     HF_TOKEN: Optional[str] = None
     
