@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>RBAC Rollen</title>
+<style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;margin:0;padding:20px;background:#0d1117;color:#e6edf3}
+h3{font-size:15px;margin:0 0 16px 0}table{width:100%;border-collapse:collapse;background:#161b22;border:1px solid #30363d;border-radius:6px;overflow:hidden}
+th{text-align:left;padding:10px 16px;font-size:12px;color:#8b949e;font-weight:600;border-bottom:1px solid #30363d}
+td{padding:10px 16px;font-size:14px;border-bottom:1px solid #30363d}
+tr:last-child td{border-bottom:none}.role{font-weight:600}.perm{color:#8b949e;font-size:12px}
+.badge{font-size:11px;padding:2px 8px;border-radius:10px;margin-left:8px}
+.badge-admin{background:#f8514922;color:#f85149;border:1px solid #f8514944}
+.badge-dev{background:#d2992222;color:#d29922;border:1px solid #d2992244}
+.badge-audit{background:#3fb95022;color:#3fb950;border:1px solid #3fb95044}
+.badge-view{background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff44}
+.badge-hr{background:#bc8cff22;color:#bc8cff;border:1px solid #bc8cff44}
+.badge-fin{background:#f0883e22;color:#f0883e;border:1px solid #f0883e44}
+</style></head><body>
+<h3>🔐 RBAC – Rollen- &amp; Teamstruktur</h3>
+<table>
+<tr><th>Rolle</th><th>GitHub Team</th><th>Berechtigungen</th><th>Mitglieder</th></tr>
+<tr><td class="role">Admin <span class="badge badge-admin">Admin</span></td><td>@vfb-bildung/admin</td><td class="perm">Vollzugriff auf alle Repos</td><td>3</td></tr>
+<tr><td class="role">Developer <span class="badge badge-dev">Dev</span></td><td>@vfb-bildung/developer</td><td class="perm">Push/Pull, Issues verwalten</td><td>8</td></tr>
+<tr><td class="role">Auditor <span class="badge badge-audit">Audit</span></td><td>@vfb-bildung/auditor</td><td class="perm">Lesezugriff auf Audit-Logs</td><td>2</td></tr>
+<tr><td class="role">Read-Only <span class="badge badge-view">View</span></td><td>@vfb-bildung/read-only</td><td class="perm">Lesezugriff auf ausgew. Repos</td><td>12</td></tr>
+<tr><td class="role">HR-Manager <span class="badge badge-hr">HR</span></td><td>@vfb-bildung/hr-manager</td><td class="perm">Personalbezogene Rollen</td><td>5</td></tr>
+<tr><td class="role">Finance <span class="badge badge-fin">Fin</span></td><td>@vfb-bildung/finance</td><td class="perm">Finanzbezogene Rollen</td><td>4</td></tr>
+</table>
+</body></html>

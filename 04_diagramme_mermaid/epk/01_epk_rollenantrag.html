@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>EPK Rollenantrag</title>
+<style>
+body{font-family:Arial,sans-serif;margin:20px;background:#fff}
+h2{font-size:14pt;text-align:center;margin-bottom:20px;color:#1a1a2e}
+.epk{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;max-width:700px;margin:0 auto}
+.event{background:#fff;border:2px solid #000;padding:12px 24px;font-size:11pt;text-align:center;min-width:200px;clip-path:polygon(10% 0%,90% 0%,100% 50%,90% 100%,10% 100%,0% 50%)}
+.function{background:#3b82f6;color:#fff;border:2px solid #2563eb;padding:12px 24px;font-size:11pt;text-align:center;min-width:200px;border-radius:8px}
+.connector{background:#fff;border:2px solid #000;padding:6px 12px;font-size:10pt;text-align:center;min-width:60px;border-radius:50%}
+.arrow{font-size:18px;color:#666;line-height:1}
+.and{background:#fff;border:2px solid #000;padding:6px 12px;font-size:11pt;font-weight:bold;text-align:center;min-width:40px;border-radius:4px}
+.label{font-size:9pt;color:#666;font-style:italic;margin-top:-4px;margin-bottom:-2px}
+</style></head><body>
+<h2>EPK: Rollenantrag-Prozess (Self-Service)</h2>
+<div class="epk">
+<div class="event">Rollenbedarf ist erkannt</div>
+<div class="arrow">↓</div>
+<div class="function">Mitarbeiter beantragt Rolle<br>im Self-Service-Portal</div>
+<div class="arrow">↓</div>
+<div class="event">Antrag ist eingegangen</div>
+<div class="arrow">↓</div>
+<div class="function">System prüft Pflichtfelder<br>und Policy-Konformität</div>
+<div class="arrow">↓</div>
+<div class="and">XOR</div>
+<div style="display:flex;gap:80px;margin:4px 0">
+<div class="function" style="background:#22c55e;border-color:#16a34a">Antrag ist vollständig<br>und policy-konform</div>
+<div class="function" style="background:#ef4444;border-color:#dc2626">Antrag ist unvollständig<br>oder nicht konform</div>
+</div>
+<div style="display:flex;gap:80px">
+<div class="event">Antrag ist zur<br>Genehmigung freigegeben</div>
+<div class="event">Antrag wird<br>zurückgewiesen</div>
+</div>
+<div class="arrow">↓</div>
+<div class="function" style="background:#3b82f6;border-color:#2563eb">System sendet Genehmigungs-<br>anfrage an Vorgesetzten</div>
+<div class="arrow">↓</div>
+<div class="event">Genehmigungsanfrage<br>ist beim Vorgesetzten</div>
+<div class="arrow">↓</div>
+<div class="and">XOR</div>
+<div style="display:flex;gap:80px;margin:4px 0">
+<div class="function" style="background:#22c55e;border-color:#16a34a">Vorgesetzter genehmigt<br>den Antrag</div>
+<div class="function" style="background:#ef4444;border-color:#dc2626">Vorgesetzter lehnt<br>den Antrag ab</div>
+</div>
+<div style="display:flex;gap:80px">
+<div class="event">Antrag ist genehmigt</div>
+<div class="event">Antrag ist abgelehnt</div>
+</div>
+<div class="arrow">↓</div>
+<div class="function" style="background:#3b82f6;border-color:#2563eb">System weist Rolle zu<br>(GitHub API)</div>
+<div class="arrow">↓</div>
+<div class="event">Rolle wurde zugewiesen</div>
+<div class="arrow">↓</div>
+<div class="function" style="background:#3b82f6;border-color:#2563eb">System erstellt<br>Audit-Log-Eintrag</div>
+<div class="arrow">↓</div>
+<div class="event">Audit-Log ist erstellt</div>
+<div class="arrow">↓</div>
+<div class="function" style="background:#3b82f6;border-color:#2563eb">System benachrichtigt<br>Mitarbeiter</div>
+<div class="arrow">↓</div>
+<div class="event">Mitarbeiter ist informiert</div>
+</div>
+</body></html>

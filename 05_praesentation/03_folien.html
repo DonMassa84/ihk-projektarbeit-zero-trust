@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>IHK Präsentation – Zero-Trust</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans',Arial,sans-serif;background:#1a1a2e;color:#e0e0e0}
+.slide{width:1024px;height:768px;padding:60px;display:flex;flex-direction:column;justify-content:center;page-break-after:always;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);position:relative}
+.slide::after{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#e94560,#0f3460)}
+h1{font-size:42px;font-weight:700;margin-bottom:16px;color:#e94560}
+h2{font-size:32px;font-weight:600;margin-bottom:24px;color:#e0e0e0}
+h3{font-size:24px;font-weight:600;margin-bottom:16px;color:#e0e0e0}
+p,li{font-size:20px;line-height:1.6;margin-bottom:8px}
+ul{list-style:none;padding:0}
+li{margin:8px 0;padding-left:28px;position:relative}
+li::before{content:'▸';position:absolute;left:0;color:#e94560}
+.highlight{color:#e94560;font-weight:600}
+.green{color:#4ecca3;font-weight:600}
+.small{font-size:16px;color:#888}
+.flex{display:flex;gap:40px;align-items:center}
+.col{flex:1}
+.footer{position:absolute;bottom:30px;right:60px;font-size:14px;color:#555}
+</style></head><body>
+
+<div class="slide">
+<h1>Zero-Trust-Sicherheitskonzept<br>mit GitHub-Integration</h1>
+<h3 style="color:#888;font-weight:300">Certified IT Business Manager (IHK) – Sommer 2026</h3>
+<p style="margin-top:40px;font-size:24px">Daniel Massa · Prüflingsnummer 615951</p>
+<p class="small">Verein zur Förderung der Berufsbildung e.V., Ludwigsburg</p>
+<div class="footer">1 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Ausgangssituation &amp; Problem</h2>
+<ul>
+<li>Manuelle Rechtevergabe per E-Mail (35 Anträge/Woche)</li>
+<li><span class="highlight">3,2 Tage</span> durchschnittliche Bearbeitungszeit</li>
+<li><span class="highlight">8–12 %</span> Fehlerquote → 15 Nachbesserungen/Monat</li>
+<li>Dezentrale Audit-Logs – Compliance-Prüfungen erschwert</li>
+<li>Keine Self-Service-Funktionen für Mitarbeiter</li>
+<li>DSGVO-Risiken durch unklare Verantwortlichkeiten</li>
+</ul>
+<div class="footer">2 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Projektziele (SMART)</h2>
+<div class="flex">
+<div class="col">
+<p><span class="highlight">S</span>pezifisch:</p>
+<p style="font-size:16px;margin-left:20px">RBAC mit 10+ Rollen, 50+ Berechtigungen</p>
+<p><span class="highlight">M</span>essbar:</p>
+<p style="font-size:16px;margin-left:20px">Bearbeitungszeit &lt;4h · Fehlerquote &lt;2 %</p>
+<p><span class="highlight">A</span>kzeptiert:</p>
+<p style="font-size:16px;margin-left:20px">Pilot mit 15 Nutzern</p>
+<p><span class="highlight">R</span>ealistisch:</p>
+<p style="font-size:16px;margin-left:20px">70 h IHK-Rahmen</p>
+<p><span class="highlight">T</span>erminiert:</p>
+<p style="font-size:16px;margin-left:20px">01.11.2026</p>
+</div>
+<div class="col">
+<p><span class="green">✓ Reduktion</span> Bearbeitungszeit: 3,2d → &lt;4h</p>
+<p><span class="green">✓ Reduktion</span> Fehlerquote: 10 % → &lt;2 %</p>
+<p><span class="green">✓ 100 %</span> Audit-Abdeckung</p>
+</div>
+</div>
+<div class="footer">3 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Projektplanung</h2>
+<div class="flex">
+<div class="col">
+<h3>Ressourcen</h3>
+<ul>
+<li>70 h Aufwand (IHK-Vorgabe)</li>
+<li>3.740 EUR Budget</li>
+<li>Hybrides Vorgehen (Wasserfall + agil)</li>
+<li>8 Meilensteine, 15 Arbeitspakete</li>
+</ul>
+</div>
+<div class="col">
+<h3>Risikomanagement</h3>
+<ul>
+<li>7 Risiken identifiziert &amp; bewertet</li>
+<li>Top-Risiko: Fehlkonfiguration (Wert 15)</li>
+<li>Gegenmaßnahmen: 4-Augen-Prinzip,<br>Policy-Checks, Secret-Scanning</li>
+</ul>
+</div>
+</div>
+<div class="footer">4 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Zero-Trust &amp; RBAC-Konzept</h2>
+<div class="flex">
+<div class="col">
+<p style="margin-bottom:20px"><em>"Never Trust, Always Verify"</em><br>– NIST SP 800-207</p>
+<ul>
+<li>6 Rollen definiert</li>
+<li>Admin · Developer · Auditor</li>
+<li>Read-Only · HR-Manager · Finance</li>
+<li>Least-Privilege-Prinzip</li>
+<li>DSGVO-Konformität (Art. 5, 25, 32)</li>
+</ul>
+</div>
+<div class="col">
+<p><span class="highlight">Make-or-Buy-Entscheidung:</span></p>
+<p style="font-size:16px">Nutzwertanalyse: GitHub-Prototyp (4,1) vs. IAM (3,7) vs. manuell (2,4)</p>
+<p style="margin-top:12px"><span class="green">✓ Eigenentwicklung gewählt</span></p>
+</div>
+</div>
+<div class="footer">5 / 10</div>
+</div>
+
+<div class="slide">
+<h2>GitHub Workflow</h2>
+<p style="margin-bottom:20px">Automatisierte Rechtevergabe in 4 Stufen:</p>
+<div class="flex">
+<div class="col">
+<p style="font-size:18px"><span class="highlight">① Validate</span></p>
+<p style="font-size:16px;margin-bottom:16px">Pflichtfelder- &amp; Policy-Prüfung</p>
+<p style="font-size:18px"><span class="highlight">② Approve</span></p>
+<p style="font-size:16px;margin-bottom:16px">Genehmigungsanfrage an Vorgesetzten</p>
+<p style="font-size:18px"><span class="highlight">③ Provision</span></p>
+<p style="font-size:16px;margin-bottom:16px">GitHub-API: Teamzuordnung</p>
+<p style="font-size:18px"><span class="highlight">④ Notify</span></p>
+<p style="font-size:16px">Statusbenachrichtigung per E-Mail</p>
+</div>
+<div class="col">
+<p class="small" style="margin-bottom:8px">Jeder Schritt:</p>
+<p class="small">✓ Automatisiert getriggert</p>
+<p class="small">✓ Im Audit-Log protokolliert</p>
+<p class="small">✓ Fehlerbehandlung integriert</p>
+</div>
+</div>
+<div class="footer">6 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Prototyp-Umsetzung</h2>
+<div class="flex">
+<div class="col">
+<h3>Technologie-Stack</h3>
+<ul>
+<li>Frontend: React.js / TypeScript</li>
+<li>Backend: FastAPI (Python)</li>
+<li>Datenbank: PostgreSQL</li>
+<li>CI/CD: GitHub Actions</li>
+<li>Auth: Azure AD / SAML</li>
+<li>Container: Docker</li>
+</ul>
+</div>
+<div class="col">
+<h3>Ergebnisse</h3>
+<p><span class="green">✓ 12/12 Testfälle bestanden</span></p>
+<p><span class="green">✓ 92,4 % Code Coverage</span></p>
+<p><span class="green">✓ Secret-Scan: 0 kritische Funde</span></p>
+<p><span class="green">✓ DSGVO-Checkliste vollständig</span></p>
+</div>
+</div>
+<div class="footer">7 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Test &amp; Abnahme</h2>
+<div class="flex">
+<div class="col">
+<h3>Testfallmatrix</h3>
+<ul>
+<li>TF01-04: Antrags-Workflow</li>
+<li>TF05-06: Policy-Engine</li>
+<li>TF07-08: Rechtevergabe/-entzug</li>
+<li>TF09: Audit-Log</li>
+<li>TF10: Secret-Scanning</li>
+<li>TF11-12: Export &amp; Benachrichtigung</li>
+</ul>
+</div>
+<div class="col">
+<h3>Abnahme</h3>
+<p><span class="green">✓ Alle Muss-Kriterien erfüllt</span></p>
+<p><span class="green">✓ Abnahmeprotokoll unterzeichnet</span></p>
+<p><span class="green">✓ Soll-Ist-Vergleich: alle Ziele erreicht</span></p>
+</div>
+</div>
+<div class="footer">8 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Wirtschaftlichkeit</h2>
+<div class="flex">
+<div class="col">
+<h3>Kosten</h3>
+<p>Projektleitung: 3.150 EUR</p>
+<p>Beratung: 340 EUR</p>
+<p>Tools: 250 EUR</p>
+<p><span class="highlight">Gesamt: 3.740 EUR</span></p>
+</div>
+<div class="col">
+<h3>Nutzen</h3>
+<p>Jährliche Einsparung: <span class="green">13.000 EUR</span></p>
+<p>Amortisation: <span class="green">3,5 Monate</span></p>
+<p>ROI (3 Jahre): <span class="green">340 %</span></p>
+</div>
+</div>
+<div class="footer">9 / 10</div>
+</div>
+
+<div class="slide">
+<h2>Lessons Learned &amp; Ausblick</h2>
+<div class="flex">
+<div class="col">
+<h3>Erfolgsfaktoren</h3>
+<ul>
+<li>Iterative Entwicklung mit kurzen Feedback-Zyklen</li>
+<li>Frühzeitige Einbindung von DSB &amp; Betriebsrat</li>
+<li>GitHub Actions als flexible Plattform</li>
+</ul>
+<h3 style="margin-top:20px">Optimierung</h3>
+<ul>
+<li>Realistischere Zeitplanung</li>
+<li>Frühere Einbindung Security-Partner</li>
+</ul>
+</div>
+<div class="col">
+<h3>Ausblick</h3>
+<ul>
+<li>KI-basierte Anomalieerkennung 2027</li>
+<li>Integration HR &amp; Verwaltung</li>
+<li>Kontinuierliche Security-Assessments</li>
+</ul>
+<p style="margin-top:24px;font-size:18px"><em>Vielen Dank für Ihre Aufmerksamkeit!</em></p>
+</div>
+</div>
+<div class="footer">10 / 10</div>
+</div>
+
+</body></html>

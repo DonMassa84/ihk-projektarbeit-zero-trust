@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>EPK Rechteentzug</title>
+<style>
+body{font-family:Arial,sans-serif;margin:20px;background:#fff}
+h2{font-size:14pt;text-align:center;margin-bottom:20px;color:#1a1a2e}
+.epk{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;max-width:650px;margin:0 auto}
+.event{background:#fff;border:2px solid #000;padding:10px 20px;font-size:11pt;text-align:center;min-width:180px;clip-path:polygon(10% 0%,90% 0%,100% 50%,90% 100%,10% 100%,0% 50%)}
+.function{background:#3b82f6;color:#fff;border:2px solid #2563eb;padding:10px 20px;font-size:11pt;text-align:center;min-width:180px;border-radius:8px}
+.arrow{font-size:18px;color:#666;line-height:1}
+.and{background:#fff;border:2px solid #000;padding:6px 12px;font-size:11pt;font-weight:bold;text-align:center;min-width:30px;border-radius:4px}
+.label{font-size:9pt;color:#666;font-style:italic;margin-top:-4px;margin-bottom:-2px}
+.org{background:#f59e0b;color:#fff;border:2px solid #d97706;padding:8px 16px;font-size:10pt;text-align:center;min-width:160px;border-radius:4px;font-style:italic}
+</style></head><body>
+<h2>EPK: Automatisierter Rechteentzug bei Austritt</h2>
+<div class="epk">
+<div class="event">Mitarbeiter-Austritt<br>ist gemeldet (HR)</div>
+<div class="arrow">↓</div>
+<div class="org">HR-Abteilung erfasst<br>Austrittsdatum im System</div>
+<div class="arrow">↓</div>
+<div class="event">Austritt ist im System<br>erfasst</div>
+<div class="arrow">↓</div>
+<div class="function">System identifiziert alle<br>aktiven Rollen des Nutzers</div>
+<div class="arrow">↓</div>
+<div class="event">Rollen sind identifiziert</div>
+<div class="arrow">↓</div>
+<div class="and">ODER</div>
+<div style="display:flex;gap:60px;margin:4px 0">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="function" style="background:#22c55e;border-color:#16a34a">Automatisierter<br>Rechteentzug via API</div>
+<div class="event">Rechte sind entzogen</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="function" style="background:#f59e0b;border-color:#d97706">Manuelle Prüfung<br>durch IT-Admin</div>
+<div class="event">Prüfung ist<br>abgeschlossen</div>
+</div>
+</div>
+<div class="arrow">↓</div>
+<div class="function">System erstellt<br>Audit-Log-Eintrag</div>
+<div class="arrow">↓</div>
+<div class="event">Audit-Log ist erstellt</div>
+<div class="arrow">↓</div>
+<div class="function">System benachrichtigt<br>IT-Admin + HR</div>
+<div class="arrow">↓</div>
+<div class="event">Alle Beteiligten<br>sind informiert</div>
+</div>
+</body></html>

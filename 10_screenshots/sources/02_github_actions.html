@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>GitHub Actions</title>
+<style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans,Helvetica,Arial,sans-serif;margin:0;padding:20px;background:#0d1117;color:#e6edf3}
+h2{font-size:18px;font-weight:600;margin:0 0 16px 0}.workflow{background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:12px;padding:16px}
+.workflow-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.workflow-name{font-size:16px;font-weight:600;color:#e6edf3}
+.badge-green{background:#3fb95022;color:#3fb950;border:1px solid #3fb95044;padding:2px 8px;border-radius:20px;font-size:12px}
+.badge-yellow{background:#d2992222;color:#d29922;border:1px solid #d2992244;padding:2px 8px;border-radius:20px;font-size:12px}
+.badge-red{background:#f8514922;color:#f85149;border:1px solid #f8514944;padding:2px 8px;border-radius:20px;font-size:12px}
+.job-list{margin-top:8px}.job{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;color:#8b949e}
+.job .dot{width:8px;height:8px;border-radius:50%}.dot.green{background:#3fb950}.dot.yellow{background:#d29922}
+</style></head><body>
+<h2>🚀 GitHub Actions – Workflows</h2>
+<div class="workflow">
+<div class="workflow-header"><span class="workflow-name">RBAC Role Request Workflow</span><span class="badge-green">✓ Passed</span></div>
+<div class="job-list">
+<div class="job"><span class="dot green"></span> validate — Check required fields &amp; policy</div>
+<div class="job"><span class="dot green"></span> approve — Approval request sent</div>
+<div class="job"><span class="dot green"></span> provision — GitHub team assigned</div>
+<div class="job"><span class="dot green"></span> notify — E-mail notification sent</div>
+</div>
+</div>
+<div class="workflow">
+<div class="workflow-header"><span class="workflow-name">Secret Scanning</span><span class="badge-green">✓ No secrets found</span></div>
+<div class="job-list">
+<div class="job"><span class="dot green"></span> scan — CodeQL analysis completed</div>
+<div class="job"><span class="dot green"></span> report — Report generated</div>
+</div>
+</div>
+<div class="workflow">
+<div class="workflow-header"><span class="workflow-name">CI – Lint, Test, Build</span><span class="badge-yellow">● Running</span></div>
+<div class="job-list">
+<div class="job"><span class="dot green"></span> lint — ESLint passed</div>
+<div class="job"><span class="dot yellow"></span> test — 42/48 tests passed</div>
+<div class="job"><span class="dot yellow"></span> build — Building...</div>
+</div>
+</div>
+</body></html>
