@@ -333,73 +333,7 @@ Der VFB benötigt einen automatisierten, revisionssicheren und datenschutzkonfor
 
 Der wachsende Einsatz von Cloud-Diensten und hybriden Lernplattformen erhöht den Druck auf eine zentralisierte, transparente und effiziente Rechteverwaltung. Ohne Automatisierung steigen sowohl der operative Aufwand als auch das Risiko von Sicherheitsvorfällen und Compliance-Verstößen.
 
-
-## 1.6 Rahmenbedingungen
-
-Die Rahmenbedingungen definieren den Handlungsspielraum des Projekts und legen die verbindlichen Vorgaben fest, unter denen das Projekt durchgeführt werden muss.
-
-### 1.6.1 Zeitliche Rahmenbedingungen
-
-- **Projektstart:** 01.05.2026 (nach Genehmigung des Projektantrags durch den Prüfungsausschuss der IHK Stuttgart)
-- **Projektende:** 01.11.2026 (Abgabefrist der Projektdokumentation bei der IHK)
-- **Gesamtdauer:** 6 Monate (Mai – Oktober 2026)
-- **Meilensteine:**
-  - M1: Projektauftrag freigegeben (KW 20/2026)
-  - M2: Lastenheft / Fachkonzept abgeschlossen (KW 26/2026)
-  - M3: Architektur & Pflichtenheft freigegeben (KW 32/2026)
-  - M4: Prototyp / Pilotprozess implementiert (KW 38/2026)
-  - M5: Tests & Abnahme abgeschlossen (KW 42/2026)
-  - M6: Projektdokumentation final, Übergabe & Lessons Learned (KW 44/2026)
-- **Verfügbarkeit:** Projektarbeit erfolgt berufsbegleitend, ca. 10–12 Stunden/Woche
-
-### 1.6.2 Finanzielle Rahmenbedingungen
-
-- **Gesamtbudget:** 3.740 EUR (kalkulatorisch, basierend auf 70 Stunden à 53,40 EUR/h)
-  - Projektleitung: 25 h × 53,40 EUR = 1.335 EUR
-  - Entwicklung (Backend/Frontend/Automation): 30 h × 53,40 EUR = 1.602 EUR
-  - Externer Security-Consultant: 10 h × 80,00 EUR = 800 EUR
-- **Kostenfreigabe:** Jede Ausgabe > 500 EUR bedarf der schriftlichen Freigabe durch den Auftraggeber (VFB-Geschäftsführung)
-- **Bezugsquellen:** Software-Lizenzen (GitHub Enterprise) bestehen bereits; Cloud-Ressourcen über bestehende Azure-/AWS-Konten des VFB
-- **Wirtschaftlichkeit:** Erwartete Kosteneinsparung durch Automatisierung ca. 13.000 EUR/Jahr (Break-even nach ca. 3,5 Monaten)
-
-### 1.6.3 Technische Rahmenbedingungen
-
-- **Bestandsysteme (Integration Pflicht):**
-  - GitHub Enterprise (Organisation `vfb-bildung`), API v4, Actions, Teams
-  - Active Directory / Azure AD (SAML-SSO für GitHub)
-  - PostgreSQL-Datenbank (On-Premises) für Metadaten & Audit-Logs
-  - Confluence (Wissensdatenbank), SharePoint (Dokumentenablage)
-- **Neuentwicklung (Tech-Stack):**
-  - Backend: Python 3.11 (FastAPI), SQLAlchemy, Pydantic
-  - Frontend: React 18 (TypeScript), Vite, Tailwind CSS
-  - CI/CD: GitHub Actions (Workflow-Dispatch, Reusable Workflows)
-  - Containerisierung: Docker, Docker Compose (Entwicklung), Kubernetes (Produktiv-Perspektive)
-  - Monitoring: Prometheus + Grafana (bereits im VFB im Einsatz)
-- **Sicherheit:** TLS 1.3 für alle externen Schnittstellen, mTLS für Service-to-Service, Secrets via GitHub Encrypted Secrets / HashiCorp Vault
-- **Verfügbarkeit:** Ziel 99,5 % für Self-Service-Portal (Pilot), Wartungsfenster sonntags 02:00–04:00 UTC
-
-### 1.6.4 Organisatorische Rahmenbedingungen
-
-- **Projektorganisation:** Matrixorganisation – Projektleiter (Daniel Massa) berichtet an Lenkungskreis (VFB-Geschäftsführung, IT-Leitung, Datenschutzbeauftragter)
-- **Projektteam:** 1 Projektleiter (PL), 1 Entwickler (Backend/Frontend/Automation), 1 externer Security-Consultant (auf Abruf)
-- **Entscheidungskompetenz:** PL entscheidet im operativen Rahmen; strategische Änderungen (Scope, Budget > 10 %, Termin > 2 Wochen) → Lenkungskreis
-- **Reporting:** Wöchentlicher Statusbericht (E-Mail, 1 Seite), monatliches Lenkungskreis-Meeting (30 Min)
-- **Kommunikation:** Microsoft Teams (Kanäle: #projekt-zero-trust, #zero-trust-dev), E-Mail für formale Entscheidungen
-- **Dokumentation:** Ablage in Confluence (Projektraum `Zero-Trust`), Versionierung über Git (Main-Branch protected)
-- **Qualitätssicherung:** Code-Reviews (4-Augen-Prinzip), automatisierte Tests (Unit/Integration), Security-Scan (Bandit, Trivy) in CI
-
-### 1.6.5 Rechtliche Rahmenbedingungen
-
-- **DSGVO (EU 2016/679):** Art. 5 (Grundsätze), Art. 25 (Datenschutz durch Technikgestaltung), Art. 32 (Sicherheit der Verarbeitung), Art. 30 (Verzeichnis von Verarbeitungstätigkeiten)
-- **BDSG (Bundesdatenschutzgesetz):** § 26 (Verarbeitung für Beschäftigungszwecke), § 64 (Technische und organisatorische Maßnahmen)
-- **ISO/IEC 27001:2022:** Annex A Controls (A.5.15–A.5.18 Zugriffskontrolle, A.8.2–A.8.3 Berechtigungsmanagement, A.12.4 Protokollierung)
-- **IHK-Prüfungsordnung:** § 12 (Betriebliche Projektarbeit), § 9 (Entwicklerdokumentation) der Verordnung über die Fortbildungsprüfung zum Operativen Professional
-- **Arbeitsrecht:** Betriebsvereinbarung zur IT-Nutzung (VFB, 2023), Mitbestimmungsrecht Betriebsrat bei Einführung technischer Überwachungseinrichtungen (§ 87 Abs. 1 Nr. 6 BetrVG)
-- **Urheberrecht:** Eigenentwickelter Code verbleibt als Arbeitsergebnis beim VFB (§ 69b UrhG), Open-Source-Komponenten (MIT/Apache-2.0) zulässig
-
----
-
-## 1.7 Soll-Konzept
+## 1.6 Soll-Konzept
 
 Angestrebt wird die Einführung eines Zero-Trust-Sicherheitskonzepts mit folgenden Kernkomponenten:
 
@@ -409,7 +343,7 @@ Angestrebt wird die Einführung eines Zero-Trust-Sicherheitskonzepts mit folgend
 - Self-Service-Portal für Endanwender zur eigenständigen Beantragung von Zugriffsrechten
 - Monitoring-Dashboard für Compliance-Prüfungen und Echtzeit-Überwachung
 
-## 1.8 Projektziele nach SMART
+## 1.7 Projektziele nach SMART
 
 **Spezifisch:** Einführung eines RBAC-Modells mit mindestens 10 definierbaren Rollen und 50+ spezifischen Berechtigungen für die GitHub-Organisation `vfb-bildung`.
 
@@ -425,13 +359,13 @@ Angestrebt wird die Einführung eines Zero-Trust-Sicherheitskonzepts mit folgend
 
 **Terminiert:** Interne Fertigstellung bis 25.10.2026, Einreichung der IHK-Projektarbeit bis 01.11.2026.
 
-## 1.9 Projektbegründung
+## 1.8 Projektbegründung
 
 Die manuelle Rechtevergabe verursacht jährliche Kosten von ca. 18.500 EUR (35 Anträge/Woche × 52 Wochen × 20 Min Bearbeitungszeit × 45 EUR/h). Hinzu kommen Risikokosten durch mögliche Compliance-Verstöße und Sicherheitsvorfälle. Die Automatisierung reduziert diese Kosten um schätzungsweise 70 % bei gleichzeitiger Steigerung der Qualität und Nachvollziehbarkeit.
 
 Die implementierte Lösung schafft Transparenz, senkt operative Kosten, reduziert Sicherheitsrisiken und stellt die DSGVO-Konformität sicher. Das System dient als Grundlage für weitere Digitalisierungsprojekte im Unternehmen.
 
-## 1.10 Projektabgrenzung
+## 1.9 Projektabgrenzung
 
 **Im Projektumfang enthalten:**
 - Automatisierter Rechtevergabeprozess (RBAC)
@@ -446,7 +380,7 @@ Die implementierte Lösung schafft Transparenz, senkt operative Kosten, reduzier
 - Produktionsrollout in allen Unternehmensbereichen (nur Pilotphase)
 - Installation externer Cloud-IDP-Dienste
 
-## 1.11 Projektschnittstellen
+## 1.10 Projektschnittstellen
 
 Die Plattform interagiert mit folgenden Systemen und Schnittstellen:
 
@@ -455,7 +389,7 @@ Die Plattform interagiert mit folgenden Systemen und Schnittstellen:
 - **Authentifizierung**: Azure AD / SAML-basiertes SSO
 - **Audit/Reporting**: Export-Schnittstelle für revisionssichere Logs
 
-## 1.12 Projektauftrag
+## 1.11 Projektauftrag
 
 Der VFB stellt fest, dass die aktuelle manuelle Rechtevergabe über E-Mail zu Sicherheitslücken, hohen Bearbeitungszeiten und Compliance-Risiken führt. Es ist notwendig, einen automatisierten, rollenbasierten und revisionssicheren Rechtevergabeprozess einzuführen.
 

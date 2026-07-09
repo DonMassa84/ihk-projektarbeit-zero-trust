@@ -16,22 +16,25 @@ SCR_DIR  := 10_screenshots
 
 all: diagrams screenshots pdf docx html lint
 
-# ─── PDF (IHK-formatiert) ──────────────────────────────────────────
+# ─── PDF (Eisvogel + XeLaTeX) ──────────────────────────────────────
 
 pdf: $(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf
 
-$(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf: $(MASTER) $(TEMPLATE)
-	@echo "=== PDF exportieren ==="
-	pandoc "$(MASTER)" -f markdown -t html5 \
-		--template="$(TEMPLATE)" \
-		--metadata title="Zero-Trust-Sicherheitskonzept mit GitHub-Integration" \
-		-o "$(OUTDIR)/PROJEKTARBEIT.html"
-	google-chrome --headless=new --disable-gpu --no-sandbox \
-		--print-to-pdf-no-header \
-		--print-to-pdf="$@" \
-		"file://$(OUTDIR)/PROJEKTARBEIT.html"
+$(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf: $(MASTER)
+	@echo "=== PDF exportieren (Eisvogel + XeLaTeX) ==="
+	sed 's/✅/X/g; s/⚠/!/g; s/🎯/O/g; s/️//g' "$(MASTER)" > /tmp/projektarbeit_no_emoji.md
+	pandoc /tmp/projektarbeit_no_emoji.md -f markdown -o "$@" \
+		--template=eisvogel \
+		--pdf-engine=xelatex \
+		-V colorlinks=true \
+		-V toc=true \
+		-V titlepage=true \
+		-V title="Zero-Trust-Sicherheitskonzept mit GitHub-Integration" \
+		-V author="Daniel Massa" \
+		-V date="01.11.2026" \
+	-H 09_export/build_scripts/pdf-header.tex
 	@echo "✓ $@"
-	@python3 -c "import subprocess; r=subprocess.run(['strings','$@'],capture_output=True,text=True); print(f'  Seiten: {r.stdout.count(\"/Type /Page\")}')" 2>/dev/null
+	@python3 -c "import subprocess; r=subprocess.run(['pdftotext','$@','-'],capture_output=True,text=True); print(f'  Textzeilen: {len(r.stdout.splitlines())}')" 2>/dev/null
 
 # ─── DOCX ──────────────────────────────────────────────────────────
 

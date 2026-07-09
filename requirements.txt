@@ -1,0 +1,66 @@
+# Python Dependencies — IHK Zero-Trust Projektarbeit
+# Install: pip install -r requirements.txt  (oder mit --break-system-packages)
+
+# Core Documentation & Export
+pypandoc>=1.13          # Pandoc Python wrapper
+python-docx>=1.1        # DOCX-Manipulation
+markdown>=3.5           # Markdown Parser
+pyyaml>=6.0             # YAML für Config/OpenAPI
+
+# Data & Visualization (optional, für Tabellen/Charts)
+pandas>=2.1             # Tabellen-Verarbeitung, CSV/Excel
+matplotlib>=3.8         # Plots (MTA, Risiko-Matrix, etc.)
+seaborn>=0.13           # Statistische Visualisierungen
+
+# Diagramme & Graphen (optional)
+graphviz>=0.20          # GraphViz Python Bindings
+plantuml>=0.3           # PlantUML Client (braucht Java)
+mermaid-cli>=10.0       # Mermaid CLI Wrapper (braucht Node)
+
+# Bildverarbeitung (für Screenshots/Export)
+pillow>=10.0            # PIL Fork, Bildmanipulation
+pngquant-cli>=1.0       # PNG Komprimierung (wrapper)
+
+# Qualitätssicherung
+language-tool-python>=2.7  # Rechtschreibung/Grammatik (LanguageTool)
+deepL>=1.0                   # DeepL API (optional, für Übersetzung)
+
+# ML/AI (nur für Prototyp-Demo in Kapitel 8.6, NICHT für Dokumentation)
+# torch>=2.1                  # PyTorch (CPU reicht)
+# transformers>=4.35         # Hugging Face Transformers
+# accelerate>=0.24           # HF Accelerate
+# datasets>=2.15             # HF Datasets
+# safetensors>=0.4           # Safe Model Loading
+
+# Entwicklung & Testing
+pytest>=7.4               # Unit Tests
+pytest-cov>=4.1           # Coverage
+ruff>=0.1                 # Linter (schnell, Rust)
+mypy>=1.7                 # Type Checking
+pre-commit>=3.6           # Git Hooks
+
+# Utilities
+rich>=13.7                # Terminal UI (Logs, Progress)
+tqdm>=4.66                # Progress Bars
+python-dotenv>=1.0        # .env Files
+click>=8.1                # CLI Framework
+
+# ============================
+# Installationshinweise
+# ============================
+# Standard (nur Doku/Export):
+#   pip install -r requirements.txt --no-deps
+#   # oder selektiv:
+#   pip install pypandoc python-docx markdown pyyaml pandas matplotlib
+
+# Mit ML-Demo (nur wenn GPU/Zeit):
+#   pip install torch transformers accelerate datasets safetensors --index-url https://download.pytorch.org/whl/cpu
+
+# System-Pakete (Ubuntu/Debian) für Build-Tools:
+#   sudo apt install pandoc texlive-xetex texlive-lang-german texlive-fonts-recommended \
+#        graphviz plantuml default-jre nodejs npm \
+#        libreoffice libreoffice-writer \
+#        pngquant jpegoptim
+#
+# Mermaid CLI (via npm):
+#   npm install -g @mermaid-js/mermaid-cli
