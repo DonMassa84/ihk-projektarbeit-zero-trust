@@ -1,6 +1,6 @@
 from typing import Optional, Dict, Any, List
 import numpy as np
-import sys, os, torch
+import sys, os
 from app.core.config import settings
 import structlog
 

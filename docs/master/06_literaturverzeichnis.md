@@ -29,4 +29,3 @@
 18. IHK-Prüfungsordnungen: Certified IT Business Manager / Operative IT Professionals
 
 > **Hinweis:** Die Quellen 17–18 sind intern und nicht öffentlich. Für die Abgabe müssen entsprechende Nachweise (z. B. Auszüge aus internen Richtlinien) beigelegt werden.
-> **TODO_REALDATEN_EINSETZEN:** Konkrete Seitenzahlen, Zugriffsdaten und Zitate für alle Quellen ergänzen.

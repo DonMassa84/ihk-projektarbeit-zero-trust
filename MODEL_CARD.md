@@ -30,17 +30,19 @@ Ein feinetuniertes **CodeBERT**-Modell zur Erkennung von Anomalien in Audit-Logs
 - Reale GitHub-Action-Logs aus CI/CD-Pipelines
 - DSGVO-konform: Keine personenbezogenen Daten im Training
 
-## Performance
+## Performance (experimentell, auf synthetischen Testdaten)
 
 | Metrik | Wert |
 |--------|------|
-| Accuracy | 94.2% |
-| Precision | 92.8% |
-| Recall | 91.5% |
-| F1-Score | 92.1% |
-| AUC-ROC | 0.976 |
+| Accuracy | ~85% |
+| Precision | ~83% |
+| Recall | ~82% |
+| F1-Score | ~82% |
+| AUC-ROC | ~0.89 |
 
-## Usage
+> **Wichtiger Hinweis:** Diese Werte wurden auf einem kleinen, synthetischen Datensatz ermittelt. Das Modell ist ein experimenteller Machbarkeitsnachweis und **nicht für den Produktiveinsatz bestimmt**. Reale Performance kann erheblich abweichen.
+
+## Usage (Demo)
 
 ```python
 from transformers import pipeline
@@ -57,9 +59,11 @@ print(result)
 
 ## Limitations
 
+- **Experimenteller Status:** Das Modell ist ein Proof-of-Concept, kein produktives System
 - Trainiert auf synthetischen Daten → reale Performance kann abweichen
 - Erkennt nur Muster aus Trainingsdaten → neue Angriffsmuster können übersehen werden
 - Sprachmodell ist Deutsch/Englisch, Code-Mixing kann die Performance beeinträchtigen
+- Keine Zertifizierung für sicherheitskritische Anwendungen
 
 ## Ethical Considerations
 

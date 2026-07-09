@@ -3,7 +3,7 @@
 **IHK-Abschlussprojekt: Certified IT Business Manager (Sommer 2026)**  
 **Prüfling:** Daniel-Alfonsin Massa (615951)  
 **Abgabedatum:** 01.11.2026  
-**Enhanced with Hugging Face ML/AI Capabilities**
+**ML/AI-Erweiterung (experimenteller Folgeausbau, nicht Bestandteil der IHK-Abnahme)**
 
 ---
 
@@ -16,7 +16,7 @@ Einführung eines modernen **Zero-Trust-Sicherheitskonzepts** mit automatisierte
 | 🔐 **RBAC** | Rollenbasierte Zugriffskontrolle mit Self-Service-Portal |
 | 🔄 **GitHub Integration** | Automatisierte Rechtevergabe via GitHub Actions |
 | 📋 **Audit-Logs** | Revisionssichere Protokollierung (DSGVO-konform) |
-| 🤖 **ML Enhancements** | Anomalieerkennung, Policy-Generierung, Semantische Suche |
+| 🤖 **ML Enhancements** | Anomalieerkennung, Policy-Generierung (experimenteller Zusatz) |
 | 🖥️ **Self-Service** | Beantragung und Genehmigung von Rollen |
 
 ---
@@ -181,9 +181,11 @@ docker compose -f docker-compose.ml.yml up -d
 
 ---
 
-## 🤗 Hugging Face Integration
+## 🤗 Hugging Face ML/KI-Erweiterung (experimenteller Folgeausbau)
 
-### 1. Anomalieerkennung (Audit-Logs)
+**Hinweis:** Die folgenden ML/KI-Komponenten wurden als **technische Machbarkeitsstudie (Proof-of-Concept)** vorbereitet. Sie sind **nicht Bestandteil der formalen IHK-Projektabnahme** und basieren ausschließlich auf synthetischen/anonymisierten Beispieldaten.
+
+### 1. Anomalieerkennung (Audit-Logs – Demo)
 ```python
 from transformers import pipeline
 
@@ -192,7 +194,7 @@ result = classifier("ROLE_ESCALATION on super-admin-role")
 # {'label': 'ANOMALY', 'score': 0.89}
 ```
 
-### 2. Policy-Generierung (NLP → Rego)
+### 2. Policy-Generierung (NLP → Rego – Demo)
 ```python
 from transformers import pipeline
 
@@ -202,14 +204,14 @@ policy = generator("Read-only access for developers on production")
 # default allow = false
 ```
 
-### 3. HF Spaces
-- [Anomaly Dashboard](hf-spaces/anomaly-dashboard/) - Gradio UI für Live-Analyse
-- [Policy Generator](hf-spaces/policy-generator/) - OPA Rego Generator
-- [Audit Explorer](hf-spaces/audit-explorer/) - Semantische Suche
+### 3. HF Spaces (Demo-Umgebungen)
+- [Anomaly Dashboard](hf-spaces/anomaly-dashboard/) – Gradio-Demo (synthetische Daten)
+- [Policy Generator](hf-spaces/policy-generator/) – OPA Rego Generator (experimentell)
+- [Audit Explorer](hf-spaces/audit-explorer/) – Semantische Suche (anonymisierte Testdaten)
 
 ---
 
-## 📐 Architektur
+## 📐 Architektur (Kernsystem)
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -223,14 +225,9 @@ policy = generator("Read-only access for developers on production")
               │GitHub│  │ OPA │  │Prometheus│
               │Actions│  │Policy│  │  Grafana │
               └──────┘  └─────┘  └─────────┘
-                            │
-                    ┌───────┴───────┐
-                    │   🤗 HF ML   │
-                    │  (Anomaly,    │
-                    │   Policy,     │
-                    │   Embeddings) │
-                    └───────────────┘
 ```
+
+> Die HF-ML-Komponenten (Anomaly, Policy, Embeddings) sind als experimenteller Folgeausbau ausgegliedert und nicht Teil des abgenommenen Kernsystems.
 
 ---
 
@@ -243,7 +240,7 @@ policy = generator("Read-only access for developers on production")
 | Fehlerrate Rechtevergabe | <2% | 1.2% | ✅ |
 | Bearbeitungszeit/Anfrage | <4h | 3.5h | ✅ |
 | User Satisfaction | >4/5 | 4.3/5 | ✅ |
-| DSGVO-Konformität | 100% | 100% | ✅ |
+| DSGVO-Konformität | vollständig | vollständig | ✅ |
 
 ---
 
@@ -254,9 +251,9 @@ policy = generator("Read-only access for developers on production")
 | **Projektstruktur** | ✅ | 33 Dateien, 14 Bereiche |
 | **Tabellen** | ✅ | 12/12 IHK-Tabellen |
 | **Diagramme** | ✅ | 10/10 Mermaid-Diagramme |
-| **Backend Code** | ✅ | FastAPI, RBAC, GitHub, ML |
+| **Backend Code** | ✅ | FastAPI, RBAC, GitHub, ML (experimentell) |
 | **CI/CD** | ✅ | GitHub Actions, Docker |
-| **HF Spaces** | ✅ | Anomaly Dashboard, Policy Generator |
+| **HF Spaces** | 🟡 | Demo-Umgebungen (experimentell, nicht abnahmerelevant) |
 | **Screenshots** | 🔴 | 0/9 erstellt |
 | **Prüferfragen** | 🔴 | Nicht erstellt |
 | **Präsentation** | 🟡 | Gliederung vorhanden |

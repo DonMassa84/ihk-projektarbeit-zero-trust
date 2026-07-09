@@ -267,7 +267,7 @@ jobs:
 |---------|------|-----------|
 | Unit Tests | pytest / Vitest | 95%+ |
 | Integration Tests | pytest + Testcontainers | 85% |
-| Security Tests | OWASP ZAP, Trivy | 100% kritisch |
+| Security Tests | OWASP ZAP, Trivy | Kritische Befunde adressiert |
 | E2E Tests | Playwright | Kern-Workflows |
 
 ### Abnahmekriterien
@@ -324,11 +324,11 @@ Status: BESTANDEN
 ### 9.1 Soll-/Ist-Vergleich
 | Ziel | Soll | Ist | Status |
 |------|------|-----|--------|
-| Automatisierung Rechtevergabe | 100% | 100% | ✅ |
-| Fehlerrate | <2% | 1.2% | ✅ |
-| Bearbeitungszeit | <4h | 3.5h | ✅ |
-| User Satisfaction | >4/5 | 4.3/5 | ✅ |
-| DSGVO-Konformität | 100% | 100% | ✅ |
+| Automatisierung Rechtevergabe | Vollständig | Vollständig | ✅ |
+| Fehlerrate | <2% | ~1.2% (Testphase) | ✅ |
+| Bearbeitungszeit | <4h | ~3.5h (Testphase) | ✅ |
+| User Satisfaction | >4/5 | ~4.3/5 (Testphase) | ✅ |
+| DSGVO-Konformität | Vollständig | Vollständig | ✅ |
 | Amortisation | 12 Monate | ~11 Monate | ✅ |
 
 ### 9.2 Lessons Learned
@@ -343,7 +343,7 @@ Status: BESTANDEN
 - Mehr Endanwender in Pilotphase
 
 ### 9.3 Ausblick
-- **2027:** KI-basierte Anomalieerkennung (ML auf Audit-Logs)
+- **2027:** KI-basierte Anomalieerkennung (ML auf Audit-Logs) als experimenteller Folgeausbau
 - **Continuous Security Assessments** automatisieren
 - **Awareness-Schulungen** fest im Onboarding verankern
 - **Rollout** auf HR, Verwaltung, Support

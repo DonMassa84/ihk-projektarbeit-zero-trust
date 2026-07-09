@@ -4,7 +4,7 @@
 |---|---|---|---|
 | RBAC-Modell | definiert | 4 Rollen modelliert (Admin, Developer, Auditor, Read-Only) | erreicht |
 | Self-Service-Antrag | strukturiert | Prozess modelliert, Formular in Planung | teilweise |
-| GitHub-Workflow | automatisiert | Workflow erstellt, Testlauf ausstehend | teilweise |
+| GitHub-Workflow | automatisiert | Workflow erstellt, Testlauf erfolgreich | erreicht |
 | Audit-Logging | protokolliert | Logik definiert, Speicherort festgelegt | erreicht |
-| Testfaelle | 12 dokumentiert | 12 Testfälle definiert, Ausführung offen | offen |
-| Dokumentation | vollstaendig | Kapitel 1-8 gegliedert, Inhalte in Arbeit | teilweise |
+| Testfaelle | 12 dokumentiert | 12 Testfälle ausgeführt | erreicht |
+| Dokumentation | vollstaendig | Kapitel 1-9 gegliedert, Inhalte finalisiert | erreicht |

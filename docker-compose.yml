@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: pgvector/pgvector:pg16
@@ -66,7 +64,7 @@ services:
       - ./src/frontend:/app
 
   prometheus:
-    image: prom/prometheus:v2.53
+    image: prom/prometheus:latest
     ports:
       - "9090:9090"
     volumes:
@@ -74,7 +72,7 @@ services:
       - prometheus_data:/prometheus
 
   grafana:
-    image: grafana/grafana:11.0
+    image: grafana/grafana:latest
     ports:
       - "3001:3000"
     environment:

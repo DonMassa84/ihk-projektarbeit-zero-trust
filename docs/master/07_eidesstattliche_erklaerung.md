@@ -23,11 +23,3 @@ Stuttgart, den **TODO_ABGABEDATUM_PRUEFEN**
 
 ____________________________________
 **Daniel Massa**
-
----
-
-**Zeuge (optional):**
-____________________________________
-Name, Vorname: ____________________
-Anschrift: _________________________
-Unterschrift: ______________________
