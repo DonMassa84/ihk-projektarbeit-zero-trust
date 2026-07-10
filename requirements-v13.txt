@@ -1,0 +1,8 @@
+reportlab>=4.0
+matplotlib>=3.7
+Pillow>=10.0
+pypdf>=6.0
+pymupdf>=1.23
+
+# System packages:
+#   poppler-utils (for pdftoppm rendering)
