@@ -1,0 +1,23 @@
+--- TODO/FIXME/Platzhalter ---
+439:  3. Entwurf - Use-Case, Oberfläche, Datenmodell
+673:  3. Entwurf – Use-Case, Oberfläche, Datenmodell
+1468:Technischer Entwurf                                 Architektur, GitHub-Workflow, Datenmodell,
+
+--- Offene Checkboxen / offene Abnahme ---
+13:Abgabedatum:                01.11.2026
+
+--- Doppeltes Inhaltsverzeichnis ---
+(keine Treffer)
+
+--- Kritische Formulierungen ---
+1706:Screenshots stammen aus der tatsächlichen Projektbearbeitung. Nicht verifizierbare oder
+1707:prototypische Aussagen sind als solche gekennzeichnet.
+
+--- Seiten-/Abgabe-/Datumstreffer ---
+9:Prüfling:                   Daniel Massa, Prüflingsnummer 615951
+13:Abgabedatum:                01.11.2026
+19:Quellen und Hilfsmittel benutzt. Stuttgart, den 01.11.2026
+162:Eidesstattliche Versicherung                                                                          33
+1691:Eidesstattliche Versicherung
+1692:Ich, Daniel Massa, Prüflingsnummer 615951, wohnhaft Hackstraße 41, 70190 Stuttgart,
+1710:   Stuttgart, den 01.11.2026

@@ -1,0 +1,18 @@
+Dependency Scan Report – Zero-Trust Pilot
+Datum: 2026-07-10
+Tool: pip-audit / manuelle Prüfung
+
+Geprüfte Abhängigkeiten:
+- fastapi
+- uvicorn
+- sqlalchemy
+- aiosqlite
+- httpx
+- pydantic
+- pydantic-settings
+- structlog
+- pytest
+- pytest-asyncio
+
+Ergebnis: Keine bekannten Sicherheitslücken in den verwendeten Versionen.
+Status: BESTANDEN

@@ -1,0 +1,24 @@
+--- TODO/FIXME/Platzhalter ---
+836:  3. Entwurf – Use-Case, Oberfläche, Datenmodell
+1800:Technischer Entwurf                                 Architektur, GitHub-Workflow, Datenmodell,
+
+--- Offene Checkboxen / offene Abnahme ---
+13:Abgabedatum:                01.11.2026
+1505:Offene Punkte                       Performance-Messung unter Produktivlast nicht
+1531:Offene Punkte                          Performance-Messung unter Produktivlast nicht
+
+--- Doppeltes Inhaltsverzeichnis ---
+(keine Treffer)
+
+--- Kritische Formulierungen ---
+2038:Screenshots stammen aus der tatsächlichen Projektbearbeitung. Nicht verifizierbare oder
+2039:prototypische Aussagen sind als solche gekennzeichnet.
+
+--- Seiten-/Abgabe-/Datumstreffer ---
+9:Prüfling:                   Daniel Massa, Prüflingsnummer 615951
+13:Abgabedatum:                01.11.2026
+19:Quellen und Hilfsmittel benutzt. Stuttgart, den 01.11.2026
+167:Eidesstattliche Versicherung                                                                          39
+2023:Eidesstattliche Versicherung
+2024:Ich, Daniel Massa, Prüflingsnummer 615951, wohnhaft Hackstraße 41, 70190 Stuttgart,
+2042:   Stuttgart, den 01.11.2026

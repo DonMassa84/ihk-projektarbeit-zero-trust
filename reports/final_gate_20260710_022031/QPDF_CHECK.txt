@@ -1,0 +1,6 @@
+checking /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_FINAL_EXPORT_20260710/PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.pdf
+PDF Version: 1.5
+File is not encrypted
+File is not linearized
+No syntax or stream encoding errors found; the file may still contain
+errors that qpdf cannot detect

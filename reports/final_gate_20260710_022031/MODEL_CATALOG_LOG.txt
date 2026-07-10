@@ -1,0 +1,10 @@
+Report: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/reports/hf_model_catalog_20260710_022032/MODEL_CATALOG_REPORT.md
+=== LOCAL HF CACHE CHECK ===
+Cache-Verzeichnis: /home/schattenmacher/.cache/huggingface/hub
+Gecachte Modelle: 5
+  - models--stabilityai--stable-diffusion-xl-base-1.0
+  - models--LanguageBind--Video-LLaVA-7B-hf
+  - models--google--flan-t5-small
+  - models--Qwen--Qwen2.5-7B-Instruct
+  - models--microsoft--codebert-base
+Report: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/reports/hf_model_catalog_20260710_022032/MODEL_CATALOG_REPORT.md

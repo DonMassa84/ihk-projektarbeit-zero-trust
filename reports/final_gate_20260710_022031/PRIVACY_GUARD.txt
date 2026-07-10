@@ -1,0 +1,24 @@
+=== HF PRIVACY GUARD ===
+BLOCKED_BY_PRIVACY_GUARD
+  Reason: PRUEFLINGSNUMMER at 356: Prüflingsnummer
+  Reason: PRUEFLINGSNUMMER at 70165: Prüflingsnummer
+  Reason: ADRESSE at 576: Hackstraße
+  Reason: ADRESSE at 70198: Hackstraße
+  Reason: TELEFON at 34012: Mobile
+  Reason: SECRET_POSSIBLE at 14395: Secret
+  Reason: SECRET_POSSIBLE at 33410: Secret
+  Reason: SECRET_POSSIBLE at 35705: Secret
+  Reason: SECRET_POSSIBLE at 36726: Secret
+  Reason: SECRET_POSSIBLE at 38924: Secret
+  Reason: SECRET_POSSIBLE at 40928: Secret
+  Reason: SECRET_POSSIBLE at 41840: Secret
+  Reason: SECRET_POSSIBLE at 57904: Secret
+  Reason: SECRET_POSSIBLE at 57927: Secret
+  Reason: SECRET_POSSIBLE at 59666: Secret
+  Reason: SECRET_POSSIBLE at 59677: Token
+  Reason: SECRET_POSSIBLE at 59737: Secret
+  Reason: SECRET_POSSIBLE at 66731: Secret
+  Reason: SECRET_POSSIBLE at 66823: Secret
+  Reason: SECRET_POSSIBLE at 67237: Secret
+
+Action: use local-only heuristic review
