@@ -2,63 +2,59 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-dist/
-build/
-*.egg
 .venv/
-venv/
-env/
+.pytest_cache/
 
 # Environment
 .env
-.env.local
-*.key
-*.pem
+.env.*
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
+# Build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.synctex.gz
+*.fdb_latexmk
+*.lof
+*.lot
 
 # OS
 .DS_Store
 Thumbs.db
 
-# ML Models (too large for git)
-src/ml/models/*
-!src/ml/models/.gitkeep
+# Temp
+/tmp/
+/export/
+/08_assets/
+/erklaerung.tex
+/erklaerung.pdf
+/build_formal.py
+/build_formal_final.py
+/15_claim_scan.py
+/insert_beleg_markers.py
+/unterschrift.png
+/dokumentation_neu.pdf
+/generate_zero_trust_images_extra.sh
+/generate_zero_trust_images_local.sh
+/render_mermaid.sh
+/demo.sh
+/zero_trust_einzelbilder_professionell.zip
+/zero_trust_einzelbilder_professionell/
+/ihk_zero_trust_abbildungen/
+/ihk_zero_trust_abbildungen_download.zip
 
-# Node
-node_modules/
-dist/
-.next/
-
-# Docker
-docker-compose.override.yml
-
-# Database
-*.db
-*.sqlite
-
-# Logs
-*.log
-audit.log
-
-# Artifacts
-mlruns/
-wandb/
-artifacts/
-coverage/
-htmlcov/
-.coverage
-coverage.xml
-
-# Monitoring
-prometheus_data/
-grafana_data/
-
-# HF
-.huggingface/
-cache/
+# Freezes (nur finalen behalten)
+/99_ABGABE_FREEZE_20260710_013218/
+/99_ABGABE_FREEZE_20260710_025057/
+/99_ABGABE_FREEZE_20260710_031312/
+/99_ABGABE_FREEZE_20260710_033011/
+/99_ABGABE_FREEZE_20260710_035130/
+/99_AUDIT_BASELINE_20260710_071903/
+/99_EXECUTION_BASELINE_20260710_072710/
+/99_IHK_FINAL_CLEAN_FIX_20260709_230041/
+/99_IHK_FINAL_CLEAN_FIX_20260709_230604/
+/99_IHK_FINAL_EXPORT_20260709/
+/99_IHK_FINAL_EXPORT_20260710/
+/99_IHK_REBUILD_20260710_035023/
