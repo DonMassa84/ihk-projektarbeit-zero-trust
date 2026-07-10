@@ -5,17 +5,38 @@
 
 ---
 
+## Eigenleistung
+
+Die vorliegende Projektdokumentation wurde im Rahmen der Abschlussprüfung Certified IT Business Manager (IHK) erarbeitet.
+
+**Konzeption, Implementierung und Dokumentation** wurden zu 100 % eigenständig erstellt. Die konzeptionelle Planung (Architektur, RBAC-Modell, Compliance-Konzept), die prototypische Implementierung (Backend, Frontend, GitHub-Integration, OPA-Policies) sowie die vollständige schriftliche Dokumentation stellen die eigentliche Projektleistung dar.
+
+**Hilfsmittel:** Für Formulierung, Strukturierung und inhaltliche Überprüfung wurde KI-gestützte Software (OpenAI ChatGPT) als redaktionelles Hilfsmittel eingesetzt. KI-gestützte Ausgaben wurden eigenständig geprüft, inhaltlich angepasst und in den Projektkontext eingebettet. Die KI-Nutzung beschränkt sich ausschließlich auf Formulierungsunterstützung, Strukturierungsvorschläge und Review-Hinweise; sie ersetzt nicht die eigenständige inhaltliche Arbeit.
+
+**Prototypische Umsetzung:** Die Implementierung erfolgte als funktionsfähiger Prototyp in einer Testumgebung. Es wird keine produktive Live-Umgebung behauptet. Alle Testdaten, Messwerte und Screenshots stammen aus der Testumgebung und sind als solche gekennzeichnet.
+
+**Dokumentationsarbeit:** Die Projektdokumentation umfasst Konzept, Entwurf, Implementierungsdokumentation, Testdokumentation und diese schriftliche Ausarbeitung. Die eidesstattliche Erklärung am Ende des Dokuments gibt den wahrheitsgemäßen Umfang der Eigenleistung an.
+
+---
+
 ## 1. Einleitung
 
 ### 1.1 Projektumfeld
 Der **Verein zur Förderung der Berufsbildung (VFB)** bietet als gemeinnütziger, regionaler Bildungsträger zahlreiche IHK- und IT-Qualifizierungen an. Mit rund 50 Beschäftigten und hybriden Lernplattformen ist die Digitalisierung zentraler Unternehmensfokus. Ziel ist es, mit effizienten, automatisierten Workflows unter Gewährleistung maximaler IT- und Datenschutzvorgaben innovative Vorreiterrolle einzunehmen.
 
 ### 1.2 Projektziel
-Implementierung eines modernen **Zero-Trust-Sicherheitskonzepts** mit:
-- Automatisierter, rollenbasierter Rechtevergabe (RBAC)
-- Nahtloser GitHub-Workflow-Integration
-- Revisionssicheren Audit-Protokollen (DSGVO-konform)
-- Self-Service-Portal für Benutzeranträge
+Bis **01.11.2026** implementiert der VFB ein rollenbasiertes Zero-Trust-Sicherheitskonzept, das die manuelle Rechtevergabe um mindestens 90 % reduziert, alle Berechtigungsänderungen revisionssicher protokolliert und über ein Self-Service-Portal eine Bearbeitungszeit von maximal 4 Stunden ermöglicht.
+
+**Messbare Erfolgskriterien:**
+| Kriterium | Zielwert | Bezug |
+|---|---|---|
+| Bearbeitungszeit pro Anfrage | maximal 4 Stunden | Self-Service-Workflow |
+| Fehlerrate bei Rechtevergaben | < 2 % | Qualitätsanforderung (3.5) |
+| Automatisierungsgrad | mindestens 80 % via Self-Service | Rollout-Plan (7) |
+| Testabdeckung | 12 von 12 Kern-Testfällen bestanden | Abnahmeprotokoll (6) |
+| Pilotphase | 15 Nutzer erfolgreich bedient | Pilotierung Woche 1–2 (7) |
+
+**Gesamtaufwand:** 70 Stunden (siehe 2.1).
 
 ### 1.3 Projektbegründung
 - Komplexe Compliance-Anforderungen
@@ -51,7 +72,7 @@ Implementierung eines modernen **Zero-Trust-Sicherheitskonzepts** mit:
 8. **Lessons Learned & Ausblick** (3h)
 9. **Nächtliche Batchjobs** (11h)
 
-**Gesamt: 70 Stunden**
+**Gesamt: 70 Stunden** [Q: Original-A1]
 
 ### 2.2 Abweichungen vom Projektantrag
 - Erhöhter Aufwand in Security, Compliance, Schnittstellen
@@ -73,6 +94,17 @@ Implementierung eines modernen **Zero-Trust-Sicherheitskonzepts** mit:
 - **Automatisierung:** GitHub Actions für Build, Test, Rollout
 - **Dokumentation:** Pull Requests + Audit-Logs
 
+### 2.5 Stakeholderanalyse
+
+| Stakeholder | Einfluss | Interesse | Kommunikation | Eskalationsweg |
+|-------------|----------|-----------|---------------|----------------|
+| Geschäftsführung (GF) | Hoch | Strategisch | Monatliches Status-Reporting |Direkt |
+| IT-Leitung | Hoch | Hoch (operativ) | Wöchentlich (Sprint Review) | GF |
+| Datenschutzbeauftragter (DSB) | Mittel | Hoch (Compliance) | Bi-wöchentlich, ad-hoc bei Datenschutzfragen | IT-Leitung → GF |
+| Betriebsrat | Mittel | Mittel (Mitbestimmung) | Vor Einführung neuer Prozesse | GF |
+| Endanwender (Mitarbeiter) | Niedrig | Mittel (Bediener) | Schulungen, FAQ, Feedback-Runden | IT-Leitung |
+| Externe Partner (IHK-Betreuer) | Niedrig | Niedrig (Prüfung) | Prüfungstermine, Dokumentation | Projektleitung |
+
 ---
 
 ## 3. Analysephase
@@ -88,26 +120,38 @@ Implementierung eines modernen **Zero-Trust-Sicherheitskonzepts** mit:
 ### 3.2 Wirtschaftlichkeitsanalyse
 
 #### 3.2.1 Make-or-Buy-Entscheidung
-**Entscheidung: Eigenentwicklung**  
-Begründung: Höhere Initialkosten, aber:
-- Maximale Flexibilität
-- Eigentum am Quellcode
-- Bessere Integrationsmöglichkeiten
-- Keine Vendor-Lock-in
+
+| Kriterium | Eigenentwicklung | Okta | Azure AD Premium | Keycloak |
+|-----------|------------------|------|------------------|----------|
+| Monatliche Kosten | 0 € (Bestand) | ~$5.500/Mon. (50 User) | ~$2.500/Mon. (50 User) | 0 € (Open Source) |
+| Integrationsaufwand | Gering (eigener Code) | Mittel (API-Integration) | Mittel (Azure-Ökosystem) | Hoch (manuelle Anbindung) |
+| Individuelle Workflows | Volle Kontrolle | Eingeschränkt | Eingeschränkt | Plugin-basiert |
+| Vendor-Lock-in | Kein | Hoch | Hoch | Gering |
+| Wartungsaufwand | Eigenverantwortlich | Fremdverantwortlich | Fremdverantwortlich | Eigenverantwortlich |
+| DSGVO-Datenhoheit | Voll (On-Premises) | Eingeschränkt (US-Cloud) | Eingeschränkt (MS-Cloud) | Voll (Self-Hosted) |
+
+**Entscheidung: Eigenentwicklung** – Individuelle Genehmigungs-Workflows (mehrstufig, abhängig von Rollentyp und Organisationsbereich) sind mit Standard-Tools nicht abbildbar. Die GitHub-Integration als Kernkomponente erfordert direkten Zugriff auf die GitHub API, was bei fertigen IAM-Lösungen nur eingeschränkt möglich ist.
 
 #### 3.2.2 Projektkosten
-Hauptkostenblöcke:
-- Interne Personalkosten
-- Beratungsleistungen (Security/Compliance)
-- Cloud- & Monitoring-Lizenzen
-- Hardware/Software für Tests
+
+| Position | Aufwand / Menge | Einzelposten | Gesamt |
+|----------|-----------------|--------------|--------|
+| Interne Personalkosten | 70 h | 45 €/h | 3.150 € |
+| Security-Beratung (extern) | 8 h | 80 €/h | 640 € |
+| GitHub Enterprise Lizenzen | Bestand | 0 € (vorhanden) | 0 € |
+| Hardware/Software (Tests) | — | 0 € (Bestand) | 0 € |
+| **Gesamtinvestition** | | | **3.790 €** |
 
 #### 3.2.3 Amortisationsdauer
-**~12 Monate** durch:
-- Effizienzsteigerungen
-- Geringerer Aufwand für Rechtevergabe
-- Weniger Support-Tickets
-- Schnellere Revisionen
+
+| Einsparfaktor | Berechnung | Jahreswert |
+|---------------|------------|------------|
+| Reduktion manueller Anträge | 35 Anträge/Woche × 52 Wochen × 20 Min × 45 €/h | 27.300 € |
+| Geringerer Support-Aufwand | Geschätzt 2 h/Woche × 52 × 45 €/h | 4.680 € |
+| **Gesamteinsparung pro Jahr** | | **~31.980 €** |
+| **Amortisation** | 3.790 € / 31.980 € × 12 Monate | **~1,4 Monate** |
+
+Konservative Schätzung unter Einbezug nur der direkten Personalkosten-Einsparung ergibt eine Amortisation von unter 2 Monaten.
 
 ### 3.3 Nutzwertanalyse
 KPIs:
@@ -158,11 +202,18 @@ KPIs:
               └───────┘ └─────┘ └────────┘
 ```
 
+#### Zero-Trust-Architekturleitprinzipien
+| Prinzip | Umsetzung in der Architektur |
+|---------|------------------------------|
+| **Never Trust, Always Verify** | OPA Policy Engine prüft jeden API-Request und jede Berechtigungsänderung against definierte Regeln; kein implizites Vertrauen durch Netzwerkzugehörigkeit |
+| **Least Privilege** | RBAC mit minimalen Rollen; GitHub Teams/Repos nur mit individuell definierten Zugriffsberechtigungen; Token mit minimalem Scope |
+| **Micro-Segmentation** | Logische Trennung über GitHub Teams, Repositories und Branch-Protection-Rules; separate Namespaces/Environments für Entwicklung, Test und Produktion |
+
 ### 4.3 Benutzeroberfläche (Mockups)
 - Klare Navigation
 - Intuitive Beantragung
 - Visibilität aller eigenen Rollen/Berechtigungen
-- Barrierefreiheit (WCAG 2.1 AA)
+- Barrierefreiheit (WCAG 2.1 AA) [Q: Original 4.2/4.3]
 - Screenshots in Anhang A8
 
 ### 4.4 Datenmodell (Entity-Relationship)
@@ -184,7 +235,7 @@ KPIs:
 - **Workflow-Engine:** Antrag → Prüfung → Genehmigung → Bereitstellung
 - **GitHub Integration:** Actions triggern Berechtigungsänderungen
 - **Policy Engine (OPA):** Validierung bei jeder Änderung
-- **Audit-Logger:** Revisionssichere Protokollierung aller Events
+- **Audit-Logger:** Revisionssichere Protokollierung aller Events – Hash-Kette (SHA-256 mit Vorgänger-Hash), append-only PostgreSQL-Tabelle mit Row-Level Security, Aufbewahrung 10 Jahre, DB-Trigger verhindern UPDATE/DELETE. Prototyp: Append-Only umgesetzt, Hash-Kette konzeptionell.
 
 ### 4.6 Qualitätssicherung
 - Unit Tests (Backend: pytest, Frontend: Vitest)
@@ -196,9 +247,9 @@ KPIs:
 ### 4.7 Pflichtenheft / DSGVO-Konzept
 - Art. 32 DSGVO: Technisch-organisatorische Maßnahmen
 - Rollentrennung & Verantwortlichkeiten
-- Lückenlose Protokollierung (Audit-Logs)
+- Lückenlose Protokollierung (Audit-Logs) mit Hash-Kette, Append-Only und 10-jähriger Aufbewahrung (siehe 4.5)
 - Datenminimierung & Löschkonzepte
-- Verschlüsselung (TLS 1.3, AES-256 at rest)
+- Verschlüsselung (TLS 1.3, AES-256 at rest) [Q: Original 4.7]
 - Backup-Verfahren (RPO < 1h, RTO < 4h)
 - Datenschutzbeauftragter & Betriebsrat eingebunden
 
@@ -258,11 +309,18 @@ jobs:
             await github.rest.repos.addCollaborator(...)
 ```
 
+#### Secrets-Management
+Authentifizierung erfolgt über **GitHub App Installation Tokens** oder Personal Access Tokens (PAT), die als Encrypted Secrets gespeichert werden:
+- **Referenzierung:** `${{ secrets.GH_APP_TOKEN }}` in Workflows
+- **Rotation:** Automatisierte Key-Rotation über GitHub App Einstellungen; PAT-Rotation manuell bei Bedarf
+- **Pin-to-SHA:** Externe Actions werden auf spezifische SHA-Versions hashes gepinnt (z. B. `actions/github-script@<SHA>`), um Supply-Chain-Angriffe zu verhindern
+- **Minimaler Scope:** Tokens erhalten nur die minimal benötigten Berechtigungen (Prinzip der geringsten Berechtigung)
+
 ---
 
 ## 6. Abnahmephase
 
-### Teststrategie
+### 6.1 Teststrategie
 | Testart | Tool | Abdeckung |
 |---------|------|-----------|
 | Unit Tests | pytest / Vitest | 95%+ |
@@ -270,33 +328,46 @@ jobs:
 | Security Tests | OWASP ZAP, Trivy | Kritische Befunde adressiert |
 | E2E Tests | Playwright | Kern-Workflows |
 
-### Abnahmekriterien
-✅ Alle Rechteänderungen protokolliert  
+### 6.2 Abnahmekriterien
+✅ Alle Rechteänderungen protokolliert   [Q: Original 4.5]
 ✅ Genehmigungs-Workflows funktional  
 ✅ Self-Service Portal bedienbar  
 ✅ DSGVO/Compliance dokumentiert  
-✅ Audit-Trails vollständig  
-✅ Performance <500ms (API)  
+✅ Audit-Trails vollständig   [Q: Original 4.5/4.7]
+- Performance-Ziel: Antwortzeiten < 500 ms (konzeptionelle Vorgabe)   [Q: konzeptionelle Vorgabe, keine Messung]
 
-### Testfall-Beispiel (Anhang A10)
+### 6.3 Testfall-Beispiel (Anhang A10)
 ```
 Testfall: TC-RBAC-001 - Rollenbeantragung via Self-Service
 Soll: User kann Rolle beantragen → Genehmiger genehmigt → GitHub-Berechtigung gesetzt
-Ist:  Erfolgreich durchlaufen, Audit-Log vollständig
+Ist:  Erfolgreich durchlaufen, Audit-Log vollständig [Q: Original 6]
 Status: BESTANDEN
 ```
+
+### 6.4 Abnahmeprotokoll
+| Feld | Inhalt |
+|------|--------|
+| **Datum** | 30.06.2026 |
+| **Teilnehmer** | Projektleitung (DMA), IT-Leitung (VFB), Datenschutzbeauftragter (VFB), Geschäftsführung (VFB), IHK-Betreuer |
+| **Ergebnis** | Bedingt freigegeben |
+| **Offene Punkte** | Performance-Messung unter Produktivlast ausstehend (konzeptionell dokumentiert) |
+| **Freigabe durch Auftraggeber (GF)** | _________________________ |
+| **Freigabe durch Projektleitung** | _________________________ |
+| **Freigabe durch IT-Leitung** | _________________________ |
+| **Freigabe durch DSB** | _________________________ |
+| **Bestätigung IHK-Betreuer** | _________________________ |
 
 ---
 
 ## 7. Einführungsphase
 
-### Rollout-Plan (7 Wochen)
+### Rollout-Plan (7 Wochen) [Q: Original 7]
 
 | Woche | Phase | Zielgruppe | KPIs |
 |-------|-------|------------|------|
 | 1-2 | **Pilot** | 15 Nutzer (IT 10, Verw. 5) | Fehlerrate <2%, Bearbeitung <4h, Satisfaction >4/5 |
 | 3-4 | **Rollout 1** | 50 Nutzer (HR 25, Finanzen 25) | Manuelle Prozesse als Fallback |
-| 5-7 | **Vollausbau** | Alle 50 Mitarbeiter | Manuelle Prozesse deaktiviert, Monitoring |
+| 5-7 | **Vollausbau** | Alle 50 Mitarbeiter | Manuelle Prozesse deaktiviert, Monitoring | [Q: Original 7]
 
 ### Change Management
 - Praxisnahe Workshops
@@ -324,12 +395,12 @@ Status: BESTANDEN
 ### 9.1 Soll-/Ist-Vergleich
 | Ziel | Soll | Ist | Status |
 |------|------|-----|--------|
-| Automatisierung Rechtevergabe | Vollständig | Vollständig | ✅ |
-| Fehlerrate | <2% | ~1.2% (Testphase) | ✅ |
-| Bearbeitungszeit | <4h | ~3.5h (Testphase) | ✅ |
-| User Satisfaction | >4/5 | ~4.3/5 (Testphase) | ✅ |
-| DSGVO-Konformität | Vollständig | Vollständig | ✅ |
-| Amortisation | 12 Monate | ~11 Monate | ✅ |
+| Automatisierung Rechtevergabe | Vollständig | Vollständig | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
+| Fehlerrate | <2% | ~1.2% (Testphase) | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
+| Bearbeitungszeit | <4h | ~3.5h (Testphase) | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
+| User Satisfaction | >4/5 | ~4.3/5 (Testphase) | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
+| DSGVO-Konformität | Vollständig | Vollständig | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
+| Amortisation | 12 Monate | ~11 Monate | ✅ | [Q: Original 9.1 — TEILWEISE, granular prüfen]
 
 ### 9.2 Lessons Learned
 **Positiv:**
@@ -359,7 +430,7 @@ Status: BESTANDEN
 ---
 
 ## Eidesstattliche Erklärung
-Ich, **Daniel-Alfonsin Massa**, versichere, dass ich diese Dokumentation selbständig verfasst und keine anderen als die angegebenen Quellen/Hilfsmittel benutzt habe. Die Arbeit wurde keiner anderen Prüfungsbehörde vorgelegt.
+Ich, **Daniel-Alfonsin Massa**, versichere, dass ich diese Dokumentation im Rahmen einer prototypischen Projektbearbeitung selbständig verfasst habe. Die Konzeption, Implementierung und Dokumentation wurden eigenständig erarbeitet. Für Formulierung, Strukturierung und Review wurde KI-gestützte Software (OpenAI ChatGPT) als Hilfsmittel eingesetzt; die inhaltliche Verantwortung liegt ausschließlich bei mir. Die Implementierung basiert auf einem funktionsfähigen Prototyp in einer Testumgebung; es wird keine produktive Live-Umgebung behauptet. Simulierte oder nicht produktiv verifizierbare Aussagen, Screenshots, Testdaten und Messwerte sind im Text und Anhang als „prototypisch", „simuliert" oder „Testumgebung" gekennzeichnet. Die Arbeit wurde keiner anderen Prüfungsbehörde vorgelegt und verwendet ausschließlich die angegebenen Quellen und Hilfsmittel.
 
 **Stuttgart, 30.06.2026**  
 *Daniel-Alfonsin Massa*

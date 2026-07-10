@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage{graphicx}
+\setkeys{Gin}{width=0.55\textwidth}
+\renewcommand{\figurename}{Abbildung}
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks=false}
+\usepackage{array}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\usepackage{framed}
+\usepackage{fancyvrb}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Make subsections appear as top-level (no "0.1" prefix)
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+% Suppress LaTeX auto-numbering (manual numbers in headings)
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+% ── DECKBLATT ────────────────────────────────────────────────────
+\pagenumbering{gobble}
+\begin{center}
+\Large\bfseries Zero-Trust-Sicherheitskonzept mit GitHub-Integration\par
+\vspace{4mm}
+\large Einführung eines Zero-Trust-Sicherheitskonzepts mit automatisierter Rechtevergabe und GitHub-basierter Workflow-Integration\par
+\end{center}
+\vspace{8mm}
+\begin{tabular}{@{}p{5cm}p{9.5cm}@{}}
+Prüfungsfach: & Betriebliche IT-Prozesse \\
+Fortbildungsprüfung: & Certified IT Business Manager (IHK) \\
+Prüfling: & Daniel Massa, Prüflingsnummer 615951 \\
+Projektbetrieb: & Verein zur Förderung der Berufsbildung e.\,V., Kurfürstenstraße 6, 71636 Ludwigsburg \\
+Wohnanschrift: & Hackstraße 41, 70190 Stuttgart \\
+Abgabedatum: & 01.11.2026 \\
+Betreuer im Betrieb: & Carsten Vordermeier \\
+IHK-Betreuer: & Frau Dr. Sabine Wagner, IHK Stuttgart \\
+\end{tabular}
+\vspace{10mm}
+Erklärung: Die Projektarbeit wurde selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt.
+\vspace{15mm}
+Stuttgart, den 01.11.2026 \hfill \rule{6cm}{0.4pt} \\
+\phantom{Stuttgart, den 01.11.2026} \hfill Daniel Massa
+
+% ── SPERRVERMERK ─────────────────────────────────────────────────
+\newpage
+\section*{Sperrvermerk}
+\addcontentsline{toc}{section}{Sperrvermerk}
+Die vorliegende Projektarbeit ist vertraulich zu behandeln. Eine Weitergabe an Dritte ist ohne Zustimmung des Auftraggebers nicht gestattet.
+
+% ── INHALTSVERZEICHNIS ──────────────────────────────────────────
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+
+% ── ABBILDUNGSVERZEICHNIS ────────────────────────────────────────
+\newpage
+\section*{Abbildungsverzeichnis}
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\input{abbildungsverzeichnis.tex}
+
+% ── TABELLENVERZEICHNIS ──────────────────────────────────────────
+\newpage
+\section*{Tabellenverzeichnis}
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\input{tabellenverzeichnis.tex}
+
+% ── ABKÜRZUNGSVERZEICHNIS ────────────────────────────────────────
+\newpage
+\section*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\input{abkuerzungsverzeichnis.tex}
+
+% ── HAUPTTEIL ────────────────────────────────────────────────────
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+$body$
+
+\end{document}
