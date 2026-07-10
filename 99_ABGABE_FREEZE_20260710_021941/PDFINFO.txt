@@ -1,0 +1,17 @@
+Creator:         LaTeX via pandoc with the Eisvogel template
+Producer:        xdvipdfmx (20220710)
+CreationDate:    Fri Jul 10 01:09:04 2026 CEST
+Custom Metadata: no
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           86
+Encrypted:       no
+Page size:       595.28 x 841.89 pts (A4)
+Page rot:        0
+File size:       1637549 bytes
+Optimized:       no
+PDF version:     1.5
