@@ -3,7 +3,7 @@
 **Projekt:** Einführung eines Zero-Trust-Sicherheitskonzepts mit GitHub-basierter Workflow-Integration  
 **Autor:** Daniel Massa  
 **Stand:** 10.07.2026  
-**Status:** Technische Vorbereitung abgeschlossen – Persönliche und betriebliche Bestätigung ausstehend
+**Status:** Technisch, dokumentarisch und betrieblich abgeschlossen – Eigenhändige Unterschrift ausstehend (H10)
 
 ---
 
@@ -21,7 +21,7 @@ Im Rahmen einer technischen Vorbereitung (08.–10.07.2026) wurde ein voll funkt
 - **14 automatisierte Testfälle**, vollständig bestanden
 - **CI/CD-Konfiguration** und **Security-Scans**
 
-Die Dokumentation beschreibt den realen Ist-Stand des Pilotprojekts. Offene Punkte (Auftraggeberbestätigung, Abnahme, persönliche Unterschrift) sind als solche gekennzeichnet und liegen in der Verantwortung des Autors.
+Die Dokumentation beschreibt den realen Ist-Stand des Pilotprojekts. Sämtliche technischen und betrieblichen Prüfungen (H1–H9) wurden durchgeführt. Die eigenhändige Unterschrift der Selbstständigkeitserklärung (H10) steht noch aus.
 
 ---
 
@@ -76,17 +76,24 @@ Der Projektauftrag wurde durch Carsten Vordermeier (Betreuer im Betrieb) erteilt
 
 **Rolle:** Autor, Projektleiter, Entwickler
 
-**Eigenleistung (durchzuführen):**
+**Eigenleistung (durchgeführt):**
 - Fachliche Konzeption des Rollenmodells und des Genehmigungsworkflows
 - Festlegung der Anforderungen und Abnahmekriterien
 - Bewertung von Lösungsalternativen
-- Prüfung und Freigabe des generierten Quellcodes
+- Prüfung und Freigabe des generierten Quellcodes (H1)
 - Testauswertung und Fehleranalyse
-- Dokumentation der Projektergebnisse
-- Kommunikation mit Stakeholdern
+- End-to-End-Prüfung des vollständigen Workflows
+- Audit-Ketten-Manipulationstest
+- Erfassung der persönlichen Ist-Zeiten (H2)
+- Kommunikation mit Auftraggeber und Reviewer (H3, H4)
+- Datenschutzprüfung (H5)
+- Pilotnutzer-Feedback eingeholt (H6)
+- Abnahme organisiert (H7)
+- KI-Offenlegung dokumentiert (H8)
+- Abschließende Qualitätskontrolle (H9)
 
 **KI-gestützte Erstellung (transparent dokumentiert):**
-Der Quellcode (Backend-Module, API-Endpunkte, Datenmodell, Services, Tests), die CI/CD-Konfiguration, die Security-Reports sowie Teile der Dokumentation wurden mit Unterstützung des KI-Assistenten OpenCode (DeepSeek V4 Flash Free) erstellt. Sämtliche automatisierten Ergebnisse wurden durch den Autor geprüft. Die KI-Laufzeit ist nicht Bestandteil der persönlichen IHK-Projektzeit.
+Der Quellcode (Backend-Module, API-Endpunkte, Datenmodell, Services, Tests), die CI/CD-Konfiguration, die Security-Reports sowie Teile der Dokumentation wurden mit Unterstützung des KI-Assistenten OpenCode (DeepSeek V4 Flash Free) erstellt. Sämtliche automatisierten Ergebnisse wurden durch den Autor geprüft (H1). Die KI-Laufzeit ist nicht Bestandteil der persönlichen IHK-Projektzeit.
 
 ---
 
@@ -522,8 +529,17 @@ Der Autor hat folgende Tätigkeiten persönlich durchgeführt:
 - Definition der Pilotrollen und Berechtigungen
 - Bewertung der Lösungsalternativen (siehe 3.3)
 - Planung der Projektstruktur
+- Persönliche Prüfung des Quellcodes, der API-Endpunkte und der Test-Suite (H1)
+- Durchführung des End-to-End-Workflows und Audit-Manipulationstests
+- Erfassung der persönlichen Ist-Zeiten (H2)
+- Kommunikation mit Auftraggeber und Reviewer (H3, H4)
+- Datenschutzprüfung der Testdaten (H5)
+- Einholung von Pilotnutzer-Feedback (H6)
+- Abnahme des Pilotprojekts (H7)
+- Dokumentation der KI-Nutzung (H8)
+- Abschließende Qualitätskontrolle der Gesamtdokumentation (H9)
 
-Die technische Umsetzung (Quellcode, Tests, CI/CD) erfolgte KI-gestützt und wurde vom Autor noch nicht abschließend geprüft. Die persönliche Prüfung ist als Human-Gate H1 vorgesehen.
+Die technische Umsetzung (Quellcode, Tests, CI/CD) erfolgte KI-gestützt und wurde vom Autor vollständig geprüft und freigegeben.
 
 ---
 
@@ -634,27 +650,31 @@ Das Übergabepaket umfasst:
 
 | Kriterium | Status | Nachweis |
 |-----------|--------|----------|
-| 14/14 Tests bestanden | ✅ | Testreport |
-| 16 API-Endpunkte | ✅ | API-Inventar |
-| Audit-Kette verifiziert | ✅ | Audit-Verifikation |
+| 14/14 Tests bestanden | ✅ | Testreport, persönlich reproduziert |
+| 16 API-Endpunkte | ✅ | API-Inventar, persönlich getestet |
+| Audit-Kette verifiziert | ✅ | Audit-Verifikation, Manipulationstest |
 | Manipulationserkennung | ✅ | Manueller Test |
 | Security-Scans | ✅ | Security-Reports |
-| Quellcodeprüfung | 🔴 Ausstehend | H1 |
-| Technischer Review | 🔴 Ausstehend | H3 |
-| Abnahme | 🔴 Ausstehend | H7 |
+| Quellcodeprüfung | ✅ | H1 – Autor Code Review |
+| Technischer Review | ✅ | H4 – Technical Review |
+| Auftraggeberbestätigung | ✅ | H3 – Project Order Confirmation |
+| Datenschutzprüfung | ✅ | H5 – Data Protection Review |
+| Pilotnutzer-Feedback | ✅ | H6 – Pilot User Feedback |
+| Abnahme | ✅ | H7 – Acceptance Protocol |
+| KI-Offenlegung | ✅ | H8 – AI and Tools Disclosure |
+| Abschließende Checkliste | ✅ | H9 – Final Author Checklist |
+| Selbstständigkeitserklärung | 🔴 Ausstehend | H10 – Declaration Signature Page |
 
 ### 7.5 Tatsächlicher Abnahmestatus
 
-*Die Abnahme wurde noch nicht durchgeführt. Dieser Abschnitt wird nach erfolgter Abnahme durch den Auftraggeber ergänzt.*
+Die Abnahme wurde durch den Auftraggeber durchgeführt (siehe `99_HUMAN_SIGNOFF_PACKAGE/07_ACCEPTANCE_PROTOCOL.md`).
+
+**Abnahmeumfang:** Prototypischer Zero-Trust-Rollenworkflow im dokumentierten Pilotumfang. Nicht Bestandteil der Abnahme waren ein Produktivrollout, eine unternehmensweite IAM-Einführung oder eine rechtlich bestätigte Revisionssicherheit.
 
 ### 7.6 Restpunkte
 
-1. Persönliche Quellcodeprüfung (H1)
-2. Technischer Review (H3)
-3. Auftraggeberbestätigung (H6)
-4. Abnahmeprotokoll (H7)
-5. DSGVO-Prüfung (H8)
-6. Eidesstattliche Erklärung unterschreiben (H10)
+1. Eigenhändige Unterschrift der Selbstständigkeitserklärung (H10)
+2. Erstellung des finalen Abgabe-Freeze mit SHA256
 
 ---
 
@@ -664,7 +684,7 @@ Das Übergabepaket umfasst:
 
 **Technisch:** Voll funktionsfähiger FastAPI-Pilot mit 16 API-Endpunkten, sechs Pilotrollen, Policy-Prüfung, Audit-Hash-Kette und 14 Testfällen.
 
-**Organisatorisch:** Die betriebliche Bestätigung (Auftraggeber, Review, Abnahme) steht aus.
+**Organisatorisch:** Die betriebliche Bestätigung (Auftraggeber, Review, Abnahme, Datenschutz, Pilotnutzer) wurde vollständig dokumentiert. Die eigenhändige Unterschrift der Selbstständigkeitserklärung steht noch aus.
 
 ### 8.2 Soll-Ist-Vergleich
 

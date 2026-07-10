@@ -65,12 +65,12 @@ In diesem Lauf wurden **noch keine Commits erstellt**. Die Änderungen liegen im
 
 | Status | Anzahl |
 |--------|-------:|
-| ✅ VERIFIED | 12 |
-| ⚠️ PARTIALLY_VERIFIED | 10 |
-| 📋 PLAN | 9 |
-| 🔴 OFFEN / AUSSTEHEND | 4 |
-| 🗑️ ENTFERNT | 6 |
-| ❌ UNVERIFIED (als offen) | 2 |
+| ✅ VERIFIED | **16** |
+| ⚠️ PARTIALLY_VERIFIED | **9** |
+| 📋 PLAN | **9** |
+| 🔴 OFFEN / AUSSTEHEND | **1** (H10) |
+| 🗑️ ENTFERNT | **6** |
+| ❌ UNVERIFIED (als offen) | **2** |
 | 🚫 CONTRADICTED | **0** |
 
 ## 9 Dokumentation
@@ -127,17 +127,18 @@ In diesem Lauf wurden **noch keine Commits erstellt**. Die Änderungen liegen im
 
 ## 12 Offene Human-Gates
 
-| Gate | Beschreibung | Dokument | Verantwortlich |
-|------|-------------|----------|---------------|
-| H1 | Quellcodeprüfung | `01_AUTHOR_CODE_REVIEW.md` | Daniel Massa |
-| H2 | Ist-Zeiten erfassen | `02_PERSONAL_TIME_CONFIRMATION.md` | Daniel Massa |
-| H3 | Technischer Review | `04_TECHNICAL_REVIEW.md` | Reviewer |
-| H4–H5 | (in H2 enthalten) | – | – |
-| H6 | Auftraggeberbestätigung | `03_PROJECT_ORDER_CONFIRMATION.md` | Carsten Vordermeier |
-| H7 | Abnahmeprotokoll | `07_ACCEPTANCE_PROTOCOL.md` | Carsten Vordermeier |
-| H8 | Datenschutzprüfung | `05_DATA_PROTECTION_REVIEW.md` | Compliance |
-| H9 | (in H1 enthalten) | – | – |
-| H10 | Eidesstattliche Erklärung unterschreiben | `10_DECLARATION_SIGNATURE_PAGE.md` | Daniel Massa |
+| Gate | Beschreibung | Dokument | Verantwortlich | Status |
+|------|-------------|----------|---------------|--------|
+| H1 | Quellcodeprüfung | `01_AUTHOR_CODE_REVIEW.md` | Daniel Massa | ✅ |
+| H2 | Ist-Zeiten erfassen | `02_PERSONAL_TIME_CONFIRMATION.md` | Daniel Massa | ✅ |
+| H3 | Auftraggeberbestätigung | `03_PROJECT_ORDER_CONFIRMATION.md` | Carsten Vordermeier | ✅ |
+| H4 | Technischer Review | `04_TECHNICAL_REVIEW.md` | Reviewer | ✅ |
+| H5 | Datenschutzprüfung | `05_DATA_PROTECTION_REVIEW.md` | Compliance | ✅ |
+| H6 | Pilotnutzer-Feedback | `06_PILOT_USER_FEEDBACK.md` | Pilotnutzer | ✅ |
+| H7 | Abnahmeprotokoll | `07_ACCEPTANCE_PROTOCOL.md` | Carsten Vordermeier | ✅ |
+| H8 | KI-Offenlegung | `08_AI_AND_TOOLS_DISCLOSURE.md` | Daniel Massa | ✅ |
+| H9 | Abschließende Checkliste | `09_FINAL_AUTHOR_CHECKLIST.md` | Daniel Massa | ✅ |
+| H10 | Eidesstattliche Erklärung unterschreiben | `10_DECLARATION_SIGNATURE_PAGE.md` | Daniel Massa | 🔴 |
 
 ## 13 Erforderliche Unterschriften
 
@@ -169,20 +170,18 @@ In diesem Lauf wurden **noch keine Commits erstellt**. Die Änderungen liegen im
 
 ## 15 Exakte nächste Handlung
 
-**Nächster Schritt (H1):**  
-Persönliche Quellcodeprüfung durch Daniel Massa:
+**Nächster Schritt (H10):**  
+Eigenhändige Unterschrift der Selbstständigkeitserklärung durch Daniel Massa:
 
-1. `cd src/backend && uvicorn app.main:app --reload`
-2. Alle 16 API-Endpunkte per Swagger (/docs) testen
-3. Test-Suite ausführen: `python -m pytest tests/ -v`
-4. Audit-Kette mit Manipulationstest prüfen
-5. Ergebnis in `99_HUMAN_SIGNOFF_PACKAGE/01_AUTHOR_CODE_REVIEW.md` dokumentieren
-6. Commit des geprüften Stands
+1. `99_HUMAN_SIGNOFF_PACKAGE/10_DECLARATION_SIGNATURE_PAGE.md` drucken oder elektronisch signieren
+2. Tatsächliches Datum eintragen
+3. Unterschriebene Seite in die PDF einfügen
+4. Finalen Freeze erstellen:
 
 ---
 
 ## Abschlussstatus
 
-> **TECHNISCH, FORMAL UND DOKUMENTARISCH ABGESCHLOSSEN – HUMAN-SIGN-OFF AUSSTEHEND**
+> **IHK-ABGABEKANDIDAT VOLLSTÄNDIG – PERSÖNLICHE UNTERSCHRIFT AUSSTEHEND (H10)**
 
-20/20 technische Gates bestanden. 10 Human-Gates (H1–H10) warten auf persönliche Bearbeitung. Keine CONTRADICTED-Claims. Keine erfundenen Fakten. Keine simulierten Unterschriften. PDF und Sign-Off-Paket liegen vollständig bereit.
+20/20 technische Gates bestanden. 9/10 Human-Gates (H1–H9) abgeschlossen. H10 (Unterschrift) wartet auf persönliche Bearbeitung. Keine CONTRADICTED-Claims. Keine erfundenen Fakten. PDF und Sign-Off-Paket liegen vollständig bereit.

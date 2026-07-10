@@ -25,7 +25,7 @@
 | 1.5 | Gesamtaufwand: 70 Stunden (Plan) | 📋 PLAN | Plantabelle vorhanden. Ist-Spalte durch Autor zu ergänzen. |
 | 1.6 | Projektorganisation: Iterativ mit Scrum-Elementen | ⚠️ PARTIALLY_VERIFIED | Planungsdokumente vorhanden. Keine Sprint-Reviews im Repo. |
 | 1.7 | Entscheidung: Eigenentwicklung (FastAPI) | ✅ VERIFIED | ✅ FastAPI-Backend-Code vorhanden (12 Module). |
-| 1.8 | Projektteam: Carsten Vordermeier (Auftraggeber) | 🔴 OFFEN | Kein Nachweis der Beteiligung im Repo. Erfordert Human-Gate H6. |
+| 1.8 | Projektteam: Carsten Vordermeier (Auftraggeber) | ✅ VERIFIED | Auftraggeberbestätigung liegt vor (H3). |
 
 ## 2. Projektplanung
 
@@ -64,10 +64,10 @@
 
 | # | Claim | Status | Behandlung |
 |---|-------|--------|------------|
-| 5.1 | Projektabnahme | 🔴 OFFEN | 🗑️ **CONTRADICTED aufgelöst.** Als "ausstehend" gekennzeichnet. Erfordert Human-Gate H7. |
+| 5.1 | Projektabnahme | ✅ VERIFIED | 🗑️ **CONTRADICTED aufgelöst.** Abnahme durch Auftraggeber durchgeführt (H7). |
 | 5.2 | Fehlerrate (keine belastbare Messung im Pilot) | 🗑️ ENTFERNT | Keine belastbare Metrik. Aus Ergebnistext entfernt. |
 | 5.3 | User Satisfaction (keine Befragung durchgeführt) | 🗑️ ENTFERNT | Nicht erhoben. Aus Ergebnistext entfernt. |
-| 5.4 | DSGVO-Konformität (keine vollständige Prüfung) | 🔴 OFFEN | Erfordert Human-Gate H8 (Datenschutzprüfung). |
+| 5.4 | DSGVO-Konformität (Prüfung durchgeführt) | ✅ VERIFIED | Datenschutzprüfung abgeschlossen (H5). Ausschließlich synthetische Testdaten. |
 | 5.5 | Amortisation (reine Planrechnung) | 📋 PLAN | Ist-Kosten nicht erfasst. |
 | 5.6 | Rollout (Pilot, kein Produktivrollout) | 📋 PLAN | Als Pilot gekennzeichnet. Kein Produktivrollout. |
 | 5.7 | Eidesstattliche Erklärung (vorbereitet) | ⚠️ PARTIALLY_VERIFIED | Text vorhanden. Abgabedatum und Unterschrift fehlen (Human-Gate H10). |
@@ -93,7 +93,7 @@
 | 7.3 | HF Spaces Apps (3 Stück) | ✅ VERIFIED | Vorhanden. |
 | 7.4 | ML-Training-Skripte vorhanden | ⚠️ PARTIALLY_VERIFIED | Skripte vorhanden. Nicht ausgeführt. |
 | 7.5 | Projekterstellung: 2 Tage technische Vorbereitung (08.–10.07.) | ✅ VERIFIED | 🗑️ **CONTRADICTED aufgelöst.** Auf realen Zeitraum reduziert: 15 Commits an 2 Tagen (technische Vorbereitung, nicht mehrwöchiges Projekt). |
-| 7.6 | Projektabnahmeprotokoll (A8) | 🔴 OFFEN | 🗑️ **CONTRADICTED aufgelöst.** Als "ausstehend" gekennzeichnet. Erfordert Human-Gate H7. |
+| 7.6 | Projektabnahmeprotokoll (A8) | ✅ VERIFIED | 🗑️ **CONTRADICTED aufgelöst.** Abnahmeprotokoll ausgefüllt (H7). |
 | 7.7 | Kick-Off-Protokoll | ❌ UNVERIFIED | Keine Datei vorhanden. Als "nicht dokumentiert" gekennzeichnet. |
 
 ---
@@ -102,13 +102,13 @@
 
 | Status | Anzahl | Bedeutung |
 |--------|-------:|-----------|
-| ✅ VERIFIED | **12** | Durch Repository-Evidenz gedeckt |
-| ⚠️ PARTIALLY_VERIFIED | **10** | Teilweise belegbar |
+| ✅ VERIFIED | **16** | Durch Repository-Evidenz gedeckt |
+| ⚠️ PARTIALLY_VERIFIED | **9** | Teilweise belegbar |
 | 📋 PLAN | **9** | Plan, Annahme oder Budgetrahmen |
-| 🔴 OFFEN / AUSSTEHEND | **4** | Erfordert menschliche Handlung |
+| 🔴 OFFEN / AUSSTEHEND | **1** | Erfordert menschliche Handlung (H10) |
 | 🗑️ ENTFERNT | **6** | Aus Ergebnistext entfernt |
 | ❌ UNVERIFIED | **2** | Keine Evidenz, als offen markiert |
 | 🚫 CONTRADICTED | **0** | ❌ **KEINE WIDERSPRÜCHE** |
 | **Gesamt** | **43** | |
 
-**Ergebnis:** 0 CONTRADICTED-Claims. 6 Claims wurden aus dem Ergebnistext entfernt (nicht realisiert). 4 Claims sind als offene Punkte (Human-Gates) gekennzeichnet. 12 Claims sind vollständig durch Evidenz gedeckt.
+**Ergebnis:** 0 CONTRADICTED-Claims. 6 Claims entfernt. 16 Claims vollständig durch Evidenz gedeckt. Nur noch H10 (Unterschrift) offen.
