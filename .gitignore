@@ -58,3 +58,9 @@ Thumbs.db
 /99_IHK_FINAL_EXPORT_20260709/
 /99_IHK_FINAL_EXPORT_20260710/
 /99_IHK_REBUILD_20260710_035023/
+
+# Quality gate build artifacts
+quality_gate/tmp/
+quality_gate/reports/
+quality_gate/rendered/
+quality_gate/freeze/
