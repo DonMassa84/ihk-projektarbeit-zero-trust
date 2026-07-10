@@ -18,7 +18,7 @@ Im Rahmen einer technischen Vorbereitung (08.–10.07.2026) wurde ein voll funkt
 - **Policy-gestützter Genehmigungsworkflow** mit Statusautomat (DRAFT → SUBMITTED → APPROVED/REJECTED → PROVISIONED/FAILED)
 - **SHA-256-Audit-Hash-Kette** mit Manipulationserkennung
 - **GitHub-Dry-Run-Provisionierung** (Simulation, keine produktive Änderung)
-- **14 automatisierte Testfälle**, vollständig bestanden
+- **12 automatisierte Testfälle**, vollständig bestanden
 - **CI/CD-Konfiguration** und **Security-Scans**
 
 Die Dokumentation beschreibt den realen Ist-Stand des Pilotprojekts. Sämtliche technischen und betrieblichen Prüfungen (H1–H9) wurden durchgeführt. Die eigenhändige Unterschrift der Selbstständigkeitserklärung (H10) steht noch aus.
@@ -63,7 +63,7 @@ Der Pilot umfasst ausschließlich:
 | 6 GitHub-Pilotrollen | Produktive GitHub-Migration |
 | Dry-Run-Provisionierung | Produktive Berechtigungssetzung |
 | SQLite-Entwicklungsdatenbank | Produktive PostgreSQL-Datenbank |
-| 14 automatisierte Testfälle | Vollständige Testabdeckung |
+| 12 automatisierte Testfälle | Vollständige Testabdeckung |
 | CI/CD-Konfiguration | Produktiver CI/CD-Betrieb |
 
 ### 1.6 Projektauftrag
