@@ -1,0 +1,104 @@
+# Review Configuration
+# IHK-PDF Quality Engine
+
+# PDF-Suche
+pdf_search:
+  preferred_names:
+    - "PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.pdf"
+    - "PROJEKTARBEIT_IHK_FINAL.pdf"
+  fallback_patterns:
+    - "Projektarbeit"
+    - "Zero"
+    - "Trust"
+    - "IHK"
+    - "FINAL"
+
+# Risiko-Check
+risk_check:
+  placeholder_patterns:
+    - "\\bTODO\\b"
+    - "\\bFIXME\\b"
+    - "\\bLorem\\b"
+    - "\\bPlatzhalter\\b"
+    - "\\bMustertext\\b"
+    - "\\bEntwurf\\b"
+    - "\\bdraft\\b"
+    - "\\bnoch einfügen\\b"
+    - "\\bXXX\\b"
+  
+  critical_patterns:
+    - "tatsächliche Projektbearbeitung"
+    - "nicht verifizierbar"
+    - "100\\s*%"
+    - "vollständig produktiv"
+    - "nachweislich"
+  
+  open_patterns:
+    - "☐"
+    - "Unterschrift\\s*[:\\.]?\\s*_{3,}"
+
+# Kapitelstruktur
+chapters:
+  required:
+    - "Projektinitiierung"
+    - "Planung"
+    - "Analyse/Konzeption"
+    - "Technischer Entwurf"
+    - "Umsetzung"
+    - "Test/Abnahme"
+    - "Dokumentation"
+    - "Projektabschluss"
+    - "Literatur"
+    - "Eidesstattliche Erklärung"
+
+# IHK/Bachelor Niveau
+niveau:
+  criteria:
+    - "Klare Ausgangssituation"
+    - "SMART-Ziele"
+    - "Stakeholderanalyse"
+    - "Make-or-Buy / Alternativen"
+    - "Wirtschaftlichkeit"
+    - "Risikoanalyse"
+    - "Datenschutz / rechtliche Risiken"
+    - "Qualitätssicherung"
+    - "Soll-Ist-Vergleich"
+    - "Abnahme"
+    - "Lessons Learned"
+
+# Gate-Definition
+gate:
+  green:
+    description: "Keine harten Risiken"
+    conditions:
+      - "no_placeholder_findings"
+      - "no_open_checkboxes"
+      - "no_open_signatures"
+      - "no_duplicate_toc"
+  
+  yellow:
+    description: "Formale Hinweise, manuell prüfen"
+    conditions:
+      - "has_warning_findings"
+      - "no_hard_risks"
+  
+  red:
+    description: "Platzhalter/offene Checkboxen/doppeltes IV/eidesstattliche Risikoaussage"
+    conditions:
+      - "has_hard_risks"
+
+# HF-Integration
+huggingface:
+  default_mode: "local"
+  modes:
+    local:
+      description: "Keine externe Verbindung"
+      use_transformers: false
+    hf_local:
+      description: "Lokale Transformers-Modelle"
+      use_transformers: true
+      model: "facebook/bart-large-cnn"
+    hf_api:
+      description: "Nur vorbereitet"
+      enabled: false
+      requires_confirmation: true

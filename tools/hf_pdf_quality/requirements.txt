@@ -1,0 +1,14 @@
+# IHK-PDF Quality Engine - Requirements
+
+# Minimal (immer installiert)
+# Python 3.8+ Standard Library
+
+# Optional - für erweiterte Features
+pyyaml>=6.0
+pypdf>=3.0
+rich>=12.0
+
+# Optional - Hugging Face (nicht zwingend)
+# transformers>=4.20
+# datasets>=2.0
+# huggingface_hub>=0.10
