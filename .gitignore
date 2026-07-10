@@ -71,3 +71,6 @@ reports/
 99_IHK_*
 99_ABGABE_*
 99_AUDIT_*
+
+reviews/
+*.db
