@@ -1,0 +1,77 @@
+=== IHK PDF Build 20260710_035023 ===
+Repository: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project
+Source:     /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/docs/projektdokumentation.md
+Script:     /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/build_formal_final.py
+Template:   /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/formal_template_final.tex
+
+=== 1/6 Validate Sources ===
+  All sources present.
+=== 2/6 Build PDF ===
+✓ Master MD: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_FINAL_EXPORT_20260710/PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.md (32530 chars)
+▶ Pass 1...
+▶ Pass 2...
+✓ PDF: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_FINAL_EXPORT_20260710/PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.pdf (1171 KB)
+
+=== FORMAL FINAL GATE ===
+  OK 'TODO': 0
+  OK 'TODO_REALDATEN': 0
+  OK 'PLATZHALTER': 0
+  OK '[Name': 0
+  OK 'offen': 0
+  OK 'ausstehend': 0
+  OK 'Testlauf ausstehend': 0
+  OK 'Erfolgreiche Tests 0': 0
+  OK 'B1:': 0
+  OK 'B2:': 0
+  OK 'B3:': 0
+  OK 'EIDESSTATTLICHE ERKL': 0
+  OK 'TODO_ABGABEDATUM_PRUEFEN': 0
+  OK 'hardcoded': 0
+  OK 'Name des betrieblichen Betreuers': 0
+  OK 'Name des IHK-Prüfers': 0
+  OK 'EINTRAGEN': 0
+  OK 'XXX': 0
+
+FINAL-GATE: GREEN
+
+✓ Reports written:
+  /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_reports/FORMAL_REBUILD_REPORT_20260710_035023.md
+  /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_reports/FORMAL_REBUILD_GATE_20260710_035023.txt
+  /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_reports/FORMAL_REBUILD_TEXTCHECK_20260710_035023.txt
+  /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_reports/FORMAL_REBUILD_PDFINFO_20260710_035023.txt
+
+✓ FINAL-GATE: GREEN
+✓ Final PDF: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_FINAL_EXPORT_20260710/PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.pdf
+  Built: 99_IHK_FINAL_EXPORT_20260710/PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.pdf
+=== 3/6 Copy to Output ===
+  Searchable: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_REBUILD_20260710_035023/PROJEKTARBEIT_ZERO_TRUST_SEARCHABLE.pdf
+=== 4/6 Validate PDF ===
+  --- pdfinfo ---
+  --- pdffonts ---
+  --- pdftotext ---
+  Text extrahiert: 5635 Wörter
+  --- qpdf check ---
+checking /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_REBUILD_20260710_035023/PROJEKTARBEIT_ZERO_TRUST_SEARCHABLE.pdf
+PDF Version: 1.5
+File is not encrypted
+File is not linearized
+No syntax or stream encoding errors found; the file may still contain
+  --- Unicode scan ---
+  Unicode check: CLEAN
+  --- Metadaten scan ---
+  Metadaten scan: CLEAN
+=== 5/6 Render Pages ===
+  32 pages rendered
+=== 6/6 Finalize ===
+
+=== BUILD COMPLETE ===
+Output: /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_REBUILD_20260710_035023
+SHA256: 24a68601ff2f83a2bcc27021f0b6bcde83a4b2a8c5f6bbdc9f1041bd2e1af34e
+Pages:  32
+Words:  5635
+
+Nächste Schritte:
+  1. Visuelle Prüfung der gerenderten Seiten in /media/schattenmacher/USB-STICK1/usb 07.11.25/zero-trust-github-project/99_IHK_REBUILD_20260710_035023/rendered
+  2. ggf. Flattened-Version erzeugen: mutool convert -o flatten.pdf searchable.pdf
+  3. Entscheidungsbericht ausfüllen
+  4. Kein Push ohne Freigabe

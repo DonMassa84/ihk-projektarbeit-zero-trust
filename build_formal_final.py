@@ -126,7 +126,7 @@ def strip_heading(text):
 
 # ── ARCH image replacement ──────────────────────────────────────
 _ARCH_IMG = (
-    "\n\n![Abbildung 8: Zielarchitektur Zero Trust](images/abb02_zielarchitektur.png){ width=0.55\\textwidth }\n\n"
+    "\n\n![Zielarchitektur Zero Trust](images/abb02_zielarchitektur.png){ width=0.55\\textwidth }\n\n"
     "*Abbildung 8: Zielarchitektur Zero Trust*\n"
 )
 
@@ -157,7 +157,9 @@ def strip_code_comments(text):
     return re.sub(r'```(\w*)\n(.*?)```', _repl, text, flags=re.DOTALL)
 
 def fig_md(fname, caption):
-    return (f"\n\n![{caption}](images/{fname}){{ width=0.55\\textwidth }}\n\n"
+    # Remove "Abbildung X:" prefix from alt text (LaTeX auto-numbers via \figurename)
+    alt = re.sub(r'^Abbildung \d+:\s*', '', caption)
+    return (f"\n\n![{alt}](images/{fname}){{ width=0.55\\textwidth }}\n\n"
             f"*{caption}*\n")
 
 # ── 1. Initiierung ──────────────────────────────────────────────
@@ -673,6 +675,10 @@ full_md = (
     + "\n\n" + eid_md
     + "\n\n\\newpage\n"
 )
+
+# Unicode-Ersatz für Zeichen, die nicht in allen PDF-Viewern korrekt dargestellt werden
+full_md = full_md.replace('\u2192', '-->')  # Pfeil rechts
+full_md = full_md.replace('\u2194', '<->')  # Pfeil links-rechts
 
 md_path = os.path.join(EXPORT, "PROJEKTARBEIT_ZERO_TRUST_FORMAL_FINAL.md")
 with open(md_path, "w", encoding="utf-8") as f:

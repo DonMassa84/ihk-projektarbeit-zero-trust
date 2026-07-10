@@ -1,0 +1,6 @@
+name                                 type              encoding         emb sub uni object ID
+------------------------------------ ----------------- ---------------- --- --- --- ---------
+ASGUKI+NotoSans-ExtraBold            CID TrueType      Identity-H       yes yes yes      4  0
+TXFPXK+NotoSans-Regular              CID TrueType      Identity-H       yes yes yes      6  0
+OEYIHF+NotoSans-Italic               CID TrueType      Identity-H       yes yes yes    101  0
+LYIFVN+NotoSansMono-Regular          CID TrueType      Identity-H       yes yes yes    130  0

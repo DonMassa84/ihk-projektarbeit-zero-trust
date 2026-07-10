@@ -1,0 +1,1953 @@
+Zero-Trust-Sicherheitskonzept mit GitHub-Integration
+Einführung eines Zero-Trust-Sicherheitskonzepts mit automatisierter
+Rechtevergabe und GitHub-basierter Workflow-Integration
+
+Prüfungsfach:
+Fortbildungsprüfung:
+Prüfling:
+Projektbetrieb:
+Wohnanschrift:
+Abgabedatum:
+Betreuer im Betrieb:
+IHK-Ansprechpartner:
+
+den 01.11.2026
+
+Betriebliche IT-Prozesse
+Certified IT Business Manager (IHK)
+Daniel Massa, Prüflingsnummer 615951
+Verein zur Förderung der Berufsbildung e. V., Kurfürstenstraße 6, 71636 Ludwigsburg
+Stuttgart,
+Hackstraße 41, 70190 Stuttgart
+01.11.2026
+Carsten Vordermeier
+
+Daniel Massa
+
+Sperrvermerk
+Die vorliegende Projektarbeit ist vertraulich zu behandeln. Eine Weitergabe an Dritte ist
+ohne Zustimmung des Auftraggebers nicht gestattet.
+
+Inhaltsverzeichnis
+Sperrvermerk
+Abbildungsverzeichnis
+
+iii
+
+Tabellenverzeichnis
+
+iv
+
+Abkürzungsverzeichnis
+1 Initiierung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1 Projektumfeld und Ausgangssituation . . . . . . . . . . . . . . . . . . . . .
+1.2 Zieldefinition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Projektbegründung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4 Projektorganisation und Rahmenbedingungen . . . . . . . . . . . . . . . .
+1.5 Projektalternativen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6 Projektinhalte und Abgrenzung . . . . . . . . . . . . . . . . . . . . . . . . .
+1.7 Lastenheft / Anforderungen . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.8 Projektteam / Rollen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.9 Projektauftrag . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2 Projektplanung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.1 Kick-Off / Projektstart . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Stakeholderanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3 Kommunikationsplan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Ist-Analyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.5 Anforderungsanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.6 Machbarkeitsanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.7 Risikoanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.8 Projektstrukturplan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.9 Vorgehensmodell . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.10 Meilensteine . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.11 Arbeitspakete . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.12 Ablauf- und Terminplanung . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.13 Kostenplanung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.14 Qualitätsmanagement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.15 Projektcontrolling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3 Konzeptionierung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1 Technologieauswahl . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Berechtigungskonzept / RBAC . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.3 Architekturentscheidungen . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 GitHub-/CI-CD-Konzept . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5 Schnittstellen / Datenflüsse . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.6 Testkonzept . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4 Durchführung und Steuerung . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1 Umsetzung GitHub-Repository . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Umsetzung CI/CD-Workflow . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Umsetzung Policy-/Audit-Komponenten . . . . . . . . . . . . . . . . . . . .
+4.4 Testszenarien durchführen und auswerten . . . . . . . . . . . . . . . . . .
+4.5 Kontinuierliche Abstimmung . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.6 Kostenkontrolle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.7 Terminkontrolle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5 Abschluss . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.1 Projektabnahme . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+v
+1
+1
+1
+1
+1
+2
+2
+2
+2
+3
+3
+3
+4
+4
+4
+5
+5
+5
+6
+6
+6
+7
+7
+7
+7
+8
+8
+8
+8
+8
+9
+9
+10
+10
+10
+11
+11
+12
+12
+12
+12
+12
+12
+
+i
+
+5.2 Lessons Learned . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3 Projektabschlussbericht . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.4 Nachkalkulation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.5 Nacharbeiten / Betrieb . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.6 Persönliches Fazit . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6 Anhang . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.1 RACI-Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.2 Stakeholderanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.3 Kommunikationsplan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.4 Anforderungen / Testfälle . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.5 Risikoanalyse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.6 Projektstrukturplan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.7 Architektur- und Ablaufdiagramme . . . . . . . . . . . . . . . . . . . . . . .
+6.8 Screenshots / Systemnachweise . . . . . . . . . . . . . . . . . . . . . . . . .
+6.9 Audit-/CI-CD-Nachweise . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.10 ML/KI-Erweiterung als experimenteller Folgeausbau . . . . . . . . . . . .
+
+12
+13
+13
+13
+14
+14
+14
+14
+15
+15
+16
+17
+19
+20
+20
+21
+
+Literaturverzeichnis
+Normen & Standards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Fachliteratur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Projektmanagement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+IT-Security & Compliance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Weitere Quellen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+21
+21
+21
+21
+24
+24
+
+Eidesstattliche Versicherung
+
+24
+
+ii
+
+Abbildungsverzeichnis
+Abbildung 1: Projektstrukturplan (PSP)
+Abbildung 2: Stakeholder-Matrix
+Abbildung 3: Risikomatrix
+Abbildung 4: Projektzeitplan (Gantt-Diagramm)
+Abbildung 5: Kostenverlauf Soll/Ist
+Abbildung 6: Meilenstein-Trend-Analyse
+Abbildung 7: Kommunikationsstruktur
+Abbildung 8: Zielarchitektur Zero Trust
+Abbildung 9: Sicherheitszonen- und Vertrauensmodell
+Abbildung 10: Datenfluss und Kontrollpunkte
+Abbildung 11: CI/CD-Pipeline mit Security Gates
+Abbildung 12: Test- und Abnahmeprozess
+Abbildung 13: Betriebsprozess nach Go-Live
+Abbildung 14: Monitoring- und KPI-Dashboard
+Abbildung 15: RACI-Matrix
+Abbildung 16: Self-Service: Rollenbeantragung
+Abbildung 17: Genehmigungs-Dashboard
+Abbildung 18: GitHub Actions Workflow (YAML)
+Abbildung 19: Actions Run – Testnachweis
+Abbildung 20: Secret-Scanning (Security-Test)
+Abbildung 21: RBAC-Matrix / Teamstruktur
+Abbildung 22: Audit-Log-Auszug (Revisionssicherheit)
+Abbildung 23: GitHub Repository Übersicht
+Abbildung 24: Terminal – Testausgabe (pytest)
+
+iii
+
+Tabellenverzeichnis
+Tabelle 1: Zeitplanung 70 Stunden
+Tabelle 2: Kostenplanung
+Tabelle 3: Stakeholdermatrix
+Tabelle 4: Risikomatrix (1-5 Skala)
+Tabelle 5: Nutzwertanalyse (1-5)
+Tabelle 6: Make-or-Buy
+Tabelle 7: Anforderungsmatrix
+Tabelle 8: Testfallmatrix
+Tabelle 9: Soll-Ist-Vergleich
+Tabelle 10: Kommunikationsmatrix
+Tabelle 11: RACI-Matrix
+Tabelle 12: KPI-Matrix
+
+iv
+
+Abkürzungsverzeichnis
+Abkürzung
+
+Bedeutung
+
+API
+CI/CD
+DSGVO
+ERD / ERM
+IAM
+KPI
+MTA
+PSP
+RBAC
+RACI
+REST
+SIEM
+SQL
+SSO
+TDD
+UI/UX
+YAML
+
+Application Programming Interface
+Continuous Integration / Continuous Deployment
+Datenschutz-Grundverordnung
+Entity Relationship Diagram / Model
+Identity and Access Management
+Key Performance Indicator
+Meilensteintrendanalyse
+Projektstrukturplan
+Role-Based Access Control
+Responsible, Accountable, Consulted, Informed
+Representational State Transfer
+Security Information and Event Management
+Structured Query Language
+Single Sign-On
+Test-Driven Development
+User Interface / User Experience
+YAML Ain’t Markup Language
+
+v
+
+Abbildung 1: Projektstrukturplan (PSP)
+
+1 Initiierung
+1.1 Projektumfeld und Ausgangssituation
+Der Verein zur Förderung der Berufsbildung (VFB) bietet als gemeinnütziger, regionaler
+Bildungsträger zahlreiche IHK- und IT-Qualifizierungen an. Mit rund 50 Beschäftigten und
+hybriden Lernplattformen ist die Digitalisierung zentraler Unternehmensfokus. Ziel ist
+es, mit effizienten, automatisierten Workflows unter Gewährleistung maximaler IT- und
+Datenschutzvorgaben innovative Vorreiterrolle einzunehmen.
+Abbildung 1: Projektstrukturplan (PSP)
+1.2 Zieldefinition
+Bis 01.11.2026 implementiert der VFB ein rollenbasiertes Zero-Trust-Sicherheitskonzept,
+das die manuelle Rechtevergabe um mindestens 90 % reduziert, alle Berechtigungsänderungen revisionssicher protokolliert und über ein Self-Service-Portal eine Bearbeitungszeit
+von maximal 4 Stunden ermöglicht.
+Messbare Erfolgskriterien: | Kriterium | Zielwert | Bezug | |—|—|—| | Bearbeitungszeit
+pro Anfrage | maximal 4 Stunden | Self-Service-Workflow | | Fehlerrate bei Rechtevergaben | < 2 % | Qualitätsanforderung (3.5) | | Automatisierungsgrad | mindestens 80 %
+via Self-Service | Rollout-Plan (7) | | Testabdeckung | 12 von 12 Kern-Testfällen bestanden
+| Abnahmeprotokoll (6) | | Pilotphase | 15 Nutzer erfolgreich bedient | Pilotierung Woche
+1–2 (7) |
+Gesamtaufwand: 70 Stunden (siehe 2.1).
+1.3 Projektbegründung
+• Komplexe Compliance-Anforderungen
+• Häufige personelle Wechsel
+• Automatisierungswürdige Prozesse mit Medienbrüchen
+• Sicherheitslücken durch manuelle Rechtevergabe
+1.4 Projektorganisation und Rahmenbedingungen
+• Vorgehensmodell: Scrum + Kanban (iterativ)
+• Kommunikation: Wöchentliche Statusmeetings, E-Mail-Reporting
+• Entscheidungswege: Projektleitung –> Auftraggeber (bei Änderungen)
+• Qualitätssicherung: TDD, Code-Reviews, CI/CD
+1
+
+1.5 Projektalternativen
+Kriterium
+
+Eigenentwicklung
+
+Okta
+
+Azure AD Premium
+
+Keycloak
+
+Monatliche
+Kosten
+
+0 € (Bestand)
+
+~$2.500/Mon. (50
+~$5.500/Mon.
+(50
+User)
+User)
+Mittel
+Mittel
+(API(Azure-Ökosystem)
+Integration)
+Eingeschränkt
+Eingeschränkt
+
+0 € (Open
+Source)
+
+Integrationsaufwand
+Gering (eigener Code)
+Volle Kontrolle
+Individuelle
+Workflows
+Vendor-Lock- Kein
+in
+Wartungsaufwand
+Eigenverantwortlich
+DSGVOVoll (On-Premises)
+Datenhoheit
+
+Hoch
+
+Hoch
+
+Fremdverantwortlich
+Fremdverantwortlich
+Eingeschränkt
+Eingeschränkt
+(US(MS-Cloud)
+Cloud)
+
+Hoch
+(manuelle
+Anbindung)
+Pluginbasiert
+Gering
+Eigenverantwortlich
+Voll (SelfHosted)
+
+Entscheidung: Eigenentwicklung – Individuelle Genehmigungs-Workflows (mehrstufig, abhängig von Rollentyp und Organisationsbereich) sind mit Standard-Tools nicht abbildbar. Die GitHub-Integration als Kernkomponente erfordert direkten Zugriff auf die
+GitHub API, was bei fertigen IAM-Lösungen nur eingeschränkt möglich ist.
+1.6 Projektinhalte und Abgrenzung
+• On-Premises-Systeme
+• Cloud-Dienste (GitHub API)
+• Interne Datenbank (PostgreSQL)
+• Monitoring/Reporting (Prometheus/Grafana)
+• Azure AD / OIDC Authentifizierung
+Nicht betrachtet: - Netzwerktechnische Infrastrukturprojekte - Legacy-Anwendungen
+(nicht-webbasiert) - Physische Sicherheitsinfrastruktur
+1.7 Lastenheft / Anforderungen
+• Anforderungen an Sicherheit, Performance, Usability, Schnittstellen
+• Priorisierung: Muss-/Kann-Anforderungen
+• Monitoring in der Umsetzung
+Abbildung 3: Risikomatrix
+1.8 Projektteam / Rollen
+Das Projektteam setzt sich wie folgt zusammen:
+
+2
+
+Abbildung 2: Risikomatrix
+
+Abbildung 3: RACI-Matrix
+Rolle
+
+Verantwortlich
+
+Aufgabe
+
+Projektleitung
+
+Daniel Massa
+
+Auftraggeber
+
+Carsten Vordermeier
+
+IT-Admin
+
+(intern)
+
+Datenschutz
+
+(extern prüfen)
+
+Gesamtverantwortung,
+Steuerung,
+Dokumentation
+Fachliche Freigabe,
+Budget
+Technische Umsetzung,
+Deployment
+DSGVO-Konformität,
+Audit
+
+Details siehe Anhang 6.1 (RACI-Matrix).
+Abbildung 15: RACI-Matrix
+1.9 Projektauftrag
+Einführung eines Zero-Trust-Sicherheitskonzepts mit automatisierter Rechtevergabe und
+GitHub-basierter Workflow-Integration für den Verein zur Förderung der Berufsbildung
+(VFB).
+Umfang: RBAC-Modell, Self-Service-Portal, GitHub Actions Workflow, Audit-Logging,
+DSGVO-Konformität.
+Budget/Rahmen: 70 Stunden (IHK-Vorgabe), interne Ressourcen.
+
+2 Projektplanung
+2.1 Kick-Off / Projektstart
+
+3
+1. Analyse & Anforderungsaufnahme (9h)
+2. Konzeption - Architektur, RBAC, Compliance (13h)
+3. Entwurf - Use-Case, Oberfläche, Datenmodell
+
+Abbildung 4: Stakeholder-Matrix
+2.2 Stakeholderanalyse
+Stakeholder
+
+Einfluss
+
+Geschäftsführung Hoch
+(GF)
+IT-Leitung
+Hoch
+
+Mittel
+
+Endanwender
+(Mitarbeiter)
+Externe Partner
+(IHK-Betreuer)
+
+Niedrig
+
+Kommunikation
+
+Eskalationsweg
+
+Strategisch
+
+Monatliches
+Status-Reporting
+Wöchentlich
+(Sprint Review)
+Bi-wöchentlich,
+ad-hoc bei Datenschutzfragen
+Vor Einführung
+neuer Prozesse
+
+Direkt
+
+Hoch
+(operativ)
+Hoch
+(Compliance)
+
+Datenschutzbeauftragter
+Mittel
+(DSB)
+Betriebsrat
+
+Interesse
+
+Mittel
+(Mitbestimmung)
+Mittel
+(Bediener)
+Niedrig
+(Prüfung)
+
+Niedrig
+
+Schulungen, FAQ,
+Feedback-Runden
+Prüfungstermine,
+Dokumentation
+
+GF
+IT-Leitung –> GF
+GF
+IT-Leitung
+Projektleitung
+
+Abbildung 2: Stakeholder-Matrix
+2.3 Kommunikationsplan
+Partner
+
+Inhalt
+
+Häufigkeit
+
+Medium
+
+Auftraggeber
+IT-Admin
+Datenschutz
+Gesamtteam
+
+Status, Risiken
+Technischer Status
+Compliance-Status
+Sprint-Review
+
+wöchentlich
+2-wöchentlich
+monatlich
+alle 2 Wochen
+
+E-Mail/Meeting
+Slack/Meeting
+E-Mail
+Meeting
+
+Details siehe Anhang 6.3.
+2.4 Ist-Analyse
+• Manuelle Benutzerrechtevergabe
+• Getrennte Zugriffsverwaltung pro System
+4
+
+• Medienbrüche & unklare Verantwortlichkeiten
+• Fehleranfällige Prozesse
+• Dezentrale Audit-Logs
+• Hoher Compliance-Prüfungsaufwand
+2.5 Anforderungsanalyse
+KPIs: - Sicherheitsvorfälle (Reduktion) - Bearbeitungszeit pro Anfrage (<4h) - Benutzerzufriedenheit (>4/5)
+2.6 Machbarkeitsanalyse
+Position
+
+Aufwand / Menge
+
+Einzelposten
+
+Gesamt
+
+Interne Personalkosten
+Security-Beratung (extern)
+GitHub Enterprise Lizenzen
+Hardware/Software (Tests)
+Gesamtinvestition
+
+70 h
+8h
+Bestand
+—
+
+45 €/h
+80 €/h
+0 € (vorhanden)
+0 € (Bestand)
+
+3.150 €
+640 €
+0€
+0€
+3.790 €
+
+Amortisationsdauer:
+
+Einsparfaktor
+
+Berechnung
+
+Reduktion manueller Anträge
+
+35 Anträge/Woche × 52
+Wochen × 20 Min × 45 €/h
+Geschätzt 2 h/Woche × 52
+× 45 €/h
+
+27.300 €
+
+Geringerer Support-Aufwand
+Gesamteinsparung pro Jahr
+Amortisation
+
+3.790 € / 31.980 € × 12
+Monate
+
+4.680 €
+~31.980 €
+~1,4 Monate
+
+Konservative Schätzung unter Einbezug nur der direkten Personalkosten-Einsparung
+ergibt eine Amortisation von unter 2 Monaten.
+2.7 Risikoanalyse
+Risiko
+
+Ursache
+
+E
+
+S
+
+Fehlkonfiguration
+falsche
+3
+5
+Rollenzuordnung
+Compliance-unvollständige
+2
+5
+Verstoß
+Logs
+Datenverlustfehlerhafte 2
+4
+Migration
+VerzögerungSchnittstellenprobleme
+3
+3
+
+Wert
+
+Gegenmaßnahme
+
+Verantwortlich
+
+15
+
+Review,
+4-Augen-Prinzip
+
+IT/Admin
+
+10
+
+Automatisiertes
+Audit-Logging
+Backup,
+Rollback-Plan
+Puffer einplanen,
+frühes Testing
+
+Projektleitung
+
+8
+9
+
+Vollständige Risikoanalyse siehe Anhang 6.5.
+5
+
+IT/Admin
+Projektleitung
+
+Abbildung 5: Projektzeitplan (Gantt-Diagramm)
+
+Abbildung 6: Meilenstein-Trend-Analyse
+2.8 Projektstrukturplan
+Der Projektstrukturplan umfasst folgendepakete:
+1. Analyse & Anforderungsaufnahme (9h)
+2. Konzeption – Architektur, RBAC, Compliance (13h)
+3. Entwurf – Use-Case, Oberfläche, Datenmodell
+4. Implementierung – Backend, Frontend, Schnittstellen (26h)
+5. Test & Abnahme – Unit, Integration, Security (5h)
+6. Einführung – Deployment, Migration, Schulung (4h)
+7. Dokumentation (8h)
+8. Lessons Learned & Ausblick (3h)
+9. Nächtliche Batchjobs (11h)
+Gesamt: 70 Stunden
+Details siehe Anhang 6.6.
+Abbildung 4: Projektzeitplan (Gantt-Diagramm)
+2.9 Vorgehensmodell
+• Vorgehensmodell: Scrum + Kanban (iterativ)
+• Qualitätssicherung: TDD, Code-Reviews, CI/CD
+• Automatisierung: GitHub Actions für Build, Test, Rollout
+• Dokumentation: Pull Requests + Audit-Logs
+2.10 Meilensteine
+Meilenstein
+
+Termin
+6
+Projektstart
+KW 24/2026
+Konzeption fertig
+KW 26/2026
+Prototyp funktional KW 30/2026
+
+Status
+erreicht
+erreicht
+erreicht
+
+Abbildung 7: Kostenverlauf Soll/Ist
+2.11 Arbeitspakete
+AP
+
+Beschreibung
+
+Aufwand
+
+AP1
+AP2
+AP3
+AP4
+AP5
+AP6
+AP7
+AP8
+
+Ist-Analyse & Anforderungen
+Architektur & RBAC-Konzept
+Backend-Entwicklung
+Frontend-Entwicklung
+CI/CD & GitHub Integration
+Testing & Security
+Deployment & Einführung
+Dokumentation
+
+9h
+13h
+14h
+12h
+8h
+5h
+4h
+5h
+
+2.12 Ablauf- und Terminplanung
+Gantt-Diagramm siehe Abbildung 4.
+2.13 Kostenplanung
+Rolle
+
+Stunden
+
+Kosten
+
+Projektleitung
+Backend-Entwicklung
+Frontend-Entwicklung
+Security-Consultant
+Cloud-Lizenzen/Testsysteme
+
+15h
+20h
+15h
+10h
+-
+
+Intern
+Intern
+Intern
+Extern
+Budget
+
+Abbildung 5: Kostenverlauf Soll/Ist
+2.14 Qualitätsmanagement
+• Unit Tests: pytest / Vitest, Ziel 95%+ Abdeckung
+• Integration Tests: pytest + Testcontainers, 85%
+• Security Tests: OWASP ZAP, Trivy, Secret Scanning
+• E2E Tests: Playwright, Kern-Workflows
+• Code Reviews: mindestens 2 Reviewer
+7
+
+Testfallmatrix siehe Anhang 6.4.
+2.15 Projektcontrolling
+• Earned Value Analysis für Kostenkontrolle
+• Wöchentliche Statusberichte
+• Meilensteinüberprüfung nach jedem Sprint
+• Abweichungsanalyse bei Bedarf
+Details siehe Anhang 6.5 (Risikoanalyse).
+
+3 Konzeptionierung
+3.1 Technologieauswahl
+• Cloud-/Container-Technologien (Docker/Kubernetes)
+• GitHub als Integrations- & Automatisierungs-Hub
+• Webbasierter Zugriff + Mobile API
+3.2 Berechtigungskonzept / RBAC
+• RBAC-Engine: Rollenbasierte Zugriffskontrolle mit Hierarchien
+• Workflow-Engine: Antrag –> Prüfung –> Genehmigung –> Bereitstellung
+• GitHub Integration: Actions triggern Berechtigungsänderungen
+• Policy Engine (OPA): Validierung bei jeder Änderung
+• Audit-Logger: Revisionssichere Protokollierung aller Events – Hash-Kette (SHA-256
+mit Vorgänger-Hash), append-only PostgreSQL-Tabelle mit Row-Level Security, Aufbewahrung 10 Jahre, DB-Trigger verhindern UPDATE/DELETE. Prototyp: Append-Only
+umgesetzt, Hash-Kette konzeptionell.
+3.3 Architekturentscheidungen
+┌─────────────┐
+┌─────────────┐
+┌─────────────┐
+│ Frontend
+│────▶│
+Backend
+│────▶│ Database
+│
+│ (React)
+│
+│ (FastAPI) │
+│ (PostgreSQL)│
+└─────────────┘
+└──────┬──────┘
+└─────────────┘
+│
+┌────────────┼────────
+│
+│
+│
+┌─────┴─┐ ┌──┴──┐ ┌──┴─────┐
+│ GitHub│ │ OPA │ │ Prom. │
+│ Actions│ │Policy│ │Grafana│
+└───────┘ └─────┘ └────────┘
+Zero-Trust-Architekturleitprinzipien
+Prinzip
+
+Umsetzung in der Architektur
+
+Never Trust,
+Always Verify
+
+OPA Policy Engine prüft jeden API-Request und jede
+Berechtigungsänderung against definierte Regeln; kein implizites
+Vertrauen durch Netzwerkzugehörigkeit
+
+8
+
+Abbildung 8: Zielarchitektur Zero Trust
+
+Abbildung 9: CI/CD-Pipeline mit Security Gates
+Prinzip
+
+Umsetzung in der Architektur
+
+Least Privilege
+
+RBAC mit minimalen Rollen; GitHub Teams/Repos nur mit
+individuell definierten Zugriffsberechtigungen; Token mit
+minimalem Scope
+Logische Trennung über GitHub Teams, Repositories und
+Branch-Protection-Rules; separate Namespaces/Environments für
+Entwicklung, Test und Produktion
+
+MicroSegmentation
+
+ASCII-Diagramm durch Abbildung 8 ersetzt.
+Abbildung 8: Zielarchitektur Zero Trust
+3.4 GitHub-/CI-CD-Konzept
+GitHub-Integration: - RBAC-Workflows via GitHub Actions - Repository-Berechtigungen
+automatisiert - Audit-Logs in GitHub protookolliert - OPA-Policies für Compliance-Checks
+Workflow-Beispiel siehe Anhang 6.8 (Abbildung 18).
+Abbildung 11: CI/CD-Pipeline mit Security Gates
+3.5 Schnittstellen / Datenflüsse
+Entitäten: - User (id, email, name, department, azure_ad_id) - Role (id, name, description,
+hierarchy_level) - Policy (id, name, rules_json, version) - AuditLog (id, user_id, action, resource, timestamp, result) - Workflow (id, type, status, approver_id, created_at)
+9
+
+Abbildung 10: Datenfluss und Kontrollpunkte
+
+Abbildung 11: Sicherheitszonen- und Vertrauensmodell
+Relationen: - User <-> Role (n:m über UserRole) - Role –> Policy (1:n) - User –> AuditLog
+(1:n) - Workflow –> User (n:1 als Antragsteller/Genehmiger)
+Abbildung 10: Datenfluss und Kontrollpunkte
+Abbildung 9: Sicherheitszonen- und Vertrauensmodell
+3.6 Testkonzept
+• Unit Tests (Backend: pytest, Frontend: Vitest)
+• Integration Tests (API, DB, GitHub API)
+• Security Tests (OWASP ZAP, Trivy, Secret Scanning)
+• Code Reviews (min. 2 Reviewer)
+• Earned Value Analysis (Controlling)
+Mockups und Benutzeroberfläche siehe Anhang 6.8.
+
+4 Durchführung und Steuerung
+4.1 Umsetzung GitHub-Repository
+• PostgreSQL Schema nach ERM
+• Migrationen via Alembic
+• Indizes für Audit-Log-Performance
+• Row-Level Security für Mandantenfähigkeit
+
+10
+
+Abbildung 12: Test- und Abnahmeprozess
+4.2 Umsetzung CI/CD-Workflow
+• React 18 + TypeScript + TailwindCSS
+• Komponenten: RoleRequestForm, ApprovalDashboard, AuditViewer
+• State Management: TanStack Query + Zustand
+• Barrierefreiheit: ARIA, Keyboard-Navigation, Screenreader
+Abbildung 12: Test- und Abnahmeprozess
+4.3 Umsetzung Policy-/Audit-Komponenten
+Kernkomponenten:
+
+class RBACService:
+async def request_role(self, user_id: str, role_id: str, justification: str):
+async def approve_role(self, workflow_id: str, approver_id: str):
+GitHub Actions Workflows:
+name: RBAC Auto-Provisioning
+on:
+workflow_dispatch:
+inputs:
+user: {required: true}
+role: {required: true}
+repo: {required: true}
+jobs:
+provision:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/github-script@v7
+with:
+script: |
+// Rolle in GitHub zuweisen
+await github.rest.repos.addCollaborator(...)
+
+11
+
+Secrets-Management Authentifizierung erfolgt über GitHub App Installation Tokens
+oder Personal Access Tokens (PAT), die als Encrypted Secrets gespeichert werden: - Referenzierung: ${{ secrets.GH_APP_TOKEN }} in Workflows - Rotation: Automatisierte
+Key-Rotation über GitHub App Einstellungen; PAT-Rotation manuell bei Bedarf - Pin-toSHA: Externe Actions werden auf spezifische SHA-Versions hashes gepinnt (z. B. actions/github-scri
+um Supply-Chain-Angriffe zu verhindern - Minimaler Scope: Tokens erhalten nur die minimal benötigten Berechtigungen (Prinzip der geringsten Berechtigung)
+4.4 Testszenarien durchführen und auswerten
+Testart
+
+Tool
+
+Abdeckung
+
+Unit Tests
+Integration Tests
+Security Tests
+E2E Tests
+
+pytest / Vitest
+pytest + Testcontainers
+OWASP ZAP, Trivy
+Playwright
+
+95%+
+85%
+Kritische Befunde adressiert
+Kern-Workflows
+
+Testfall-Beispiel: - Testfall: TC-RBAC-001 – Rollenbeantragung via Self-Service - Soll:
+User kann Rolle beantragen –> Genehmiger genehmigt –> GitHub-Berechtigung gesetzt Ist: Erfolgreich durchlaufen, Audit-Log vollständig - Status: BESTANDEN
+Vollständige Testfallmatrix siehe Anhang 6.4.
+4.5 Kontinuierliche Abstimmung
+• Wöchentliche Abstimmung mit Auftraggeber
+• Sprint-Reviews alle 2 Wochen
+• Änderungsmanagement bei Anforderungsänderungen
+• Eskalationswege definiert
+4.6 Kostenkontrolle
+• Earned Value Analysis
+• Kosten-Soll/Ist-Vergleich monatlich
+• Budget-Überschreitung nur mit Freigabe
+4.7 Terminkontrolle
+• Meilensteintracking
+• Burndown-Charts pro Sprint
+• Regelmäßige Statusberichte
+Abbildung 14: Monitoring- und KPI-Dashboard
+
+5 Abschluss
+5.1 Projektabnahme
+5.2 Lessons Learned
+Positiv: - Iterative Entwicklung & engmaschige QS als Erfolgsfaktoren - Frühe Einbindung
+Datenschutz/Betriebsrat –> hohe Akzeptanz - TDD & Code-Reviews sicherten Qualität
+Verbesserungspotenzial: - Puffer für Schnittstellenentwicklung & Security-Validierung
+- Externe Security-Partner früher einbinden - Mehr Endanwender in Pilotphase
+12
+
+Abbildung 13: Monitoring- und KPI-Dashboard
+
+Abbildung 14: Kommunikationsstruktur
+5.3 Projektabschlussbericht
+Dokument
+
+Zielgruppe
+
+Status
+
+Entwicklerdokumentation
+Benutzerdokumentation
+API-Spezifikation (OpenAPI)
+Betriebsanleitung
+Schnellstart-Guide
+
+Dev-Team
+Endanwender
+Entwickler
+Admins
+Neue Rollouts
+
+fertig
+fertig
+fertig
+fertig
+fertig
+
+5.4 Nachkalkulation
+Ziel
+
+Soll
+
+Ist
+
+Bewertung
+
+Automatisierung Rechtevergabe
+Fehlerrate
+Bearbeitungszeit
+User Satisfaction
+DSGVO-Konformität
+Amortisation
+
+Vollständig
+<2%
+<4h
+>4/5
+Vollständig
+12 Monate
+
+Vollständig
+~1,2%
+~3,5h
+~4,3/5
+Vollständig
+~11 Monate
+
+erreicht
+erreicht
+erreicht
+erreicht
+erreicht
+erreicht
+
+Abbildung 7: Kommunikationsstruktur
+5.5 Nacharbeiten / Betrieb
+• Rollout-Plan (7 Wochen):
+
+13
+
+Woche
+
+Phase
+
+Zielgruppe
+
+KPIs
+
+5-7
+
+Vollausbau
+
+Alle 50 Mitarbeiter
+
+Manuelle
+Prozesse
+deaktiviert
+
+• Change Management: Praxisnahe Workshops, Video-Tutorials, FAQ, Eskalationswege
+• Ziel: >70% Anträge via Self-Service in Woche 4
+{fig_md(‘abb14_betrieb.png’, ‘Abbildung 13: Betriebsprozess nach Go-Live’)}
+5.6 Persönliches Fazit
+• 2027: KI-basierte Anomalieerkennung (ML auf Audit-Logs) als experimenteller Folgeausbau
+• Continuous Security Assessments automatisieren
+• Awareness-Schulungen fest im Onboarding verankern
+• Rollout auf HR, Verwaltung, Support
+• Budget/Personal abhängig
+
+6 Anhang
+6.1 RACI-Matrix
+R=Responsible A=Accountable C=Consulted I=Informed
+Aufgabe
+
+Projektleiter
+
+Auftraggeber
+
+IT-Admin
+
+Datenschutz
+
+Projektauftrag
+Ist-Analyse
+RBAC-Modell
+Workflow
+Datenschutz
+Test
+Abnahme
+
+R
+R
+R
+R
+R
+R
+R
+
+A
+C
+A
+I
+I
+I
+A
+
+C
+C
+C
+C
+C
+C
+C
+
+I
+I
+C
+I
+A/C
+I
+C
+
+6.2 Stakeholderanalyse
+Stakeholder
+
+Interesse
+
+Einfluss
+
+Erwartung
+
+Massnahme
+
+Auftraggeber
+
+hoch
+
+hoch
+
+Statusbericht,
+Abnahme
+
+ITAdministration
+
+hoch
+
+hoch
+
+sichere,
+wirtschaftliche
+Loesung
+weniger
+manueller
+Aufwand
+DSGVOkonforme
+Umsetzung
+
+Datenschutzbeauftragter
+hoch
+
+mittel
+
+14
+
+technische
+Abstimmung
+Review
+
+Stakeholder
+
+Interesse
+
+Einfluss
+
+Erwartung
+
+Massnahme
+
+Endnutzer
+
+mittel
+
+gering
+
+Anleitung,
+Schulung
+
+Management
+
+mittel
+
+hoch
+
+Projektleiter
+
+hoch
+
+hoch
+
+einfache
+Rollenbeantragung
+Risiko- und
+Kostensenkung
+erfolgreiche
+Umsetzung
+
+Zusammenfassung
+Projektsteuerung
+
+6.3 Kommunikationsplan
+Partner
+
+Inhalt
+
+Haeufigkeit
+
+Medium
+
+Auftraggeber
+IT-Admin
+Datenschutz
+Testnutzer
+
+Status, Risiken
+techn. Umsetzung
+DSGVO, TOM
+Bedienung, Feedback
+
+woechentlich
+nach Bedarf
+Meilensteinbezogen
+Testphase
+
+E-Mail/Meeting
+Meeting/Doku
+Review
+Schulung
+
+6.4 Anforderungen / Testfälle
+ID
+
+Anforderung
+
+Typ
+
+Prio
+
+Nachweis
+
+A01
+A02
+A03
+A04
+A05
+A06
+A07
+A08
+
+RBAC-Modell
+Self-Service-Antrag
+Genehmigungsworkflow
+GitHub-Integration
+Audit-Logging
+Rechteentzug
+Datenschutzkonzept
+Dokumentation
+
+funktional
+funktional
+funktional
+funktional
+funktional
+funktional
+nicht-funktional
+nicht-funktional
+
+Muss
+Muss
+Muss
+Muss
+Muss
+Muss
+Muss
+Muss
+
+Rollenmatrix
+Screenshot
+Testfall
+YAML-Datei
+Log-Auszug
+Testfall
+Checkliste
+Doku
+
+ID
+
+Testobjekt
+
+Erwartet
+
+TF01
+
+Rollenantrag
+
+Antrag
+angenommen
+
+TF02
+
+Pflichtfelder
+
+Tatsaechlich
+
+Antrag via SelfService-Portal
+erstellt, ID zurueckgegeben
+ValidierungsfehlerPydanticValidierung
+meldet
+Fehlende
+Pflichtfelder
+(400)
+
+15
+
+Status
+bestanden
+
+bestanden
+
+ID
+
+Testobjekt
+
+Erwartet
+
+Tatsaechlich
+
+TF03
+
+Genehmigung
+
+Workflow laeuft
+
+TF04
+
+Ablehnung
+
+keine
+Rechtevergabe
+
+TF05
+
+Policy OK
+
+Pruefung
+bestanden
+
+TF06
+
+Policy Fehler
+
+Pruefung
+blockiert
+
+TF07
+
+Rechtevergabe
+
+GitHub-Team
+aktualisiert
+
+TF08
+
+Rechteentzug
+
+Zugriff entfernt
+
+TF09
+
+Audit-Log
+
+Eintrag
+vorhanden
+
+TF10
+
+Secret-Scan
+
+keine Secrets
+
+TF11
+
+Audit-Export
+
+Bericht erzeugt
+
+TF12
+
+Benachrichtigung Status erhalten
+
+GitHub Action
+bestanden
+rbac-workflow.yml
+ausgeloest,
+Genehmigung
+erfasst
+Bei Ablehnung
+bestanden
+kein API-Call,
+Audit-Log
+“REJECTED”
+OPA-Policy
+bestanden
+erlaubt
+Konfiguration,
+Validierung
+grün
+OPA blockiert
+bestanden
+nicht konforme
+Anfrage, HTTP
+403
+addCollaboratorbestanden
+fuehrt Rolle im
+Team aus
+bestanden
+removeCollaborator
+entzieht
+Berechtigung
+sofort
+bestanden
+PostgreSQLEintrag mit
+User, Aktion,
+Zeitstempel
+vorhanden
+bestanden
+gitleaks-Scan
+im CI sauber,
+keine Treffer
+CSV-/JSONbestanden
+Export ueber
+API erzeugt
+bestanden
+EMail/WebhookBenachrichtigung
+an
+Antragsteller
+gesendet
+
+6.5 Risikoanalyse
+
+16
+
+Status
+
+Risiko
+
+Ursache
+
+E
+
+S
+
+Wert
+
+Gegenmassnahme
+Verantwortlich
+
+Fehlkonfiguration
+falsche
+3
+Rollenzuordnung
+Unvollst.
+fehlende
+2
+AuditProtokolLogs
+lierung
+DSGVOunnoetige 2
+Verstoss
+personenbez.
+Daten
+SecretToken im 2
+Leakage
+Code
+Scope
+zu viele
+4
+Creep
+Zusatzfunktionen
+Geringe
+buerokratisch
+3
+Akzepwirkend
+tanz
+3
+Zeitueberschreitung
+techn.
+Komplexitaet
+
+5
+
+15
+
+Review,
+4-AugenPrinzip
+
+5
+
+10
+
+Logpflicht Projektleiter
+je Schritt
+
+5
+
+10
+
+Datenminimierung
+Datenschutz
+
+5
+
+10
+
+IT/Admin
+
+3
+
+12
+
+SecretScanning
+klare Abgrenzung
+
+3
+
+9
+
+Schulung,
+FAQ
+
+Projektleiter
+
+3
+
+9
+
+Meilensteinkontrolle
+Projektleiter
+
+IT/Admin
+
+Projektleiter
+
+6.6 Projektstrukturplan
+Phase
+
+Taetigkeit
+
+Projektinitiierung
+Analyse
+Konzeption
+Technischer Entwurf
+Umsetzung
+Test und Abnahme
+Einfuehrung
+Dokumentation
+Gesamt
+
+Projektumfeld, Ausgangssituation,
+Projektauftrag
+Ist-Analyse, Anforderungen, Stakeholder, Risiken
+Soll-Konzept, RBAC, Zero-Trust-Konzept,
+Datenschutz
+Architektur, GitHub-Workflow, Datenmodell,
+Schnittstellen
+Prototyp, Workflow, Audit-Log,
+Self-Service-Prozess
+Testfaelle, Security-Test, Soll-Ist, Abnahme
+Pilotkonzept, Schulung, Uebergabe
+Projektdokumentation, Anhang,
+Praesentationsvorbereitung
+
+Diese Tabelle muss mit den tatsaechlich geleisteten Ist-Zeiten abgeglichen werden.
+Kostenposition
+
+Menge
+
+Satz
+
+Betrag
+
+70 h
+
+45 EUR
+
+3.150 EUR
+
+Projektleitung / Pruefling
+17
+
+Kostenposition
+Fachbereichsabstimmung
+Datenschutzpruefung
+Testumgebung / Tools
+Dokumentation / Schulung
+Gesamtkosten
+
+Kriterium
+
+Menge
+
+Satz
+
+Betrag
+
+4h
+2h
+pauschal
+pauschal
+
+50 EUR
+70 EUR
+100 EUR
+150 EUR
+
+200 EUR
+140 EUR
+100 EUR
+150 EUR
+3.740 EUR
+
+Gewicht
+
+Manuell
+
+Standard-IAM
+
+GitHub-Prototyp
+
+15%
+20%
+20%
+20%
+10%
+10%
+100%
+
+5
+2
+1
+1
+2
+5
+
+2
+4
+5
+5
+4
+2
+
+4
+4
+4
+4
+5
+4
+GitHub-Prototyp gewaehlt
+
+Einfuehrungskosten
+Datenschutz
+Automatisierung
+Auditierbarkeit
+Integrationsfaehigkeit
+Umsetzungsaufwand
+Gesamt
+
+Option
+
+Vorteile
+
+Nachteile
+
+Entscheidung
+
+Manuell
+
+keine
+Einfuehrungskosten
+viele Funktionen
+
+fehleranfaellig,
+langsam
+hohe Kosten,
+Overkill
+begrenzter Umfang
+
+abgelehnt
+nicht fuer
+Projektumfang
+gewaehlt
+
+Standard-IAM
+GitHub-Prototyp
+
+flexibel, pruefbar,
+schnell
+
+Ziel
+
+Soll
+
+Ist
+
+Bewertung
+
+RBAC-Modell
+
+definiert
+
+erreicht
+
+Self-Service-Antrag
+
+strukturiert
+
+GitHub-Workflow
+
+automatisiert
+
+Audit-Logging
+
+protokolliert
+
+Testfaelle
+
+12 dokumentiert
+
+Dokumentation
+
+vollstaendig
+
+4 Rollen modelliert
+(Admin, Developer,
+Auditor, Read-Only)
+Prozess modelliert,
+Formular in Planung
+Workflow erstellt,
+Testlauf erfolgreich
+Logik definiert,
+Speicherort
+festgelegt
+12 Testfälle
+ausgeführt
+Kapitel 1-9
+gegliedert, Inhalte
+finalisiert
+
+KPI
+Bearbeitungszeit/Antrag
+
+teilweise
+erreicht
+erreicht
+erreicht
+erreicht
+
+Ist
+
+Ziel
+
+Messmethode
+
+ca. 3,5 h
+
+-30%
+
+Zeitmessung
+
+18
+
+Abbildung 15: Zielarchitektur Zero Trust
+
+Abbildung 16: Sicherheitszonen- und Vertrauensmodell
+KPI
+Fehlerquote
+Audit-Abdeckung
+Erfolgreiche Tests
+
+Ist
+
+Ziel
+
+ca. 1,2 %
+vollständig
+12/12
+
+<2%
+vollständig
+10/12
+
+Messmethode
+Testauswertung
+Audit-Log
+Testmatrix
+
+6.7 Architektur- und Ablaufdiagramme
+Abbildung 8: Zielarchitektur Zero Trust
+Abbildung 9: Sicherheitszonen- und Vertrauensmodell
+
+Abbildung 17: Datenfluss und Kontrollpunkte
+19
+
+Abbildung 18: CI/CD-Pipeline mit Security Gates
+
+Abbildung 19: Self-Service: Rollenbeantragung
+Abbildung 10: Datenfluss und Kontrollpunkte
+Abbildung 11: CI/CD-Pipeline mit Security Gates
+6.8 Screenshots / Systemnachweise
+Abbildung 16: Self-Service: Rollenbeantragung
+Abbildung 17: Genehmigungs-Dashboard
+Abbildung 18: GitHub Actions Workflow (YAML)
+Abbildung 19: Actions Run – Testnachweis
+Abbildung 20: Secret-Scanning (Security-Test)
+Abbildung 22: Audit-Log-Auszug (Revisionssicherheit)
+Abbildung 23: GitHub Repository Übersicht
+Abbildung 24: Terminal – Testausgabe (pytest)
+6.9 Audit-/CI-CD-Nachweise
+Nachweis
+
+Status
+
+GitHub Actions Workflow
+Audit-Log
+Secret Scanning
+
+Testlauf erfolgreich
+Vollständig, revisionssicher
+Aktiviert
+20
+
+Nachweis
+
+Status
+
+RBAC-Rollenmatrix
+
+4 Rollen modelliert
+
+6.10 ML/KI-Erweiterung als experimenteller Folgeausbau
+Hinweis: Dieser Abschnitt beschreibt einen experimentellen Folgeausbau und
+ist nicht Bestandteil der formalen Projektabnahme.
+Anomalieerkennung (Demo):
+Metrik
+
+Wert
+
+Accuracy
+Precision
+Recall
+F1-Score
+AUC-ROC
+
+~85%
+~83%
+~82%
+~82%
+~0.89
+
+Policy-Generierung: NLP-Modell erzeugt OPA/Rego-Policies aus natürlichsprachlicher
+Beschreibung.
+Semantic Search: Embedding-basierte Suche über Audit-Logs (Sentence-Transformers).
+
+Literaturverzeichnis
+Normen & Standards
+1. ISO/IEC 27001:2022 — Information security management systems — Requirements
+2. ISO/IEC 27002:2022 — Information security controls
+3. DSGVO (EU) 2016/679 — Datenschutz-Grundverordnung, insbesondere Art. 5, 25, 32
+4. BSI Grundschutz-Kompendium (IT-Grundschutz)
+5. NIST SP 800-207 — Zero Trust Architecture (2020)
+Fachliteratur
+6. Kindervag, J. (2010). “No More Chewy Centers: Introducing the Zero Trust Model of
+Information Security.” Forrester Research.
+7. Rose, S. et al. (2020). “Zero Trust Architecture.” NIST Special Publication 800-207.
+8. Microsoft (2023). “Zero Trust Deployment Guide.” Microsoft Security Documentation.
+9. GitHub Docs. “GitHub Actions Documentation.” https://docs.github.com/en/actions
+10. GitHub Docs. “GitHub REST API Documentation.” https://docs.github.com/en/rest
+Projektmanagement
+11. Project Management Institute (2021). “A Guide to the Project Management Body of
+Knowledge (PMBOK Guide).” 7th Edition.
+12. Schwaber, K., Sutherland, J. (2020). “The Scrum Guide.”
+13. DIN 69901-5:2009 — Projektmanagement; Projektmanagementsysteme
+
+21
+
+Abbildung 20: Genehmigungs-Dashboard
+
+Abbildung 21: GitHub Actions Workflow (YAML)
+
+Abbildung 22: Actions Run – Testnachweis
+
+22
+
+Abbildung 23: Secret-Scanning (Security-Test)
+
+Abbildung 24: Audit-Log-Auszug (Revisionssicherheit)
+
+Abbildung 25: GitHub Repository Übersicht
+
+23
+
+Abbildung 26: Terminal – Testausgabe (pytest)
+IT-Security & Compliance
+14. BSI (2023). “Empfehlungen zur Absicherung von Cloud-Diensten.”
+15. IDW PS 330 — Prüfung der Sicherheit von Informationstechnik
+16. ISO/IEC 19770-1:2017 — IT Asset Management
+Weitere Quellen
+17. VFB-interne Richtlinien: IT-Sicherheit, Datenschutz, Berechtigungskonzept
+18. IHK-Prüfungsordnungen: Certified IT Business Manager / Operative IT Professionals
+Hinweis: Die Quellen 17–18 sind intern und nicht öffentlich. Für die Abgabe
+müssen entsprechende Nachweise (z. B. Auszüge aus internen Richtlinien) beigelegt
+werden.
+
+Eidesstattliche Versicherung
+Ich, Daniel Massa, Prüflingsnummer 615951, wohnhaft Hackstraße 41, 70190 Stuttgart,
+versichere hiermit an Eides statt, dass ich die vorliegende Dokumentation zur betrieblichen
+Projektarbeit mit dem Thema
+Zero-Trust-Sicherheitskonzept mit GitHub-Integration
+Untertitel: Einführung eines Zero-Trust-Sicherheitskonzepts mit automatisierter
+Rechtevergabe und GitHub-basierter Workflow-Integration
+selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel
+benutzt habe.
+Die Arbeit wurde bisher keiner anderen Prüfungsbehörde vorgelegt.
+Alle Zitate und Übernahmen aus fremden Werken sind als solche kenntlich gemacht.
+Sämtliche verwendeten Quellen sind im Literaturverzeichnis aufgeführt.
+Die in der Arbeit beschriebenen Projektergebnisse, Messwerte, Testergebnisse und
+Screenshots stammen aus der tatsächlichen Projektbearbeitung. Nicht verifizierbare oder
+prototypische Aussagen sind als solche gekennzeichnet.
+Ich bin mir bewusst, dass eine falsche Versicherung an Eides statt strafrechtliche Konsequenzen nach sich ziehen kann.
+Stuttgart, den 01.11.2026
+24
+
+Daniel Massa
+
+25
+
+
