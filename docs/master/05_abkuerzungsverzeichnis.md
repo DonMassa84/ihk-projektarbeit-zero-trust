@@ -6,7 +6,6 @@
 | CI/CD | Continuous Integration / Continuous Deployment |
 | DSGVO | Datenschutz-Grundverordnung |
 | ERD / ERM | Entity Relationship Diagram / Model |
-| GitHub | GitHub Enterprise / GitHub.com |
 | IAM | Identity and Access Management |
 | KPI | Key Performance Indicator |
 | MTA | Meilensteintrendanalyse |
@@ -20,7 +19,6 @@
 | TDD | Test-Driven Development |
 | UI/UX | User Interface / User Experience |
 | YAML | YAML Ain't Markup Language |
-| Zero Trust | Zero-Trust-Sicherheitsmodell (Never Trust, Always Verify) |
 
 > **Korrekturhinweis:** In der ursprünglichen Vorlage waren SIEM und SQL fehlerhaft definiert. Hier korrigiert:
 > - SIEM = Security Information and Event Management (nicht "Security Query Language")

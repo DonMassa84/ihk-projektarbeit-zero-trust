@@ -97,14 +97,20 @@ for tf in table_files:
 # ── extract sections from old doku ───────────────────────────────
 # Split by ## headings
 def extract_section(text, heading_pattern):
-    """Extract a section starting with heading_pattern until next ## or end."""
+    """Extract section from heading_pattern until next same/higher-level heading or end."""
     m = re.search(heading_pattern, text, re.MULTILINE)
     if not m:
         return ""
     start = m.start()
-    # find next ## heading after this one
+    heading_line = text[m.start():m.end()].split('\n')[0]
+    level = len(re.match(r'^(#+)', heading_line).group(1))
     rest = text[m.end():]
-    next_h = re.search(r'^## ', rest, re.MULTILINE)
+    if level == 2:
+        next_h = re.search(r'^## ', rest, re.MULTILINE)
+    elif level == 3:
+        next_h = re.search(r'^(### |## )', rest, re.MULTILINE)
+    else:
+        next_h = re.search(r'^(#### |### |## )', rest, re.MULTILINE)
     if next_h:
         end = m.end() + next_h.start()
     else:
@@ -195,29 +201,29 @@ ch1_md = f"""## 1 Initiierung
 ### 1.2 Zieldefinition
 {sec1_2}
 
-### 1.3 Projektrahmen
+### 1.3 Projektbegründung
 {sec1_3}
 
-### 1.4 Abgrenzung der Projektinhalte
-{sec1_4}
-
-{sec1_5}
+### 1.4 Projektorganisation und Rahmenbedingungen
+{sec1_8}
 
 ### 1.5 Projektalternativen
 {strip_nums(strip_heading(extract_section(ch3_raw, r'#### 3\.2\.1 Make-or-Buy')))}
 
-### 1.6 Lastenheft / Anforderungen
+### 1.6 Projektinhalte und Abgrenzung
+{sec1_4}
+
+{sec1_5}
+
+### 1.7 Lastenheft / Anforderungen
 {sec1_6}
 
 {fig_md('abb05_risikomatrix.png', 'Abbildung 3: Risikomatrix')}
 
-### 1.7 Projektteam / Rollen
+### 1.8 Projektteam / Rollen
 {sec1_7}
 
 {fig_md('abb08_raci.png', 'Abbildung 15: RACI-Matrix')}
-
-### 1.8 Projektorganisation
-{sec1_8}
 
 ### 1.9 Projektauftrag
 {sec1_9}
@@ -227,6 +233,7 @@ ch1_md = f"""## 1 Initiierung
 sec2_1 = strip_nums(strip_heading(extract_section(ch2_raw, r'### 2\.1 Projektphasen')))
 sec2_2 = strip_nums(strip_heading(extract_section(ch2_raw, r'### 2\.2 Abweichungen')))
 sec2_3 = strip_nums(strip_heading(extract_section(ch2_raw, r'### 2\.3 Ressourcenplanung')))
+sec2_stakeholder = strip_nums(strip_heading(extract_section(ch2_raw, r'### 2\.5 Stakeholderanalyse')))
 sec2_4 = strip_nums(strip_heading(extract_section(ch3_raw, r'### 3\.1 Ist-Analyse')))
 sec2_5 = strip_nums(strip_heading(extract_section(ch3_raw, r'### 3\.3 Nutzwertanalyse')))
 sec2_6 = strip_nums(strip_heading(extract_section(ch3_raw, r'### 3\.2 Wirtschaftlichkeitsanalyse')))
@@ -297,7 +304,7 @@ ch2_md = f"""## 2 Projektplanung
 {sec2_1}
 
 ### 2.2 Stakeholderanalyse
-{sec1_4}
+{sec2_stakeholder}
 
 {fig_md('abb06_stakeholdermatrix.png', 'Abbildung 2: Stakeholder-Matrix')}
 
