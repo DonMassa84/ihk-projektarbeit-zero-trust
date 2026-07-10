@@ -74,3 +74,9 @@ reports/
 
 reviews/
 *.db
+
+# V13 build output
+/09_export/
+
+# V13 virtual environment
+.venv-v13/
