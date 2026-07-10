@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '12px' }}}%%
+graph LR
+    subgraph Legende
+        L1[Plan ---]
+        L2[Ist - - -]
+    end
+
+    M1[M1: 15.08]:::plan
+    M2[M2: 05.09]:::plan
+    M3[M3: 18.09]:::plan
+    M4[M4: 12.10]:::plan
+    M5[M5: 22.10]:::plan
+    M6[M6: 25.10]:::plan
+    M7[M7: 31.10]:::plan
+    M8[M8: 01.11]:::plan
+
+    M1 --- M2 --- M3 --- M4 --- M5 --- M6 --- M7 --- M8
+
+    classDef plan fill:none,stroke:#1557A5,stroke-width:2px,width:2px,stroke-dasharray: 0;
+    classDef ist fill:none,stroke:#B43C3C,stroke-width:2px,stroke-dasharray: 5 5;

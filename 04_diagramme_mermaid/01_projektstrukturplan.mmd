@@ -1,0 +1,76 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '11px' }}}%%
+graph TD
+    classDef phase fill:#EAF2FB,stroke:#1557A5,stroke-width:2px;
+    classDef wp fill:#E8F4EE,stroke:#2E7D5A,stroke-width:1.5px;
+    classDef total fill:#17202A,color:#fff,stroke:#fff;
+
+    PROJ[["Projektstrukturplan\nZero-Trust GitHub Integration\n70 h / 14 Wochen"]]:::total
+
+    P1[Phase 1: Initiierung\n5 h]:::phase
+    P2[Phase 2: Analyse & Konzeption\n22 h]:::phase
+    P3[Phase 3: Techn. Entwurf\n8 h]:::phase
+    P4[Phase 4: Prototyp-Umsetzung\n20 h]:::phase
+    P5[Phase 5: Test & Abnahme\n7 h]:::phase
+    P6[Phase 6: Einführung\n3 h]:::phase
+    P7[Phase 7: Dokumentation\n5 h]:::phase
+
+    PROJ --> P1 & P2 & P3 & P4 & P5 & P6 & P7
+
+    %% Phase 1
+    WP1[WP 1: Ist-Analyse\n5 h]:::wp
+    P1 --> WP1
+
+    %% Phase 2
+    WP2[WP 2: Anforderungsdef.\n4 h]:::wp
+    WP3[WP 3: Stakeholderanalyse\n3 h]:::wp
+    WP4[WP 4: Make-or-Buy\n3 h]:::wp
+    WP5[WP 5: Zero-Trust-Konzept\n6 h]:::wp
+    WP6[WP 6: RBAC-Modellierung\n6 h]:::wp
+    WP7[WP 7: Datenschutzkonzept\n4 h]:::wp
+    P2 --> WP2 & WP3 & WP4 & WP5 & WP6 & WP7
+
+    %% Phase 3
+    WP8[WP 8: Architekturdesign\n4 h]:::wp
+    WP9[WP 9: GitHub-Workflow-Design\n4 h]:::wp
+    WP10[WP 10: Self-Service-Konzept\n3 h]:::wp
+    WP11[WP 11: Datenmodell\n3 h]:::wp
+    P3 --> WP8 & WP9 & WP10 & WP11
+
+    %% Phase 4
+    WP12[WP 12: Prototyp-Umsetzung\n12 h]:::wp
+    P4 --> WP12
+
+    %% Phase 5
+    WP13[WP 13: Testdurchführung\n4 h]:::wp
+    WP14[WP 14: Abnahme\n3 h]:::wp
+    P5 --> WP13 & WP14
+
+    %% Phase 6
+    WP15[WP 15: Dokumentation\n6 h]:::wp
+    P6 --> WP15
+
+    %% Phase 7
+    WP16[WP 16: Projektabschluss\n5 h]:::wp
+    P7 --> WP16
+
+    %% Responsible
+    subgraph Verantwortlich
+        PL[Daniel Massa\nProjektleiter]:::wp
+        DEV[Entwickler\nIT-Abteilung]:::wp
+        SEC[Security-Consultant\nextern]:::wp
+        DSB[Datenschutz-\nbeauftragter]:::wp
+        ITADM[IT-Admin\nThomas Zoller]:::wp
+        AUF[Auftraggeber\nVFB-GF]:::wp
+    end
+
+    WP1 -.-> PL
+    WP2 -.-> PL
+    WP5 -.-> PL & SEC
+    WP6 -.-> PL
+    WP7 -.-> PL & DSB
+    WP8 -.-> PL & DEV
+    WP9 -.-> PL & DEV
+    WP12 -.-> PL & DEV
+    WP13 -.-> PL & DEV
+    WP14 -.-> PL & AUF
+    WP15 -.-> PL

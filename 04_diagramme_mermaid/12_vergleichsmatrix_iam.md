@@ -1,47 +1,29 @@
-# Mermaid: Vergleichsmatrix Identity-Management-Systeme
+---
+title: "Nutzwertanalyse: Identitätsmanagement-Lösungen"
+---
 
-```mermaid
-graph LR
-    subgraph Kriterien
-    K1[Einführungskosten 15%]
-    K2[Datenschutz 20%]
-    K3[Automatisierung 20%]
-    K4[Auditierbarkeit 20%]
-    K5[Integration 10%]
-    K6[Umsetzungsaufwand 10%]
-    end
+| Kriterium | Gewicht | Manuell | Standard-IAM | GitHub-Prototyp |
+|-----------|:-------:|:-------:|:------------:|:---------------:|
+| Einführungskosten | 15 % | 5 | 2 | 4 |
+| Datenschutz | 20 % | 2 | 4 | 4 |
+| Automatisierung | 20 % | 1 | 5 | 4 |
+| Auditierbarkeit | 20 % | 1 | 5 | 4 |
+| Integrationsfähigkeit | 10 % | 2 | 4 | 5 |
+| Umsetzungsaufwand | 10 % | 5 | 2 | 4 |
+| **Gesamt (gewichtet)** | **100 %** | **2,4** | **4,10** | **4,15** |
 
-    subgraph Manueller_Prozess
-    M1[5 Punkte]
-    M2[2 Punkte]
-    M3[1 Punkt]
-    M4[1 Punkt]
-    M5[2 Punkte]
-    M6[5 Punkte]
-    M_Gesamt[Gesamt: 2,4]
-    end
+---
 
-    subgraph Standard_IAM
-    S1[2 Punkte]
-    S2[4 Punkte]
-    S3[5 Punkte]
-    S4[5 Punkte]
-    S5[4 Punkte]
-    S6[2 Punkte]
-    S_Gesamt[Gesamt: 3,7]
-    end
+### Bewertungsskala
+- **5** = Sehr gut / Sehr günstig / Sehr einfach
+- **1** = Schlecht / Teuer / Komplex
 
-    subgraph GitHub_Prototyp
-    G1[4 Punkte]
-    G2[4 Punkte]
-    G3[4 Punkte]
-    G4[4 Punkte]
-    G5[5 Punkte]
-    G6[4 Punkte]
-    G_Gesamt[Gesamt: 4,1 GEWÄHLT]
-    end
+---
 
-    style G_Gesamt fill:#2D7D32,color:#fff
-    style S_Gesalt fill:#E67E22,color:#fff
-    style M_Gesamt fill:#C62828,color:#fff
-```
+### Interpretation
+
+Die exakten Ergebnisse liegen mit **4,10 Punkten für Standard-IAM** und **4,15 Punkten für den GitHub-Pilot** nur **0,05 Punkte auseinander**.
+
+Die Auswahl des GitHub-Piloten folgt deshalb **nicht** aus einer behaupteten funktionalen Überlegenheit, sondern aus dem engeren Lern-, Nachweis- und Umsetzungsumfang innerhalb des 70-Stunden-Rahmens.
+
+> **Hinweis:** Die im Dokument ursprünglich ausgewiesene Punktzahl 3,8 für Standard-IAM war ein Rechenfehler (korrekt: 4,10). Die Korrektur stärkt die Argumentation: der kleine Abstand von 0,05 Punkten unterstreicht die Entscheidung für den Pilot als Lern- und Entscheidungsplattform.

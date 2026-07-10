@@ -1,0 +1,40 @@
+flowchart LR
+    subgraph Antragstellung
+        A1[Mitarbeiter\nstellt Antrag\nvia Portal/Issue]:::start
+    end
+
+    subgraph Validierung
+        V1[GitHub Actions\nWorkflow startet]:::auto
+        V2[Pflichtfelder\nprüfen]:::check
+        V3[Policy-Compliance\nprüfen]:::check
+    end
+
+    subgraph Genehmigung
+        G1[Automatische\nGenehmigungsanfrage\nan Vorgesetzten]:::auto
+        G2{Vorgesetzter\ngenehmigt?}:::decision
+        G3[48h Timeout →\nEskalation an IT-Admin]:::escalation
+    end
+
+    subgraph Provisioning
+        P1[GitHub API:\nTeam-Membership\nsetzen]:::auto
+        P2[Audit-Log-Eintrag\nerstellen]:::auto
+        P4[Idempotenz-Key\n(Request-ID)\nverhindert Duplikate]:::safe
+    end
+
+    subgraph Benachrichtigung
+        N1[Status-Mail\nan Antragsteller]:::notify
+        N2[Status im Portal\naktualisieren]:::notify
+    end
+
+    A1 --> V1 --> V2 --> V3 --> G1 --> G2
+    G2 -- Ja --> P1 --> P2 --> P4 --> N1 --> N2
+    G2 -- Nein --> N1
+    G2 -- Timeout --> G3 --> N1
+
+    classDef start fill:#E8F4EE,stroke:#2E7D5A,stroke-width:2px;
+    classDef auto fill:#EAF2FB,stroke:#1557A5,stroke-width:1.5px;
+    classDef check fill:#FFF1E5,stroke:#C46A1A,stroke-width:1.5px;
+    classDef decision fill:#FBECEC,stroke:#B43C3C,stroke-width:2px;
+    classDef escalation fill:#FBECEC,stroke:#B43C3C,stroke-dasharray: 5 5;
+    classDef safe fill:#E8F4EE,stroke:#2E7D5A,stroke-dasharray: 5 5;
+    classDef notify fill:#EAF2FB,stroke:#1557A5,stroke-width:1px;

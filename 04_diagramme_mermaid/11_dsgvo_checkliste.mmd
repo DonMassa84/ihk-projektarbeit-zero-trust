@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '11px' }}}%%
+graph TD
+    classDef art5 fill:#E8F4EE,stroke:#2E7D5A,stroke-width:2px;
+    classDef art25 fill:#EAF2FB,stroke:#1557A5,stroke-width:2px;
+    classDef art32 fill:#FFF1E5,stroke:#C46A1A,stroke-width:2px;
+    classDef done fill:#E8F4EE,stroke:#2E7D5A,stroke-width:3px;
+
+    A[DSGVO-Checkliste] --> B[Art. 5 Grundsätze]:::art5
+    A --> C[Art. 25 Privacy by Design]:::art25
+    A --> D[Art. 32 TOMs]:::art32
+    A --> E[DPIA durchgeführt]:::art25
+    A --> F[Art. 30 VVT]:::art5
+
+    B --> B1[Datenminimierung ✅]:::done
+    B --> B2[Zweckbindung ✅]:::done
+    B --> B3[Speicherbegrenzung ✅]:::done
+
+    C --> C1[Privacy by Design ✅]:::done
+    C --> C2[Privacy by Default ✅]:::done
+
+    D --> D1[Verschlüsselung TLS 1.3 ✅]:::done
+    D --> D2[RBAC/Least Privilege ✅]:::done
+    D --> D3[Append-Only Audit-Log ✅]:::done
+    D --> D3b[Backup/Recovery ✅]:::done
+    D --> D3c[Monitoring/Alerting ✅]:::done
+
+    E --> E1[DPIA durchgeführt ✅]:::done
+    E --> E2[Risiken bewertet ✅]:::done
+
+    F --> F1[VVT geführt ✅]:::done
+
+    classDef art5 fill:#E8F4EE,stroke:#2E7D5A,stroke-width:2px;
+    classDef art25 fill:#EAF2FB,stroke:#1557A5,stroke-width:2px;
+    classDef art32 fill:#FFF1E5,stroke:#C46A1A,stroke-width:2px;
+    classDef done fill:#E8F4EE,stroke:#2E7D5A,stroke-width:3px;

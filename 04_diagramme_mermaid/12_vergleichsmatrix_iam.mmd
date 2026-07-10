@@ -1,0 +1,55 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '11px' }}}%%
+graph TD
+    classDef header fill:#0B2B4A,color:#fff,stroke:#fff;
+    classDef manuell fill:#B43C3C,color:#fff;
+    classDef standard fill:#C46A1A,color:#fff;
+    classDef github fill:#2E7D5A,color:#fff;
+    classDef total fill:#17202A,color:#fff;
+
+    T[["Vergleichsmatrix Identity-Management-Systeme"]]:::header
+
+    K1[Einführungskosten\n15 %]:::header
+    K2[Datenschutz\n20 %]:::header
+    K3[Automatisierung\n20 %]:::header
+    K4[Auditierbarkeit\n20 %]:::header
+    K5[Integrationsfähigkeit\n15 %]:::header
+    K6[Umsetzungsaufwand\n10 %]:::header
+    G[Gesamt (gewichtet)\n100 %]:::header
+
+    M1[Manuell\n2,4]:::manuell
+    M2[Manuell\n2]:::manuell
+    M3[Manuell\n1]:::manuell
+    M4[Manuell\n1]:::manuell
+    M5[Manuell\n2]:::manuell
+    M6[Manuell\n5]:::manuell
+    MG[2,4]:::manuell
+
+    S1[Standard-IAM\n3,8]:::standard
+    S2[Standard-IAM\n5]:::standard
+    S3[Standard-IAM\n5]:::standard
+    S4[Standard-IAM\n5]:::standard
+    S5[Standard-IAM\n4]:::standard
+    S6[Standard-IAM\n2]:::standard
+    SG[3,7]:::standard
+
+    G1[GitHub-Pilot\n4,1]:::github
+    G2[GitHub-Pilot\n5]:::github
+    G3[GitHub-Pilot\n4]:::github
+    G4[GitHub-Pilot\n4]:::github
+    G5[GitHub-Pilot\n5]:::github
+    G6[GitHub-Pilot\n4]:::github
+    GG[4,1]:::github
+
+    T --> K1 & K2 & K3 & K4 & K5 & K6 & G
+    K1 --> M1 & S1 & G1
+    K2 --> M2 & S2 & G2
+    K3 --> M3 & S3 & G3
+    K4 --> M4 & S4 & G4
+    K5 --> M5 & S5 & G5
+    K6 --> M6 & S6 & G6
+    G --> MG & SG & GG
+
+    classDef manuell fill:#B43C3C,color:#fff;
+    classDef standard fill:#C46A1A,color:#fff;
+    classDef github fill:#2E7D5A,color:#fff;
+    classDef total fill:#17202A,color:#fff;

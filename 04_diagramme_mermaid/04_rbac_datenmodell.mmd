@@ -1,0 +1,66 @@
+erDiagram
+    USER ||--o{ USER_ROLE : hat
+    ROLE ||--o{ USER_ROLE : wird_zugewiesen
+    ROLE ||--o{ ROLE_PERMISSION : hat
+    PERMISSION ||--o{ ROLE_PERMISSION : ist_in
+    ROLE ||--o{ GITHUB_TEAM : mapped_to
+    GITHUB_TEAM ||--o{ REPOSITORY : hat_zugriff_auf
+    USER ||--o{ APPROVAL : stellt
+    APPROVAL ||--o{ AUDIT_LOG : erzeugt
+
+    USER {
+        uuid id PK
+        string email UK
+        string full_name
+        string department
+        boolean is_active
+    }
+    ROLE {
+        uuid id PK
+        string name UK
+        string description
+    }
+    PERMISSION {
+        uuid id PK
+        string name UK
+        string resource
+        string action
+    }
+    USER_ROLE {
+        uuid user_id FK
+        uuid role_id FK
+        timestamp granted_at
+        timestamp expires_at
+    }
+    ROLE_PERMISSION {
+        uuid role_id FK
+        uuid permission_id FK
+    }
+    GITHUB_TEAM {
+        uuid id PK
+        string team_name UK
+        string org
+    }
+    REPOSITORY {
+        uuid id PK
+        string name UK
+        string org
+    }
+    APPROVAL {
+        uuid id PK
+        uuid user_id FK
+        uuid role_id FK
+        enum status
+        uuid approver_id FK
+        timestamp decided_at
+    }
+    AUDIT_LOG {
+        uuid id PK
+        uuid user_id FK
+        string action
+        jsonb resource
+        string result
+        string hash
+        string prev_hash
+        timestamp timestamp
+    }

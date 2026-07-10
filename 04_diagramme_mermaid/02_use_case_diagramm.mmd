@@ -1,0 +1,38 @@
+flowchart LR
+    Mitarbeiter((Mitarbeiter))
+    Vorgesetzter((Vorgesetzter))
+    IT_Admin((IT-Admin))
+    GitHub_Actions((GitHub Actions))
+    DSB((DSB))
+
+    subgraph "Zero-Trust RBAC System"
+        UC1[Rolle beantragen]
+        UC2[Antrag validieren]
+        UC3[Genehmigen]
+        UC4[Ablehnen]
+        UC5[Rolle provisionieren]
+        UC6[Rechte entziehen]
+        UC7[Audit-Log prüfen]
+        UC8[DSGVO-Check]
+        UC9[Rolle ändern]
+        UC10[Status verfolgen]
+    end
+
+    Mitarbeiter --> UC1
+    Mitarbeiter --> UC10
+    Vorgesetzter --> UC3
+    Vorgesetzter --> UC4
+    IT_Admin --> UC2
+    IT_Admin --> UC5
+    IT_Admin --> UC6
+    IT_Admin --> UC7
+    GitHub_Actions --> UC2
+    GitHub_Actions --> UC5
+    GitHub_Actions --> UC6
+    DSB --> UC7
+    DSB --> UC8
+
+    classDef actor fill:#EAF2FB,stroke:#1557A5;
+    classDef uc fill:#E8F4EE,stroke:#2E7D5A;
+    class Mitarbeiter,Vorgesetzter,IT_Admin,GitHub_Actions,DSB actor;
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10 uc;

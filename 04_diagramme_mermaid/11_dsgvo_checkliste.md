@@ -1,54 +1,46 @@
-# Mermaid: DSGVO-Checkliste zur Rollen- und Zugriffskontrolle
+---
+title: "DSGVO-Checkliste (Art. 5, 25, 32)"
+---
 
-```mermaid
-flowchart TB
-    subgraph Art5[Art. 5 DSGVO - Grundsätze]
-        A5_1[Rechtmäßigkeit\nArt. 5 Abs. 1 a]
-        A5_2[Zweckbindung\nArt. 5 Abs. 1 b]
-        A5_3[Datenminimierung\nArt. 5 Abs. 1 c]
-        A5_4[Richtigkeit\nArt. 5 Abs. 1 d]
-        A5_5[Speicherbegrenzung\nArt. 5 Abs. 1 e]
-        A5_6[Integrität & Vertraulichkeit\nArt. 5 Abs. 1 f]
-    end
+| Art. DSGVO | Prüfpunkt | Status | Nachweis / Verweis |
+|------------|-----------|--------|-------------------|
+| **Art. 5** | **Grundsätze** | | |
+| 5(1)a | Rechtmäßigkeit, Verarbeitung nach Treu und Glauben, Transparenz | ✅ | Kap. 3.5, 3.6 |
+| 5(1)b | Zweckbindung | ✅ | Kap. 1.3.5, 3.6 |
+| 5(1)c | Datenminimierung | ✅ | Kap. 3.5, 3.6, A14 |
+| 5(1)d | Richtigkeit | ✅ | Kap. 3.5, 4.7 |
+| 5(1)e | Speicherbegrenzung | ✅ | Kap. 3.6, A14 |
+| 5(1)f | Integrität & Vertraulichkeit | ✅ | Kap. 3.6, 4.7 |
+| 5(2) | Rechenschaftspflicht | ✅ | Kap. 3.6, 4.7, A14 |
+| **Art. 25** | **Datenschutz durch Technikgestaltung & Standard** | | |
+| 25(1) | Technische & organisatorische Maßnahmen | ✅ | Kap. 3.5, 4.7, A14 |
+| 25(2) | Datenschutzfreundliche Voreinstellungen | ✅ | Kap. 3.5, 3.6 |
+| **Art. 32** | **Sicherheit der Verarbeitung** | | |
+| 32(1)a | Pseudonymisierung & Verschlüsselung | ✅ | TLS 1.3, DB at Rest, Kap. 3.6 |
+| 32(1)b | Vertraulichkeit, Integrität, Verfügbarkeit | ✅ | RBAC, Least Privilege, Kap. 3.6 |
+| 32(1)c | Verfahren zur Wiederherstellung | ✅ | Backup, Recovery, Kap. 3.6 |
+| 32(1)d | Regelmäßige Überprüfung | ✅ | Monitoring, Alerting, Kap. 3.6 |
+| 32(2) | Risikobeurteilung | ✅ | DPIA, Kap. 3.6, A14 |
 
-    subgraph Art25[Art. 25 DSGVO - Privacy by Design/Default]
-        A25_1[Technische Maßnahmen\nPseudonymisierung]
-        A25_2[Organisatorische Maßnahmen\nRollenkonzept]
-        A25_3[Privacy by Default\nStandard-Einstellungen]
-    end
+---
 
-    subgraph Art32[Art. 32 DSGVO - Sicherheit der Verarbeitung]
-        A32_1[Verschlüsselung\nTLS 1.3, AES-256]
-        A32_2[Zugriffskontrolle\nRBAC, 4-Augen]
-        A32_3[Verfügbarkeit\nBackup, Monitoring]
-        A32_4[Resilienz\nHash-Chain, Append-Only]
-        A32_5[Regelmäßige Prüfung\nCodeQL, Pen-Test]
-    end
+### Technische & Organisatorische Maßnahmen (TOMs, Art. 32)
 
-    subgraph Rechte[Betroffenenrechte]
-        R1[Auskunft Art. 15\nExport-Funktion]
-        R2[Berichtigung Art. 16\nSelf-Service]
-        R3[Löschung Art. 17\nAuto nach 30 Tagen]
-        R4[Einschränkung Art. 18\nDeaktivierung]
-        R5[Datenübertragbarkeit Art. 20\nCSV/JSON Export]
-    end
+| Maßnahme | Implementierung | Status |
+|----------|----------------|--------|
+| Verschlüsselung | TLS 1.3 (Transport), DB at Rest Encryption | ✅ |
+| Vertraulichkeit | RBAC, Least Privilege, Need-to-know | ✅ |
+| Integrität | Append-only Audit-Log, Hash-Chain | ✅ |
+| Verfügbarkeit | Docker Compose, Backup, Monitoring | ✅ |
+| Belastbarkeit | Prometheus/Grafana Alerting, Health-Checks | ✅ |
 
-    subgraph AVV[Auftragsverarbeitung Art. 28]
-        AV1[GitHub Inc.\nDPA vorhanden]
-        AV2[Microsoft Azure AD\nDPA vorhanden]
-        AV3[TOM geprüft\nSOC 2, ISO 27001]
-    end
+---
 
-    subgraph DPIA[Art. 35 DSGVO]
-        D1[DPIA durchgeführt]
-        D2[Risiken bewertet\nRBAC, Audit-Log]
-        D3[Maßnahmen definiert\nTOM, Verschlüsselung]
-        D4[DSB beteiligt\nFreigegeben]
-    end
+### DPIA (Datenschutz-Folgenabschätzung)
 
-    Art5 --> Art25
-    Art25 --> Art32
-    Art32 --> Rechte
-    Art32 --> AVV
-    Art32 --> DPIA
-```
+| Aspekt | Status |
+|--------|--------|
+| Erforderlichkeit geprüft | ✅ Ja (Art. 35) |
+| DPIA durchgeführt | ✅ In Kap. 3.6 dokumentiert |
+| DSB beteiligt | ✅ 4h Beratung |
+| Risiken bewertet | ✅ Risikomatrix Kap. 2.6 |

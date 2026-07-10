@@ -1,0 +1,57 @@
+flowchart TD
+    subgraph Portal
+        P1[Login via\nAzure AD SSO]:::auth
+        P2[Dashboard:\nMeine Rollen\nOffene Anträge\nLetzte Aktivitäten]:::ui
+        P3[Button:\n+ Rolle beantragen]:::action
+    end
+
+    subgraph Antrag
+        F1[Formular:\nGewünschte Rolle\nBegründung\nRessource optional]:::form
+        F2[Client-seitige\nValidierung]:::check
+        F3[Absenden]:::submit
+    end
+
+    subgraph Policy
+        PL1[Server-seitige\nPolicy-Prüfung:\n- Rollenberechtigung\n- Kompetenzmatrix\n- 4-Augen-Prinzip]:::policy
+        PL2{Policy OK?}:::decision
+    end
+
+    subgraph Genehmigung
+        G1[Workflow startet\nGitHub Actions]:::auto
+        G2[E-Mail an\nVorgesetzten]:::notify
+        G3{Vorgesetzter\ngenehmigt?}:::decision
+        G4[48h Timeout →\nEskalation IT-Admin]:::escalation
+    end
+
+    subgraph Provisioning
+        PR1[GitHub API:\nTeam-Membership setzen]:::auto
+        PR2[Audit-Log\nschreiben]:::auto
+        PR3[Idempotenz via\nRequest-ID]:::safe
+    end
+
+    subgraph Status
+        S1[E-Mail:\nGenehmigt/Abgelehnt]:::notify
+        S2[Portal:\nStatus aktualisiert]:::ui
+        S3[Dashboard:\nNeue Rolle sichtbar]:::ui
+    end
+
+    START((Start)) --> P1 --> P2 --> P3 --> F1 --> F2 --> F3 --> PL1 --> PL2
+    PL2 -- Ja --> G1 --> G2 --> G3
+    G3 -- Ja --> PR1 --> PR2 --> PR3 --> S1 --> S2 --> S3
+    PL2 -- Nein --> N1[Antrag abgelehnt\nmit Begründung]:::reject
+    G3 -- Nein --> N1
+    G3 -- Timeout --> G4 --> N1
+
+    classDef start fill:#E8F4EE,stroke:#2E7D5A,stroke-width:2px;
+    classDef ui fill:#EAF2FB,stroke:#1557A5;
+    classDef action fill:#FFF1E5,stroke:#C46A1A,stroke-width:2px;
+    classDef form fill:#F5F5F5,stroke:#5B6573;
+    classDef check fill:#FFF8E1,stroke:#C46A1A;
+    classDef policy fill:#FFF1E5,stroke:#C46A1A,stroke-width:1.5px;
+    classDef decision fill:#FBECEC,stroke:#B43C3C,stroke-width:2px;
+    classDef auto fill:#EAF2FB,stroke:#1557A5,stroke-width:1.5px;
+    classDef escalation fill:#FBECEC,stroke:#B43C3C,stroke-dasharray: 5 5;
+    classDef safe fill:#E8F4EE,stroke:#2E7D5A,stroke-dasharray: 5 5;
+    classDef notify fill:#EAF2FB,stroke:#1557A5;
+    classDef reject fill:#FBECEC,stroke:#B43C3C,stroke-width:2px;
+    classDef auth fill:#E8F4EE,stroke:#2E7D5A,stroke-width:2px;

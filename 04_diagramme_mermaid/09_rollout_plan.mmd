@@ -1,0 +1,25 @@
+gantt
+    title Rollout-Plan Zero-Trust Pilot
+    dateFormat  YYYY-MM-DD
+    axisFormat  %W
+
+    section Pilotphase
+    Pilotvorbereitung     :p1, 2026-10-01, 14d
+    Pilotbetrieb 15 Nutzer :p2, after p1, 14d
+    Pilot-Auswertung      :p3, after p2, 7d
+
+    section Rollout Phase 1
+    HR & Finanzen (50 Nutzer) :r1, after p3, 14d
+    Schulung Vorgesetzte    :r2, after r1, 7d
+
+    section Vollausbau
+    Organisationsweit       :v1, after r2, 30d
+    Manuelle Prozesse AB    :v2, after v1, 7d
+
+    section Monitoring
+    Kontinuierlich          :m1, after v2, 60d
+
+    milestone M4 Prototyp fertig : 2026-10-10
+    milestone M5 Test/Abnahme    : 2026-10-20
+    milestone M6 Intern fertig   : 2026-10-25
+    milestone M8 Abgabe IHK      : 2026-11-01
