@@ -1,0 +1,3 @@
+2189:Min pro Antrag (�90 %) - Wegfall von Nachbesserungen durch Fehler (15 Fälle/Monat à 30
+2190:Min = 7,5 h/Monat) - Reduzierter Audit-Aufwand durch zentralisierte Logs (�50 %)
+3196:�75 %

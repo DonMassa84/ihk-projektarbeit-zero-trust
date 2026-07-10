@@ -16,14 +16,25 @@ SCR_DIR  := 10_screenshots
 
 all: diagrams screenshots pdf docx html lint
 
-# ─── PDF (Eisvogel + XeLaTeX) ──────────────────────────────────────
+# ─── PDF ───────────────────────────────────────────────────────────
+# Optimierte 54-Seiten-Fassung (ReportLab, aus externer Konsolidierung)
+# Der alte Markdown-Build bleibt als "pdf-from-markdown" erhalten.
 
 pdf: $(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf
 
-$(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf: $(MASTER)
-	@echo "=== PDF exportieren (Eisvogel + XeLaTeX) ==="
-	sed 's/✅/X/g; s/⚠/!/g; s/🎯/O/g; s/️//g' "$(MASTER)" > /tmp/projektarbeit_no_emoji.md
+$(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf: /home/schattenmacher/Downloads/PROJEKTARBEIT_ZERO_TRUST_IHK_FINAL_OPTIMIERT.pdf
+	@echo "=== PDF übernehmen (optimierte 54-Seiten-Fassung) ==="
+	cp "$<" "$@"
+	@echo "✓ $@ ($(shell du -h $@ | cut -f1))"
+
+# Alternativ: PDF aus Master-Markdown bauen (IHK-konform: Arial/LiberationSans 12pt, 1,5-zeilig, Ränder 1,5/4,5 cm)
+pdf-from-markdown: $(OUTDIR)/PROJEKTARBEIT_IHK_FINAL_MARKDOWN.pdf
+
+$(OUTDIR)/PROJEKTARBEIT_IHK_FINAL_MARKDOWN.pdf: $(MASTER)
+	@echo "=== PDF aus Markdown bauen (IHK-Format: Liberation Sans 12pt, 1,5-zeilig) ==="
+	sed 's/✅/X/g; s/⚠/!/g; s/🎯/O/g; s/️//g; s/✓/[x]/g; s/☐/[ ]/g; s/→/->/g; s/−/-/g' "$(MASTER)" > /tmp/projektarbeit_no_emoji.md
 	pandoc /tmp/projektarbeit_no_emoji.md -f markdown -o "$@" \
+		--resource-path=. \
 		--template=eisvogel \
 		--pdf-engine=xelatex \
 		-V colorlinks=true \
@@ -32,9 +43,14 @@ $(OUTDIR)/PROJEKTARBEIT_IHK_FINAL.pdf: $(MASTER)
 		-V title="Zero-Trust-Sicherheitskonzept mit GitHub-Integration" \
 		-V author="Daniel Massa" \
 		-V date="01.11.2026" \
+		-V papersize=a4 \
+		-V mainfont="Liberation Sans" \
+		-V sansfont="Liberation Sans" \
+		-V monofont="Liberation Mono" \
+		-V fontsize=12pt \
+		-V geometry:left=1.5cm,right=4.5cm,top=2.5cm,bottom=2.5cm \
 	-H 09_export/build_scripts/pdf-header.tex
 	@echo "✓ $@"
-	@python3 -c "import subprocess; r=subprocess.run(['pdftotext','$@','-'],capture_output=True,text=True); print(f'  Textzeilen: {len(r.stdout.splitlines())}')" 2>/dev/null
 
 # ─── DOCX ──────────────────────────────────────────────────────────
 
@@ -59,16 +75,10 @@ $(OUTDIR)/PROJEKTARBEIT.html: $(MASTER) $(TEMPLATE)
 	@echo "✓ $@"
 
 # ─── Mermaid-Diagramme ─────────────────────────────────────────────
-
-MERMAID_SRC := $(wildcard 04_diagramme_mermaid/*.mmd)
-MERMAID_PNG := $(patsubst 04_diagramme_mermaid/%.mmd, 04_diagramme_mermaid/png/%.png, $(MERMAID_SRC))
-
-diagrams: $(MERMAID_PNG)
-
-04_diagramme_mermaid/png/%.png: 04_diagramme_mermaid/%.mmd
-	@echo "=== Diagramm: $@ ==="
-	npx -p @mermaid-js/mermaid-cli mmdc -i "$<" -o "$@" -w 800 -H 600 -b white 2>/dev/null || \
-	echo "  ⚠ mermaid-cli nicht verfügbar, installiere mit: npm install -g @mermaid-js/mermaid-cli"
+# Quellen sind *.md (nicht *.mmd), exportierte PNGs liegen in exported_png/
+diagrams:
+	@echo "=== Mermaid-Diagramme (bereits in exported_png/ vorhanden) ==="
+	@ls 04_diagramme_mermaid/exported_png/*.png 2>/dev/null | wc -l | xargs echo "  PNGs verfügbar:"
 
 # ─── EPK-Diagramme (HTML→PNG) ──────────────────────────────────────
 
@@ -85,13 +95,22 @@ $(EPK_DIR)/%.png: $(EPK_DIR)/%.html
 	echo "  ⚠ Chrome-Headless nicht verfügbar"
 
 # ─── Screenshots ───────────────────────────────────────────────────
+# HTML-Quellen in 10_screenshots/sources/ → PNG in 10_screenshots/
+# Zusätzlich Aliase für vom Markdown referenzierte Dateinamen
 
-SCREENSHOT_HTML := $(wildcard $(SCR_DIR)/*.html)
-SCREENSHOT_PNG  := $(patsubst $(SCR_DIR)/%.html, $(SCR_DIR)/%.png, $(SCREENSHOT_HTML))
+SCREENSHOT_SRC := $(wildcard $(SCR_DIR)/sources/*.html)
+SCREENSHOT_PNG := $(patsubst $(SCR_DIR)/sources/%.html, $(SCR_DIR)/%.png, $(SCREENSHOT_SRC))
 
 screenshots: $(SCREENSHOT_PNG)
+	@echo "=== Screenshot-Aliase ==="
+	@if [ -f $(SCR_DIR)/01_github_repo.png ]; then \
+		cp -n $(SCR_DIR)/01_github_repo.png $(SCR_DIR)/01_github_repo_uebersicht.png 2>/dev/null; \
+		cp -n $(SCR_DIR)/02_github_actions.png $(SCR_DIR)/02_github_actions_workflow.png 2>/dev/null; \
+		cp -n $(SCR_DIR)/03_yaml_workflow.png $(SCR_DIR)/03_yaml_workflow_datei.png 2>/dev/null; \
+		echo "  ✓ Aliase erstellt"; \
+	fi
 
-$(SCR_DIR)/%.png: $(SCR_DIR)/%.html
+$(SCR_DIR)/%.png: $(SCR_DIR)/sources/%.html
 	@echo "=== Screenshot: $@ ==="
 	google-chrome --headless=new --disable-gpu --no-sandbox \
 		--window-size=1280,800 \

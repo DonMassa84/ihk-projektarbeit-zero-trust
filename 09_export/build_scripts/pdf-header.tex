@@ -1,1 +1,45 @@
-\setkeys{Gin}{width=\textwidth,height=\textheight,keepaspectratio}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=1.5cm,
+  right=4.5cm,
+  top=2.5cm,
+  bottom=2.5cm,
+  includeheadfoot
+}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{xcolor}
+\usepackage[ngerman,provide=*]{babel}
+
+\setkeys{Gin}{
+  width=\linewidth,
+  height=0.72\textheight,
+  keepaspectratio
+}
+
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  breaklines=true,
+  breakanywhere=true,
+  commandchars=\\\{\}
+}
+
+\emergencystretch=3em
+\sloppy
+
+\renewcommand{\figurename}{Abbildung}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
+
+\usepackage{ragged2e}
+\RaggedRight

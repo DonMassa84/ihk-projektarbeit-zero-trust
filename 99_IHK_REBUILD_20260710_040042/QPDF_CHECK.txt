@@ -1,0 +1,6 @@
+checking 09_export/PROJEKTARBEIT_IHK_FINAL.pdf
+PDF Version: 1.5
+File is not encrypted
+File is not linearized
+No syntax or stream encoding errors found; the file may still contain
+errors that qpdf cannot detect
