@@ -1,144 +1,136 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Enum, JSON, Float
+import enum
+import uuid
+from datetime import datetime
+from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Text, Enum, JSON, Integer
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
-import enum
-import uuid
 
 
 def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-class User(Base):
-    __tablename__ = "users"
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
 
+
+class RequestStatus(str, enum.Enum):
+    DRAFT = "DRAFT"
+    SUBMITTED = "SUBMITTED"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+    PROVISIONING = "PROVISIONING"
+    PROVISIONED = "PROVISIONED"
+    FAILED = "FAILED"
+
+
+class ProvisioningMode(str, enum.Enum):
+    DRY_RUN = "DRY_RUN"
+    TEST_API = "TEST_API"
+
+
+class ProvisioningResult(str, enum.Enum):
+    SUCCESS = "SUCCESS"
+    FAILURE = "FAILURE"
+    SIMULATED = "SIMULATED"
+
+
+class UserReference(Base):
+    __tablename__ = "user_references"
     id = Column(String, primary_key=True, default=generate_uuid)
-    email = Column(String(255), unique=True, nullable=False, index=True)
-    display_name = Column(String(255), nullable=False)
-    azure_ad_id = Column(String(255), unique=True, nullable=True, index=True)
-    department = Column(String(100), nullable=True)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    external_reference = Column(String(255), unique=True, nullable=False, index=True)
+    display_name = Column(String(255), nullable=True)
+    active = Column(Boolean, default=True)
+    created_at = Column(DateTime, server_default=func.now())
 
-    role_assignments = relationship("UserRoleAssignment", back_populates="user")
-    audit_logs = relationship("AuditLog", back_populates="user")
-    role_requests = relationship("RoleRequest", back_populates="user")
+    access_requests = relationship("AccessRequest", foreign_keys="AccessRequest.requester_reference", back_populates="requester")
+    target_requests = relationship("AccessRequest", foreign_keys="AccessRequest.target_user_reference", back_populates="target_user")
 
 
 class Role(Base):
     __tablename__ = "roles"
-
     id = Column(String, primary_key=True, default=generate_uuid)
     name = Column(String(100), unique=True, nullable=False, index=True)
     description = Column(Text, nullable=True)
-    hierarchy_level = Column(Integer, default=100)
-    is_system_role = Column(Boolean, default=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    risk_level = Column(String(20), default="low")
+    github_team_slug = Column(String(100), nullable=True)
+    active = Column(Boolean, default=True)
+    created_at = Column(DateTime, server_default=func.now())
 
-    assignments = relationship("UserRoleAssignment", back_populates="role")
-    policies = relationship("RolePolicy", back_populates="role")
-    requests = relationship("RoleRequest", back_populates="role")
+    access_requests = relationship("AccessRequest", back_populates="requested_role")
 
 
-class UserRoleAssignment(Base):
-    __tablename__ = "user_role_assignments"
-
+class AccessRequest(Base):
+    __tablename__ = "access_requests"
     id = Column(String, primary_key=True, default=generate_uuid)
-    user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    role_id = Column(String, ForeignKey("roles.id"), nullable=False)
-    grant_start = Column(DateTime(timezone=True), server_default=func.now())
-    grant_end = Column(DateTime(timezone=True), nullable=True)
-    granted_by = Column(String, ForeignKey("users.id"), nullable=True)
-    revoke_reason = Column(Text, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    requester_reference = Column(String, ForeignKey("user_references.id"), nullable=False)
+    target_user_reference = Column(String, ForeignKey("user_references.id"), nullable=False)
+    requested_role_id = Column(String, ForeignKey("roles.id"), nullable=False)
+    justification = Column(Text, nullable=False)
+    status = Column(Enum(RequestStatus), default=RequestStatus.DRAFT, nullable=False)
+    requested_at = Column(DateTime, server_default=func.now())
+    decided_at = Column(DateTime, nullable=True)
+    decided_by = Column(String, nullable=True)
+    provisioned_at = Column(DateTime, nullable=True)
+    failure_reason = Column(Text, nullable=True)
+    correlation_id = Column(String(100), nullable=False, index=True)
 
-    user = relationship("User", back_populates="role_assignments", foreign_keys=[user_id])
-    role = relationship("Role", back_populates="assignments")
+    requester = relationship("UserReference", foreign_keys=[requester_reference], back_populates="access_requests")
+    target_user = relationship("UserReference", foreign_keys=[target_user_reference], back_populates="target_requests")
+    requested_role = relationship("Role", back_populates="access_requests")
+    approval_decisions = relationship("ApprovalDecision", back_populates="request")
+    provisioning_attempts = relationship("ProvisioningAttempt", back_populates="request")
 
 
-class Policy(Base):
-    __tablename__ = "policies"
-
+class ApprovalDecision(Base):
+    __tablename__ = "approval_decisions"
     id = Column(String, primary_key=True, default=generate_uuid)
-    name = Column(String(200), unique=True, nullable=False)
-    description = Column(Text, nullable=True)
-    policy_type = Column(String(50), nullable=False)
-    rules_json = Column(JSON, nullable=False)
-    version = Column(Integer, default=1)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    request_id = Column(String, ForeignKey("access_requests.id"), nullable=False)
+    decision = Column(String(20), nullable=False)
+    approver_reference = Column(String(100), nullable=False)
+    comment = Column(Text, nullable=True)
+    decided_at = Column(DateTime, server_default=func.now())
+
+    request = relationship("AccessRequest", back_populates="approval_decisions")
 
 
-class RolePolicy(Base):
-    __tablename__ = "role_policies"
-
+class AuditEvent(Base):
+    __tablename__ = "audit_events"
     id = Column(String, primary_key=True, default=generate_uuid)
-    role_id = Column(String, ForeignKey("roles.id"), nullable=False)
-    policy_id = Column(String, ForeignKey("policies.id"), nullable=False)
+    event_type = Column(String(100), nullable=False, index=True)
+    actor_reference = Column(String(100), nullable=True)
+    object_type = Column(String(50), nullable=True)
+    object_id = Column(String, nullable=True)
+    timestamp = Column(DateTime, server_default=func.now(), index=True)
+    payload_json = Column(JSON, nullable=True)
+    previous_hash = Column(String(64), nullable=True)
+    event_hash = Column(String(64), unique=True, nullable=False)
+    correlation_id = Column(String(100), nullable=True, index=True)
 
-    role = relationship("Role", back_populates="policies")
-    policy = relationship("Policy")
 
-
-class RoleRequest(Base):
-    __tablename__ = "role_requests"
-
+class ProvisioningAttempt(Base):
+    __tablename__ = "provisioning_attempts"
     id = Column(String, primary_key=True, default=generate_uuid)
-    user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    role_id = Column(String, ForeignKey("roles.id"), nullable=False)
-    status = Column(Enum("pending", "approved", "rejected", "cancelled", name="request_status"), default="pending")
-    justification = Column(Text, nullable=True)
-    reviewed_by = Column(String, ForeignKey("users.id"), nullable=True)
-    review_comment = Column(Text, nullable=True)
-    github_workflow_run_id = Column(String, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    request_id = Column(String, ForeignKey("access_requests.id"), nullable=False)
+    attempt_number = Column(Integer, default=1)
+    mode = Column(Enum(ProvisioningMode), default=ProvisioningMode.DRY_RUN)
+    result = Column(Enum(ProvisioningResult), nullable=True)
+    response_code = Column(Integer, nullable=True)
+    error_message = Column(Text, nullable=True)
+    started_at = Column(DateTime, server_default=func.now())
+    completed_at = Column(DateTime, nullable=True)
 
-    user = relationship("User", back_populates="role_requests", foreign_keys=[user_id])
-    role = relationship("Role", back_populates="requests")
-
-
-class AuditLog(Base):
-    __tablename__ = "audit_logs"
-
-    id = Column(String, primary_key=True, default=generate_uuid)
-    user_id = Column(String, ForeignKey("users.id"), nullable=True, index=True)
-    action = Column(String(100), nullable=False, index=True)
-    resource_type = Column(String(50), nullable=True)
-    resource_id = Column(String, nullable=True)
-    details = Column(JSON, nullable=True)
-    ip_address = Column(String(45), nullable=True)
-    user_agent = Column(String(500), nullable=True)
-    result = Column(String(20), default="success")
-    anomaly_score = Column(Float, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
-
-    user = relationship("User", back_populates="audit_logs")
-
-
-class GitHubWorkflow(Base):
-    __tablename__ = "github_workflows"
-
-    id = Column(String, primary_key=True, default=generate_uuid)
-    workflow_name = Column(String(200), nullable=False)
-    run_id = Column(String, unique=True, nullable=True)
-    trigger_type = Column(String(50), nullable=False)
-    status = Column(String(20), default="pending")
-    payload = Column(JSON, nullable=True)
-    result = Column(JSON, nullable=True)
-    started_at = Column(DateTime(timezone=True), server_default=func.now())
-    completed_at = Column(DateTime(timezone=True), nullable=True)
+    request = relationship("AccessRequest", back_populates="provisioning_attempts")
 
 
 class ComplianceReport(Base):
     __tablename__ = "compliance_reports"
-
     id = Column(String, primary_key=True, default=generate_uuid)
     report_type = Column(String(50), nullable=False)
     status = Column(String(20), default="generating")
     findings = Column(JSON, nullable=True)
     summary = Column(Text, nullable=True)
-    generated_by = Column(String, ForeignKey("users.id"), nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    generated_by = Column(String, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())

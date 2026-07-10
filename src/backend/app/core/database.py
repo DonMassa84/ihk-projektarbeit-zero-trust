@@ -1,6 +1,5 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.pool import NullPool
 from app.core.config import settings
 
 
@@ -10,11 +9,7 @@ class Base(DeclarativeBase):
 
 engine = create_async_engine(
     settings.DATABASE_URL,
-    pool_size=settings.DATABASE_POOL_SIZE,
-    max_overflow=settings.DATABASE_MAX_OVERFLOW,
-    pool_pre_ping=True,
     echo=settings.DEBUG,
-    poolclass=NullPool if settings.ENVIRONMENT == "testing" else None,
 )
 
 async_session_maker = async_sessionmaker(
@@ -22,7 +17,6 @@ async_session_maker = async_sessionmaker(
     class_=AsyncSession,
     expire_on_commit=False,
     autoflush=False,
-    autocommit=False,
 )
 
 
