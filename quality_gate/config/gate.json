@@ -1,0 +1,43 @@
+{
+  "source_markdown": "dokumentation.md",
+  "output_pdf": "PROJEKTARBEIT_IHK_FINAL_SIGNED.pdf",
+  "build_command": "python3 quality_gate/build_pdf.py",
+  "required_document_date": "10.07.2026",
+  "canonical_stack_required": ["FastAPI", "Python", "Zero-Trust", "GitHub"],
+  "canonical_stack_forbidden": ["Jest"],
+  "forbidden_claims": [
+    "Go-Live",
+    "Abnahmeprotokoll A15"
+  ],
+  "required_sections": [
+    "Management Summary",
+    "Projektinformationen",
+    "Projektplanung",
+    "Analyse",
+    "Rollenmodell",
+    "API",
+    "Test",
+    "Qualitätssicherung",
+    "Abnahme",
+    "Projektabschluss",
+    "Lessons Learned",
+    "Eidesstattliche"
+  ],
+  "required_evidence_fields": [
+    "Testfall",
+    "Ergebnis",
+    "API",
+    "Rolle",
+    "Status"
+  ],
+  "minimum_total_score": 90,
+  "minimum_category_scores": {
+    "formal": 13,
+    "project_management": 18,
+    "technical_consistency": 14,
+    "evidence_traceability": 18,
+    "economics": 8,
+    "language_visuals": 9,
+    "release_integrity": 9
+  }
+}
