@@ -1,8 +1,0 @@
-=== HF OFFLINE GUARD ===
-  MODE: OFFLINE_SAFE
-  NETWORK: DISABLED
-  TELEMETRY: DISABLED
-  TOKEN_EXPORT: BLOCKED
-
-Standardmodus: Alle externen HF-Zugriffe blockiert.
-Für Online-Zugriff: --allow-online verwenden.

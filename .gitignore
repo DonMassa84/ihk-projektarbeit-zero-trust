@@ -64,3 +64,10 @@ quality_gate/tmp/
 quality_gate/reports/
 quality_gate/rendered/
 quality_gate/freeze/
+
+99_reports/
+
+reports/
+99_IHK_*
+99_ABGABE_*
+99_AUDIT_*

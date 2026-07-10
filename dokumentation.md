@@ -38,7 +38,7 @@ Vor Projektbeginn erfolgte die Rechtevergabe in der GitHub-Organisation manuell 
 ### 1.3 Problemstellung
 
 - Kein nachvollziehbarer Genehmigungsprozess für Zugriffsrechte
-- Keine revisionssichere Dokumentation von Berechtigungsänderungen
+- Keine nachvollziehbare und lückenlose Dokumentation von Berechtigungsänderungen
 - Manuelle Provisionierung ohne Automatisierung
 - Keine Trennung zwischen Antrag, Genehmigung und Ausführung
 - Keine Möglichkeit zur nachträglichen Überprüfung von Berechtigungsänderungen
