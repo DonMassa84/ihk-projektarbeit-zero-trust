@@ -751,6 +751,39 @@ Das Projekt hat gezeigt, dass ein evidenzbasierter Ansatz mit klarer Trennung vo
 
 ---
 
+\newpage
+
+\thispagestyle{empty}
+
+\begin{center}
+\Large\bfseries Eidesstattliche Erklärung
+\end{center}
+
+\vspace{1cm}
+
+Ich versichere, dass ich die vorliegende Projektarbeit selbstständig verfasst,
+keine anderen als die angegebenen Quellen und Hilfsmittel benutzt sowie alle
+wörtlich oder sinngemäß übernommenen Stellen in der Arbeit gekennzeichnet
+habe. Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen für
+mich haben kann.
+
+\vspace{2cm}
+
+\noindent
+\begin{tabular}{@{}p{4cm}p{8cm}@{}}
+Ort: & Stuttgart \\[1cm]
+Datum: & 10.07.2026 \\[1cm]
+Unterschrift: & \includegraphics[width=4cm,height=1.2cm]{unterschrift.png} \\[0.3cm]
+Gedruckter Name: & Daniel Massa
+\end{tabular}
+
+\vfill
+
+\noindent
+{\small Hinweis: Diese Seite wurde eigenhändig unterschrieben.}
+
+\newpage
+
 ## Anhang
 
 ### A: Testprotokoll (Auszug)
