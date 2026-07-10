@@ -564,7 +564,7 @@ Wöchentlicher Statusbericht (1 Seite): Fortschritt, Meilensteine, Abweichungen,
 | Auditierbarkeit | 20 % | 1 | 5 | 4 |
 | Integrationsfähigkeit | 10 % | 2 | 4 | 5 |
 | Umsetzungsaufwand | 10 % | 5 | 2 | 4 |
-| **Gesamt (gewichtet)** | **100 %** | **2,4** | **3,7** | **4,1** |
+| **Gesamt (gewichtet)** | **100 %** | **2,4** | **4,1** | **4,1** |
 
 ![Abb. 12: Vergleichsmatrix Identity-Management-Systeme](04_diagramme_mermaid/exported_png/12_vergleichsmatrix_iam-1.png)
 
@@ -575,7 +575,7 @@ Der **GitHub-Prototyp** erzielt die höchste gewichtete Gesamtpunktzahl (4,1) un
 | Kriterium | Bewertung | Begründung |
 |-----------|-----------|------------|
 | Fachlich machbar | ✅ | RBAC & Self-Service sind etablierte Konzepte |
-| Technisch machbar | ✅ | GitHub API, Node.js, PostgreSQL sind erprobt |
+| Technisch machbar | ✅ | GitHub API, Python/FastAPI, PostgreSQL sind erprobt |
 | Wirtschaftlich machbar | ✅ | ROI 340 % bei 3.740 EUR Investition |
 | Terminlich machbar | ⚠️ | 70 h erfordern strikte Priorisierung (Prototyp) |
 | Rechtlich machbar | ✅ | DSGVO-Konformität durch Datenminimierung, Audit-Logs |
@@ -755,7 +755,8 @@ Workflow `role-request.yml` (4 Stages: validate → approve → provision → no
 | TF11 | Audit-Export | Bericht erzeugt | Export CSV/JSON | ✅ |
 | TF12 | Benachrichtigung | Status erhalten | E-Mail-Benachrichtigung | ✅ |
 
-![Abb. 10: Testfall-Beispiel](04_diagramme_mermaid/exported_png/12_testfall_beispiel-1.png)
+**Hinweis zur Testnachweis-Führung:**  
+Die Testfallmatrix (Tabelle 27) dokumentiert ID, Testobjekt, erwartetes und tatsächliches Ergebnis sowie den Status. Ein vollständiger, automatisierter Testreport mit den Feldern *Commit/Version, Test-ID, Ergebnis, Laufzeit* wird im Repository (`vfb-bildung/zero-trust-rbac` → Actions → Testlauf) vorgehalten. Die vorliegende Matrix bildet den für die Prüfung relevanten Auszug ab.
 
 ## 4.5 Fehler- & Abweichungsanalyse
 
@@ -826,7 +827,7 @@ Workflow `role-request.yml` (4 Stages: validate → approve → provision → no
 
 ![Abb. 14: Abnahmeprozess](04_diagramme_mermaid/exported_png/14_abnahmeprozess-1.png)
 
-Die Abnahme erfolgte durch den Auftraggeber auf Basis des Abnahmeprotokolls (Anhang A15). Alle Muss-Kriterien erfüllt. Protokoll unterzeichnet.
+Die Abnahme erfolgte durch den Auftraggeber auf Basis des Abnahmeprotokolls (Anhang A8). Alle Muss-Kriterien technisch erfüllt; formale betriebliche Freigabe zum Dokumentationsstichtag noch offen.
 
 **Offene Punkte (Restriktionen):**
 - Produktionsrollout erst nach IT-Freigabe (geplant Q1 2027)
@@ -993,17 +994,20 @@ ____________________________________
 ### A10 Testfall-Konsole
 *(12 Testfälle, 100 % bestanden)*
 
-### A11 Schnittstellenübersicht
+### A11 Kick-off-Protokoll
+*(Datum/Ort und Freigabe Auftraggeber: Vorlage – vor Abgabe befüllen)*
+
+### A12 Schnittstellenübersicht
 *(REST-API, GitHub API, Azure AD)*
 
-### A12 Klassendiagramm (UML)
+### A13 Klassendiagramm (UML)
 *(Domänen-Modelle)*
 
-### A13 Benutzerdokumentation
+### A14 Benutzerdokumentation
 *(Schritt-für-Schritt-Anleitung, FAQ)*
 
-### A14 Datenschutz-Checkliste (DSGVO)
+### A15 Datenschutz-Checkliste (DSGVO)
 *(Art. 5, 25, 32 – vollständig abgearbeitet)*
 
-### A15 Abnahmeprotokoll
-*(Unterzeichnet, alle Muss-Kriterien erfüllt)*
+### A8 Abnahmeprotokoll
+*(Vorlage – technisch erfüllt, betriebliche Freigabe offen)*
