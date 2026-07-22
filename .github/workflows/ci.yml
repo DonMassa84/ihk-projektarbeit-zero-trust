@@ -141,7 +141,7 @@ jobs:
           grep -qi "Zero-Trust" "$MASTER"
           grep -qi "Projektstrukturplan" "$MASTER"
           grep -qi "Risiko" "$MASTER"
-          grep -qi "Soll-Ist" "$MASTER"
+          grep -Eqi "Soll[-–—/]?Ist|Soll-Ist-Vergleich" "$MASTER"
           grep -qi "Kosten" "$MASTER"
 
           DIAGRAM_COUNT="$(
