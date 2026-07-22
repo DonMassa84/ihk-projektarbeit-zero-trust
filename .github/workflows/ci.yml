@@ -1,0 +1,156 @@
+name: IHK Documentation CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ihk-documentation-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Static checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify required files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -s README.md
+          test -s Makefile
+          test -s 09_export/final/PROJEKTARBEIT_ZERO_TRUST_FINAL_LATEST.md
+
+      - name: Compile Python tools
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          find . -type f -name "*.py" \
+            -not -path "./.git/*" \
+            -print0 |
+          xargs -0 -r python -m py_compile
+
+      - name: Check unresolved placeholders
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          MASTER="09_export/final/PROJEKTARBEIT_ZERO_TRUST_FINAL_LATEST.md"
+
+          if grep -nEi '\b(TODO|TBD|PLACEHOLDER|XXX)\b' "$MASTER"; then
+            echo "Unaufgelöste Platzhalter gefunden."
+            exit 1
+          fi
+
+  pdf-build:
+    name: PDF build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install document tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            pandoc \
+            texlive-xetex \
+            texlive-fonts-recommended \
+            poppler-utils
+
+      - name: Build CI PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          MASTER="09_export/final/PROJEKTARBEIT_ZERO_TRUST_FINAL_LATEST.md"
+          OUTPUT_DIR="09_export/ci"
+          OUTPUT_PDF="$OUTPUT_DIR/PROJEKTARBEIT_IHK_CI.pdf"
+
+          mkdir -p "$OUTPUT_DIR"
+
+          sed \
+            -e 's/✅/X/g' \
+            -e 's/⚠/!/g' \
+            -e 's/🎯/O/g' \
+            -e 's/️//g' \
+            "$MASTER" > /tmp/projektarbeit_ci.md
+
+          pandoc /tmp/projektarbeit_ci.md \
+            --from markdown \
+            --pdf-engine=xelatex \
+            -V geometry:margin=25mm \
+            -V fontsize=12pt \
+            -o "$OUTPUT_PDF"
+
+          test -s "$OUTPUT_PDF"
+          pdfinfo "$OUTPUT_PDF" | tee "$OUTPUT_DIR/pdfinfo.txt"
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: ihk-documentation-pdf
+          path: |
+            09_export/ci/PROJEKTARBEIT_IHK_CI.pdf
+            09_export/ci/pdfinfo.txt
+          if-no-files-found: error
+          retention-days: 14
+
+  quality-gate:
+    name: Documentation quality gate
+    runs-on: ubuntu-latest
+    needs:
+      - tests
+      - pdf-build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Execute quality gate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          MASTER="09_export/final/PROJEKTARBEIT_ZERO_TRUST_FINAL_LATEST.md"
+
+          test -s "$MASTER"
+          test -s 09_export/PROJEKTARBEIT_IHK_FINAL.pdf
+
+          grep -qi "Zero-Trust" "$MASTER"
+          grep -qi "Projektstrukturplan" "$MASTER"
+          grep -qi "Risiko" "$MASTER"
+          grep -qi "Soll-Ist" "$MASTER"
+          grep -qi "Kosten" "$MASTER"
+
+          DIAGRAM_COUNT="$(
+            find 04_diagramme_mermaid \
+              -type f \
+              \( -name "*.mmd" -o -name "*.png" \) |
+            wc -l
+          )"
+
+          test "$DIAGRAM_COUNT" -gt 0
+
+          echo "QUALITY_GATE=GREEN"
