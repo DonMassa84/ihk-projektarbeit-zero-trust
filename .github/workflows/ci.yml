@@ -136,7 +136,10 @@ jobs:
           MASTER="09_export/final/PROJEKTARBEIT_ZERO_TRUST_FINAL_LATEST.md"
 
           test -s "$MASTER"
-          test -s 09_export/PROJEKTARBEIT_IHK_FINAL.pdf
+          if ! find 09_export -type f -name "*.pdf" -size +0c | grep -q .; then
+            echo "FAIL: Keine versionierte PDF unter 09_export gefunden."
+            exit 1
+          fi
 
           grep -qi "Zero-Trust" "$MASTER"
           grep -qi "Projektstrukturplan" "$MASTER"
